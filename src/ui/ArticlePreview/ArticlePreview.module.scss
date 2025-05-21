@@ -1,0 +1,22 @@
+.articlePreview {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--color-light);
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+
+    &__name {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    
+    &__textDescription {
+
+        width: 250px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+}

@@ -1,0 +1,14 @@
+.aButton {
+    padding: 5px 10px;
+    background-color: var(--color-palette-dark-middle);
+    text-decoration: none;
+    color: var(--color-palette-light);
+    border-radius: 5px;
+    display: inline-flex;
+    justify-content: center;
+
+    &:hover {
+        background-color: var(--color-palette-middle);
+        color: var(--color-palette-light);
+    }
+}

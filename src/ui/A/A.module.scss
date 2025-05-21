@@ -1,0 +1,8 @@
+.a {
+    text-decoration: none;
+    color: var(--color-palette-dark);
+
+    &:hover {
+        color: var(--color-palette-dark-middle);
+    }
+}
