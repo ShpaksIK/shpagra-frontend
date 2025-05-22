@@ -12,4 +12,14 @@
         background-color: var(--color-palette-light-middle);
         color: var(--color-palette-dark);
     }
+
+    &_danger {
+        background-color: var(--color-danger);
+        color: #fff;
+
+        &:hover {
+            background-color: var(--color-danger-hover);
+            color: #fff;
+        }
+    }
 }

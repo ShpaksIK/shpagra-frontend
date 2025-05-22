@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-import Button from '../Button/Button'
-import ButtonSecondary from '../ButtonSecondary/ButtonSecondary';
-import Avatar from '../Avatar/Avatar'
+import Button from '../../ui/Button/Button'
+import ButtonSecondary from '../../ui/ButtonSecondary/ButtonSecondary'
+import Avatar from '../../ui/Avatar/Avatar'
 
 import style from './ProfilePreview.module.scss'
 
@@ -19,9 +19,7 @@ const ProfilePreview: React.FC<ProfilePreviewProps> = ({ profileAvatar, profileN
     return (
         <div className={style.profilePreview}>
             <div className={style.profilePreview__info}>
-                <Link to={`/profile/${profileId}`}>
-                    <Avatar profileAvatar={profileAvatar} profileId={profileId} />
-                </Link>
+                <Avatar profileAvatar={profileAvatar} profileId={profileId} />
                 <div className={style.profilePreview__name}>
                     <Link to={`/profile/${profileId}`}>
                         <b className={style.profilePreview__name}>{profileName}</b>

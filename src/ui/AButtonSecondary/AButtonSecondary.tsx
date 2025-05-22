@@ -9,13 +9,15 @@ interface AButtonSecondaryProps {
     to: string
     text: string
     isMaxWidth?: boolean
+    isDanger?: boolean
 }
 
-const AButtonSecondary: React.FC<AButtonSecondaryProps> = ({ to, text, isMaxWidth = false }) => {
+const AButtonSecondary: React.FC<AButtonSecondaryProps> = ({ to, text, isMaxWidth = false, isDanger = false }) => {
     return (
         <Link className={classNames(
             style.aButtonSecondary,
-            isMaxWidth ? 'max-width' : ''
+            isMaxWidth ? 'max-width' : '',
+            isDanger ? style.aButtonSecondary_danger : ''
         )} to={to}>{text}</Link>
     )
 }

@@ -4,17 +4,19 @@ import { Routes, Route } from 'react-router'
 
 import MainPage from './pages/MainPage/MainPage'
 
-import { auth } from './redux/reducers/authReducer'
+import { auth, getNotifications } from './redux/reducers/authReducer'
 
 
 interface DispatchProps {
     auth: () => void
+    getNotifications: () => void
 }
 
 type AppProps = DispatchProps
 
 const App: React.FC<AppProps> = (props) => {
     props.auth()
+    props.getNotifications()
     
     return (
         <Routes>
@@ -23,4 +25,4 @@ const App: React.FC<AppProps> = (props) => {
     )
 }
 
-export default connect(null, {auth})(App)
+export default connect(null, {auth, getNotifications})(App)

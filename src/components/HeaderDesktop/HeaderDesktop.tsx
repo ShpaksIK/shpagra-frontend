@@ -2,14 +2,16 @@ import React, { useState } from 'react'
 import classNames from 'classnames'
 import { Link } from 'react-router'
 
+import AButtonSecondary from '../../ui/AButtonSecondary/AButtonSecondary'
+import Dropdown from '../../ui/Dropdown/Dropdown'
+import Search from '../Search/Search'
+import Notifications from '../Notifications/Notifications'
+
 import style from './HeaderDesktop.module.scss'
 import logoIMG from './../../../public/images/logo-big.png'
 import userIMG from './../../../public/images/user.png'
-import notificationSVG from './../../../public/svg/notification.svg'
-import closeSVG from './../../../public/svg/close.svg'
-import Search from '../Search/Search'
-import Dropdown from '../../ui/Dropdown/Dropdown'
-import AButtonSecondary from '../../ui/AButtonSecondary/AButtonSecondary'
+import arrowSVG from './../../../public/svg/arrow.svg'
+import ButtonSecondary from '../../ui/ButtonSecondary/ButtonSecondary'
 
 
 interface HeaderDesktopProps {
@@ -29,9 +31,7 @@ const HeaderDesktop: React.FC<HeaderDesktopProps> = ({ isAuth, login, username, 
             </div>
             <div className={style.header__search}>
                 <Search />
-                <div className={style.header__notifications}>
-                    <img src={notificationSVG} alt='Уведомления' />
-                </div>
+                <Notifications />
             </div>
             <div className={style.header__actions}>
                 <div className={style.header__profile}>
@@ -42,7 +42,7 @@ const HeaderDesktop: React.FC<HeaderDesktopProps> = ({ isAuth, login, username, 
                                     <img src={avatar ? avatar : userIMG} alt='Фото профиля' draggable={false} />
                                 </div>
                                 <div className={style.profile__arrow}>
-                                    <img src={closeSVG} alt='Информация' />
+                                    <img src={arrowSVG} alt='Информация' />
                                 </div>
                                 {isShowProfile && (
                                     <Dropdown dropdownClose={() => setShowProfile(false)}>
@@ -52,9 +52,9 @@ const HeaderDesktop: React.FC<HeaderDesktopProps> = ({ isAuth, login, username, 
                                             <div className={style.dropdown__links}>
                                                 <AButtonSecondary to={`/profile/${login}`} text='В профиль' />
                                                 <AButtonSecondary to='/' text='Редактировать' />
+                                                <ButtonSecondary text='Выйти' isDanger={true} />
                                             </div>
                                         </div>
-                                        
                                     </Dropdown>
                                 )}
                             </div>

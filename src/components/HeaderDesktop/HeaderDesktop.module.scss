@@ -28,28 +28,6 @@
         align-items: center;
         gap: 5px;
     }
-
-    &__notifications {
-        padding: 5px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        border-radius: 10px;
-        height: 35px;
-        width: 35px;
-        background-color: var(--color-palette-dark-middle);
-        transition: 0.2s;
-
-        &:hover {
-            background-color: var(--color-palette-middle);
-        }
-        
-        img {
-            width: 30px;
-            height: 30px;
-        }
-    }
 }
 
 .profile {
@@ -59,9 +37,12 @@
     align-items: center;
     gap: 10px;
     cursor: pointer;
-    border: 1px solid var(--color-palette-light-middle);
     border-radius: 10px;
     height: 60px;
+
+    &:hover {
+        background-color: var(--color-palette-light);
+    }
 
     &__avatar {
         img {
@@ -75,6 +56,7 @@
         img {
             width: 25px;
             height: 25px;
+            transform: rotate(90deg);
         }
     }
 }

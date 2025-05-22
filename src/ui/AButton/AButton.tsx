@@ -9,13 +9,15 @@ interface AButtonProps {
     to: string
     text: string
     isMaxWidth?: boolean
+    isDanger?: boolean
 }
 
-const AButton: React.FC<AButtonProps> = ({ to, text, isMaxWidth = false }) => {
+const AButton: React.FC<AButtonProps> = ({ to, text, isMaxWidth = false, isDanger = false }) => {
     return (
         <Link className={classNames(
             style.aButton,
-            isMaxWidth ? 'max-width' : ''
+            isMaxWidth ? 'max-width' : '',
+            isDanger ? style.aButton_danger : ''
         )} to={to}>{text}</Link>
     )
 }

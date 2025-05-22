@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 import Input from '../../ui/Input/Input'
 import Dropdown from '../../ui/Dropdown/Dropdown'
 import Line from '../../ui/Line/Line'
-import ProfilePreview from '../../ui/ProfilePreview/ProfilePreview'
-import ArticlePreview from '../../ui/ArticlePreview/ArticlePreview'
+import ProfilePreview from '../ProfilePreview/ProfilePreview'
+import ArticlePreview from '../ArticlePreview/ArticlePreview'
 
 import style from './Search.module.scss'
 import { AppStateType } from '../../redux'
@@ -49,29 +49,21 @@ const Search: React.FC<SearchProps> = (props) => {
                             {props.recentSearch.map(recent => {
                                 if ('articleId' in recent) {
                                     return (
-                                        props.articleSearch.map(article => (
-                                            <div className={style.dropdown__item} key={article.articleId}>
-                                                <ArticlePreview
-                                                    articleCreatedAt={article.articleCreatedAt}
-                                                    articleDescription={article.articleDescription}
-                                                    articleId={article.articleId}
-                                                    articleTitle={article.articleTitle}
-                                                />
-                                            </div>
-                                        ))
+                                        <ArticlePreview
+                                            articleCreatedAt={recent.articleCreatedAt}
+                                            articleDescription={recent.articleDescription}
+                                            articleId={recent.articleId}
+                                            articleTitle={recent.articleTitle}
+                                        />
                                     )
                                 } else {
                                     return (
-                                        props.profileSearch.map(profile => (
-                                            <div className={style.dropdown__item} key={profile.profileId}>
-                                                <ProfilePreview
-                                                    profileAvatar={profile.profileAvatar}
-                                                    profileId={profile.profileId}
-                                                    profileName={profile.profileName}
-                                                    isSubscribed={false}
-                                                />
-                                            </div>
-                                        ))
+                                        <ProfilePreview
+                                            profileAvatar={recent.profileAvatar}
+                                            profileId={recent.profileId}
+                                            profileName={recent.profileName}
+                                            isSubscribed={false}
+                                        />
                                     ) 
                                 }
                             })}
