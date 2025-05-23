@@ -12,6 +12,6 @@ export interface Notification {
 export interface AuthSchema {
     login: string
     username: string
-    avatar: string
-    email: string
+    avatar: string | null
+    email: string | null
 }

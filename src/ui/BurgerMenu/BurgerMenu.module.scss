@@ -1,0 +1,31 @@
+.burgerMenu {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    cursor: pointer;
+
+    span {
+        height: 2px;
+        width: 100%;
+        background-color: var(--color-dark);
+    }
+
+    &_open {
+        justify-content: center;
+        align-items: center;
+
+        span:first-child {
+            rotate: -45deg;
+        }
+        span:nth-child(2) {
+            display: none;
+        }
+        span:last-child {
+            rotate: 45deg;
+            position: relative;
+            bottom: 2px;
+        }
+    }
+}

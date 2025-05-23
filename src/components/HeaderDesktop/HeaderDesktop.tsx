@@ -6,12 +6,12 @@ import AButtonSecondary from '../../ui/AButtonSecondary/AButtonSecondary'
 import Dropdown from '../../ui/Dropdown/Dropdown'
 import Search from '../Search/Search'
 import Notifications from '../Notifications/Notifications'
+import ButtonSecondary from '../../ui/ButtonSecondary/ButtonSecondary'
 
 import style from './HeaderDesktop.module.scss'
 import logoIMG from './../../../public/images/logo-big.png'
 import userIMG from './../../../public/images/user.png'
 import arrowSVG from './../../../public/svg/arrow.svg'
-import ButtonSecondary from '../../ui/ButtonSecondary/ButtonSecondary'
 
 
 interface HeaderDesktopProps {
@@ -19,9 +19,10 @@ interface HeaderDesktopProps {
     login: string
     username: string
     avatar: string
+    logout: () => void
 }
 
-const HeaderDesktop: React.FC<HeaderDesktopProps> = ({ isAuth, login, username, avatar }) => {
+const HeaderDesktop: React.FC<HeaderDesktopProps> = ({ isAuth, login, username, avatar, logout }) => {
     const [isShowProfile, setShowProfile] = useState(false)
 
     return (
@@ -52,7 +53,7 @@ const HeaderDesktop: React.FC<HeaderDesktopProps> = ({ isAuth, login, username, 
                                             <div className={style.dropdown__links}>
                                                 <AButtonSecondary to={`/profile/${login}`} text='В профиль' />
                                                 <AButtonSecondary to='/' text='Редактировать' />
-                                                <ButtonSecondary text='Выйти' isDanger={true} />
+                                                <ButtonSecondary text='Выйти' onClick={() => logout()} isDanger={true} />
                                             </div>
                                         </div>
                                     </Dropdown>

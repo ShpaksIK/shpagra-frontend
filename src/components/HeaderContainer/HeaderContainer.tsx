@@ -5,6 +5,8 @@ import HeaderDesktop from '../HeaderDesktop/HeaderDesktop'
 
 import style from './HeaderContainer.module.scss'
 import { AppStateType } from '../../redux'
+import { logout } from '../../redux/reducers/authReducer'
+import HeaderMobile from '../HeaderMobile/HeaderMobile'
 
 
 interface StateProps {
@@ -14,7 +16,11 @@ interface StateProps {
     avatar: string
 }
 
-type HeaderContainerProps = StateProps
+interface DispatchProps {
+    logout: () => void
+}
+
+type HeaderContainerProps = StateProps & DispatchProps
 
 const HeaderContainer: React.FC<HeaderContainerProps> = (props) => {
     const screenWidth = window.innerWidth
@@ -25,7 +31,7 @@ const HeaderContainer: React.FC<HeaderContainerProps> = (props) => {
                 <HeaderDesktop {...props} />
             )}
             {screenWidth <= 700 && (
-                <></>
+                <HeaderMobile {...props} />
             )}
         </header>
     )
@@ -40,4 +46,4 @@ const mapState = (state: AppStateType) => {
     }
 }
 
-export default connect(mapState, null)(HeaderContainer)
+export default connect(mapState, {logout})(HeaderContainer)

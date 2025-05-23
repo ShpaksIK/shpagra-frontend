@@ -85,6 +85,10 @@ export const auth = () => async (dispatch: any) => {
     dispatch(setAuthAC(authData))
 }
 
+export const logout = () => async (dispatch: any) => {
+    window.location.reload()
+}
+
 export const getNotifications = () => async (dispatch: any) => {
     const notifications: Notification[] = [{
         notificationId: 1,
