@@ -7,6 +7,7 @@ import Dropdown from '../../ui/Dropdown/Dropdown'
 import Search from '../Search/Search'
 import Notifications from '../Notifications/Notifications'
 import ButtonSecondary from '../../ui/ButtonSecondary/ButtonSecondary'
+import AButton from '../../ui/AButton/AButton'
 
 import style from './HeaderDesktop.module.scss'
 import logoIMG from './../../../public/images/logo-big.png'
@@ -46,22 +47,26 @@ const HeaderDesktop: React.FC<HeaderDesktopProps> = ({ isAuth, login, username, 
                                     <img src={arrowSVG} alt='Информация' />
                                 </div>
                                 {isShowProfile && (
-                                    <Dropdown dropdownClose={() => setShowProfile(false)}>
-                                        <div className={style.dropdown}>
-                                            <b className={style.dropdown__title}>{username}</b>
-                                            <p className={style.dropdown__login}>{login}</p>
-                                            <div className={style.dropdown__links}>
-                                                <AButtonSecondary to={`/profile/${login}`} text='В профиль' />
-                                                <AButtonSecondary to='/' text='Редактировать' />
-                                                <ButtonSecondary text='Выйти' onClick={() => logout()} isDanger={true} />
+                                    <div className={style.profile__dropdown}>
+                                        <Dropdown dropdownClose={() => setShowProfile(false)}>
+                                            <div className={style.dropdown}>
+                                                <b className={style.dropdown__title}>{username}</b>
+                                                <p className={style.dropdown__login}>{login}</p>
+                                                <div className={style.dropdown__links}>
+                                                    <AButtonSecondary to={`/profile/${login}`} text='В профиль' />
+                                                    <AButtonSecondary to='/' text='Редактировать' />
+                                                    <ButtonSecondary text='Выйти' onClick={() => logout()} isDanger={true} />
+                                                </div>
                                             </div>
-                                        </div>
-                                    </Dropdown>
+                                        </Dropdown>
+                                    </div>
                                 )}
                             </div>
                         </>
                     ) : (
-                        <></>
+                        <div className={style.header__profileButton}>
+                            <AButton to='/login' text='Войти' />
+                        </div>
                     )}
                 </div>
             </div>

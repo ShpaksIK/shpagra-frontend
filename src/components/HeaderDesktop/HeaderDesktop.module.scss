@@ -59,6 +59,12 @@
             transform: rotate(90deg);
         }
     }
+
+    &__dropdown {
+        position: absolute;
+        top: 60px;
+        left: -50px;
+    }
 }
 
 .dropdown {

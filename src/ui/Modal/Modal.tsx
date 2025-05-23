@@ -1,5 +1,7 @@
 import React from 'react'
 
+import Background from '../Background/Background'
+
 import style from './Modal.module.scss'
 import closeSVG from './../../../public/svg/close.svg'
 
@@ -12,7 +14,7 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({ onClick, children }) => {
     return (
         <>
-            <div className={style.modalBackground} onClick={onClick}></div>
+            <Background onClick={onClick} />
             <div className={style.modal}>
                 <div className={style.modal__inner}>
                     <div className={style.modal__close}>

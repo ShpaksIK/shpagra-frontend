@@ -49,21 +49,25 @@ const Search: React.FC<SearchProps> = (props) => {
                             {props.recentSearch.map(recent => {
                                 if ('articleId' in recent) {
                                     return (
-                                        <ArticlePreview
-                                            articleCreatedAt={recent.articleCreatedAt}
-                                            articleDescription={recent.articleDescription}
-                                            articleId={recent.articleId}
-                                            articleTitle={recent.articleTitle}
-                                        />
+                                        <div key={recent.articleId}>
+                                            <ArticlePreview
+                                                articleCreatedAt={recent.articleCreatedAt}
+                                                articleDescription={recent.articleDescription}
+                                                articleId={recent.articleId}
+                                                articleTitle={recent.articleTitle}
+                                            />
+                                        </div>
                                     )
                                 } else {
                                     return (
-                                        <ProfilePreview
-                                            profileAvatar={recent.profileAvatar}
-                                            profileId={recent.profileId}
-                                            profileName={recent.profileName}
-                                            isSubscribed={false}
-                                        />
+                                        <div key={recent.profileId}>
+                                            <ProfilePreview
+                                                profileAvatar={recent.profileAvatar}
+                                                profileId={recent.profileId}
+                                                profileName={recent.profileName}
+                                                isSubscribed={false}
+                                            />
+                                        </div>
                                     ) 
                                 }
                             })}
