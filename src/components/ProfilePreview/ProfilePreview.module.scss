@@ -1,21 +1,21 @@
 .profilePreview {
-    width: 100%;
-    padding: 10px;
-    background-color: var(--color-light);
-    border-radius: 5px;
+  width: 100%;
+  padding: 10px;
+  background-color: var(--color-light);
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__info {
     display: flex;
-    justify-content: space-between;
+    gap: 10px;
     align-items: center;
+  }
 
-    &__info {
-        display: flex;
-        gap: 10px;
-        align-items: center;
-    }
-
-    &__name {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
+  &__name {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 }

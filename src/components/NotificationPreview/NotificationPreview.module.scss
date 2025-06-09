@@ -1,35 +1,35 @@
 .notificationPreview {
-    &__header {
-        display: flex;
-        justify-content: space-between;
-    }
+  &__header {
+    display: flex;
+    justify-content: space-between;
+  }
 
-    &__title {
-        font-size: var(--font-size-accent);
-    }
-    
-    &__button {
-        background-color: var(--color-light);
-        border-radius: 5px;
-        border: none;
-        outline: none;
-        width: 30px;
-        height: 30px;
+  &__title {
+    font-size: var(--font-size-accent);
+  }
 
-        img {
-            width: 25px;
-            height: 25px;
-            transform: rotate(180deg);
-        }
-    }
+  &__button {
+    background-color: var(--color-light);
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    width: 30px;
+    height: 30px;
 
-    &__createdAt {
-        color: var(--color-dark);
-        font-size: 0.9rem;
+    img {
+      width: 25px;
+      height: 25px;
+      transform: rotate(180deg);
     }
+  }
 
-    &__footer {
-        display: flex;
-        justify-content: space-between;
-    }
+  &__createdAt {
+    color: var(--color-dark);
+    font-size: 0.9rem;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+  }
 }

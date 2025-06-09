@@ -1,12 +1,9 @@
-import React from 'react'
+import React from 'react';
 
-import style from './Line.module.scss'
-
+import style from './Line.module.scss';
 
 const Line: React.FC = () => {
-    return (
-        <div className={style.line}></div>
-    )
-}
+  return <div className={style.line}></div>;
+};
 
-export default Line
+export default Line;

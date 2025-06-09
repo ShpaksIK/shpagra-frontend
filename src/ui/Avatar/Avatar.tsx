@@ -1,21 +1,20 @@
-import React from 'react'
-import { Link } from 'react-router'
+import React from 'react';
+import { Link } from 'react-router';
 
-import style from './Avatar.module.scss'
-import userIMG from './../../../public/images/user.png'
-
+import style from './Avatar.module.scss';
+import userIMG from './../../../public/images/user.png';
 
 interface AvatarProps {
-    profileAvatar: string
-    profileId: string
+  profileAvatar: string;
+  profileId: string;
 }
 
 const Avatar: React.FC<AvatarProps> = ({ profileAvatar, profileId }) => {
-    return (
-        <Link to={`/profile/${profileId}`}>
-            <img className={style.avatar} src={profileAvatar ? profileAvatar : userIMG} />
-        </Link>
-    )
-}
+  return (
+    <Link to={`/profile/${profileId}`}>
+      <img className={style.avatar} src={profileAvatar ? profileAvatar : userIMG} />
+    </Link>
+  );
+};
 
-export default Avatar
+export default Avatar;

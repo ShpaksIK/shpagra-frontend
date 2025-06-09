@@ -1,85 +1,85 @@
 .header {
-    &__inner {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        align-items: center;
-    }
+  &__inner {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+  }
 
-    &__functionals {
-        display: flex;
-    }
+  &__functionals {
+    display: flex;
+  }
 
-    &__logo {
-        img {
-            max-height: 75px;
-        }
+  &__logo {
+    img {
+      max-height: 75px;
     }
+  }
 
-    &__search {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-    }
+  &__search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
 
-    &__actions {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        gap: 5px;
-    }
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 5px;
+  }
 }
 
 .profile {
-    position: relative;
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    border-radius: 10px;
-    height: 60px;
+  position: relative;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  border-radius: 10px;
+  height: 60px;
 
-    &:hover {
-        background-color: var(--color-palette-light);
-    }
+  &:hover {
+    background-color: var(--color-palette-light);
+  }
 
-    &__avatar {
-        img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-        }
+  &__avatar {
+    img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
     }
+  }
 
-    &__arrow {
-        img {
-            width: 25px;
-            height: 25px;
-            transform: rotate(90deg);
-        }
+  &__arrow {
+    img {
+      width: 25px;
+      height: 25px;
+      transform: rotate(90deg);
     }
+  }
 
-    &__dropdown {
-        position: absolute;
-        top: 60px;
-        left: -50px;
-    }
+  &__dropdown {
+    position: absolute;
+    top: 60px;
+    left: -50px;
+  }
 }
 
 .dropdown {
-    &__title {
-        font-size: var(--font-size-accent);
-    }
+  &__title {
+    font-size: var(--font-size-accent);
+  }
 
-    &__login {
-        color: var(--color-dark);
-    }
+  &__login {
+    color: var(--color-dark);
+  }
 
-    &__links {
-        margin-top: 5px;
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-    }
+  &__links {
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
 }

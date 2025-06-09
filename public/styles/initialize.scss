@@ -30,15 +30,23 @@
     font-display: swap;
 }
 
+// --color-palette-light: #dae4e5;
+// --color-palette-light-middle: #94c0c2;
+// --color-palette-middle: #69a4a2;
+// --color-palette-dark-middle: #296e6b;
+// --color-palette-dark: #2b4a4a;
+
 :root {
     // Черно-белые
     --color-white: #ffffff;
     --color-light: #ececec;
     --color-dark: #4d4d4d;
     --color-black: #000000;
+    --color-gray: rgb(149, 149, 149);
+    --color-transparent: rgba(255, 255, 255, 0.27);
     // Палитра цветов
     --color-palette-light: #dae4e5;
-    --color-palette-light-middle: #94c0c2;
+    --color-palette-light-middle: rgb(218, 218, 218);
     --color-palette-middle: #69a4a2;
     --color-palette-dark-middle: #296e6b;
     --color-palette-dark: #2b4a4a;
@@ -82,10 +90,15 @@ body {
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-family-accent);
     font-weight: 700;
+    margin: 0;
 }
 
 h1 {
     font-size: var(--font-size-title);
+}
+
+p {
+    margin: 0;
 }
 
 a, button, input, textarea, svg * {

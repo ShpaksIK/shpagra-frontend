@@ -1,26 +1,26 @@
 .button {
-    padding: 5px 10px;
-    background-color: var(--color-palette-dark-middle);
-    text-decoration: none;
+  padding: 5px 10px;
+  background-color: var(--color-palette-dark-middle);
+  text-decoration: none;
+  color: var(--color-palette-light);
+  outline: none;
+  border-radius: 5px;
+  border: none;
+  display: inline-flex;
+  justify-content: center;
+
+  &:hover {
+    background-color: var(--color-palette-middle);
     color: var(--color-palette-light);
-    outline: none;
-    border-radius: 5px;
-    border: none;
-    display: inline-flex;
-    justify-content: center;
+  }
+
+  &_danger {
+    background-color: var(--color-danger);
+    color: #fff;
 
     &:hover {
-        background-color: var(--color-palette-middle);
-        color: var(--color-palette-light);
+      background-color: var(--color-danger-hover);
+      color: #fff;
     }
-
-    &_danger {
-        background-color: var(--color-danger);
-        color: #fff;
-
-        &:hover {
-            background-color: var(--color-danger-hover);
-            color: #fff;
-        }
-    }
+  }
 }
