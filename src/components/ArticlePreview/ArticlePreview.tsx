@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
@@ -8,8 +8,9 @@ import Like from '../../ui/Like/Like';
 import style from './ArticlePreview.module.scss';
 import articlePreviewIMG from './../../../public/images/logo-big.png';
 import { ArticleType } from '../../redux/types/articleType';
-import { setLike } from '../../redux/reducers/articleReducer';
+import { setLike, getComments } from '../../redux/reducers/articleReducer';
 import { AppStateType } from '../../redux';
+import CommentButton from '../../ui/CommentButton/CommentButton';
 
 interface StateProps {
   article: ArticleType;
@@ -17,6 +18,7 @@ interface StateProps {
 
 interface DispatchProps {
   setLike: (articleId: number) => void;
+  getComments: (articleId: number) => void;
 }
 
 interface OwnProps {
@@ -25,7 +27,18 @@ interface OwnProps {
 
 type ArticleFilterProps = StateProps & DispatchProps & OwnProps;
 
-const ArticlePreview: React.FC<ArticleFilterProps> = ({ setLike, article }) => {
+const ArticlePreview: React.FC<ArticleFilterProps> = ({ setLike, getComments, article }) => {
+  const [isShowComments, setShowComments] = useState(false);
+
+  const handleShowComments = () => {
+    if (isShowComments) {
+      setShowComments(false);
+    } else {
+      getComments(article.id);
+      setShowComments(true);
+    }
+  };
+
   return (
     <article className={style.articlePreview}>
       <Link to={`/article/${article.id}`}>
@@ -40,6 +53,7 @@ const ArticlePreview: React.FC<ArticleFilterProps> = ({ setLike, article }) => {
         <div className={style.articlePreview__footer}>
           <Button href={`/article/${article.id}`}>Читать</Button>
           <Like isLike={article.isLike} onClick={() => setLike(article.id)} />
+          <CommentButton isOpen={isShowComments} onClick={handleShowComments} />
         </div>
       </div>
     </article>
@@ -54,4 +68,4 @@ const mapState = (state: AppStateType, ownProps: OwnProps) => {
   };
 };
 
-export default connect(mapState, { setLike })(ArticlePreview);
+export default connect(mapState, { setLike, getComments })(ArticlePreview);

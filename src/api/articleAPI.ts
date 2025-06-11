@@ -1,5 +1,6 @@
 import { instance } from '.';
 import { ArticleFilterType } from '../redux/types/articleFilterType';
+import { CommentSendType } from '../redux/types/commentType';
 
 export const articleAPI = {
   getArticles(articleFilterType: ArticleFilterType) {
@@ -24,5 +25,11 @@ export const articleAPI = {
       },
     ];
     return instance.get(`articles?filter=${articleFilterType}`);
+  },
+  getComments(articleId: number) {
+    return instance.get(`articles/${articleId}/comments`);
+  },
+  sendComment(comment: CommentSendType) {
+    return instance.post(`articles/${comment.relatedId}/comments`);
   },
 };

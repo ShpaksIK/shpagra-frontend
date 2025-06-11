@@ -1,3 +1,5 @@
+import { CommentType } from './commentType';
+
 type ArticleStatusType = 'published' | 'review' | 'draft';
 
 interface ArticleContentType {
@@ -19,4 +21,5 @@ export interface ArticleType {
   authorUsername: string;
   authorAvatar: any;
   isLike: boolean;
+  comments?: CommentType[];
 }
