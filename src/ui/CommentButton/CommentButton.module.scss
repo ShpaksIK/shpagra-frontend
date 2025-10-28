@@ -1,0 +1,17 @@
+.commentButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+}
+
+.commentButton_active {
+  background-color: var(--color-block);
+}
+
+.commentButton:hover {
+  background-color: var(--color-transparent);
+}

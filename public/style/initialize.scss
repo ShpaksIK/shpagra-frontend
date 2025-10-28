@@ -1,0 +1,115 @@
+@font-face {
+    font-family: 'Moderustic';
+    src: url('./../fonts/Moderustic-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Moderustic';
+    src: url('./../fonts/Moderustic-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Moderustic';
+    src: url('./../fonts/Moderustic-SemiBold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'MontserratAlternates';
+    src: url('./../fonts/MontserratAlternates-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    // Цвета
+    --color-text-title: #000000;
+    --color-text-base: #000000;
+    --color-text-link: #2b4a4a;
+
+    --color-danger: #ab3c3c;
+    --color-danger-hover: #852d2d;
+    
+    --color-background: #e7e6e6;
+    --color-block: #ffffff;
+
+    --color-element: #69a4a2;
+    --color-element-hover: #296a6b;
+    --color-line: #e7e6e6;
+    --color-line-hover: #dddddd;
+
+    // Шрифты
+    --font-family-base: 'Moderustic', sans-serif;
+    --font-family-accent: 'MontserratAlternates', sans-serif;
+
+    // Размер шрифтов
+    --font-size-title: clamp(24px, 2.5rem, 64px);
+    --font-size-accent: clamp(16px, 1.3rem, 32px);
+    --font-size-text: clamp(14px, 1rem, 24px);
+    --font-size-small: clamp(10px, 0.8rem, 16px);
+
+    // Другие параметры
+    --container-width: 1300px;
+    --transition-duration: 0.2s;
+    --border-radius-large: 10px;
+    --border-radius-small: 5px;
+}
+
+body {
+    font-family: var(--font-family-base);
+    font-weight: 400;
+    font-size: var(--font-size-text);
+    color: var(--color-text-base);
+    background-color: var(--color-background);
+    transition: var(--transition-duration);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-size: var(--font-size-title);
+    font-weight: 700;
+    margin: 0;
+}
+
+p {
+    margin: 0;
+}
+
+a, button, input, textarea, svg * {
+    transition: var(--transition-duration);
+}
+
+a {
+    color: var(--color-text-link);
+    text-decoration: none;
+}
+
+.container {
+    max-width: var(--container-width);
+    margin-inline: auto;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.max-width {
+    width: 100%;
+}
+
+.alert {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}

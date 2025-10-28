@@ -1,0 +1,22 @@
+.close {
+  outline: none;
+  border: none;
+  border-radius: 50%;
+  padding: 5px;
+  background-color: var(--color-line);
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+
+  .close__svg {
+    fill: var(--color-element);
+  }
+
+  &:hover {
+    background-color: var(--color-line-hover);
+
+    .close__svg {
+      fill: var(--color-element-hover);
+    }
+  }
+}
