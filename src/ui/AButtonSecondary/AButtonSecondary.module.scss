@@ -1,6 +1,6 @@
 .aButtonSecondary {
   padding: 5px 10px;
-  background-color: var(--color-element);
+  background-color: transparent;
   text-decoration: none;
   color: var(--color-text-link);
   border-radius: 5px;
@@ -9,7 +9,6 @@
   justify-content: center;
 
   &:hover {
-    background-color: var(--color-element-hover);
     border-color: var(--color-element-hover);
   }
 

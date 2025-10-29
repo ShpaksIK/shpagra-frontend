@@ -5,11 +5,11 @@ type RelatedType = 'article' | 'post';
 export interface CommentType {
   id: number;
   content: string;
-  createdAt: string;
-  updatedAt: string | null;
+  createdAt: number;
+  updatedAt: number | null;
   authorLogin: string;
   authorUsername: string;
-  authorAvatar: any | null;
+  authorAvatar: string | null;
   parentId: number | null;
   relatedId: number;
   relatedType: RelatedType;

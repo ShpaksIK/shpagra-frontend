@@ -7,11 +7,7 @@ interface AProps {
 }
 
 const Logo: React.FC<AProps> = ({ to, children }) => {
-  return (
-    <Link to={to}>
-      {children}
-    </Link>
-  );
+  return <Link to={to}>{children}</Link>;
 };
 
 export default Logo;

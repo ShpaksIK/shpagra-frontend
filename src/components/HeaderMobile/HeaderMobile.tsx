@@ -7,7 +7,7 @@ import BurgerMenu from '../../ui/BurgerMenu/BurgerMenu';
 
 const HeaderMobile = () => {
   const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false);
-  const toggleMenu = () => setIsOpenMenu(prev => !prev);
+  const toggleMenu = () => setIsOpenMenu((prev) => !prev);
 
   return (
     <>
@@ -19,9 +19,7 @@ const HeaderMobile = () => {
           <BurgerMenu onClick={toggleMenu} />
         </div>
       </header>
-      {isOpenMenu && (
-        <NavMobile />
-      )}
+      {isOpenMenu && <NavMobile />}
     </>
   );
 };

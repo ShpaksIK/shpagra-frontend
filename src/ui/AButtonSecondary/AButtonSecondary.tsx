@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { type ReactNode } from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router';
 
@@ -6,16 +6,16 @@ import style from './AButtonSecondary.module.scss';
 
 interface AButtonSecondaryProps {
   to: string;
-  text: string;
   isMaxWidth?: boolean;
   isDanger?: boolean;
+  children: ReactNode;
 }
 
 const AButtonSecondary: React.FC<AButtonSecondaryProps> = ({
   to,
-  text,
   isMaxWidth = false,
   isDanger = false,
+  children
 }) => {
   return (
     <Link
@@ -26,7 +26,7 @@ const AButtonSecondary: React.FC<AButtonSecondaryProps> = ({
       )}
       to={to}
     >
-      {text}
+      {children}
     </Link>
   );
 };

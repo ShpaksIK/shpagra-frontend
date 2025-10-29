@@ -5,9 +5,11 @@ import style from './NavMobile.module.scss';
 const NavMobile = () => {
   return (
     <nav className={style.nav}>
-      <A to='/profile'>Профиль</A>
+      <A to="/">Статьи</A>
       <Line />
-      <A to='/settings'>Настройки</A>
+      <A to="/profile">Профиль</A>
+      <Line />
+      <A to="/settings">Настройки</A>
     </nav>
   );
 };

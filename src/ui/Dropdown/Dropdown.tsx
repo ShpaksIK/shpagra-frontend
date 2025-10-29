@@ -25,13 +25,8 @@ const Dropdown: React.FC<DropdownProps> = ({ isShowCloseImg = false, dropdownClo
   }, [dropdownClose]);
 
   return (
-    <div
-      ref={dropdownRef}
-      className={style.dropdown}
-    >
-      {isShowCloseImg && (
-        <Close />
-      )}
+    <div ref={dropdownRef} className={style.dropdown}>
+      {isShowCloseImg && <Close />}
       {children}
     </div>
   );

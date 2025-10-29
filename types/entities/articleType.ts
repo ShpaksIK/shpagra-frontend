@@ -5,7 +5,7 @@ type ArticleStatusType = 'published' | 'review' | 'draft';
 
 interface ArticleContentType {
   type: string;
-  file?: any;
+  file?: string;
   text?: string;
   src?: string;
 }
@@ -14,14 +14,14 @@ export interface ArticleType {
   id: number;
   title: string;
   description: string;
-  banner: any;
+  banner: string | null;
   content: ArticleContentType[];
   status: ArticleStatusType;
-  createdAt: string;
-  updatedAt: string | null;
+  createdAt: number;
+  updatedAt: number | null;
   authorLogin: string;
   authorUsername: string;
-  authorAvatar: any | null;
+  authorAvatar: string | null;
   reactions: ReactionType[];
   comments: CommentType[];
 }
