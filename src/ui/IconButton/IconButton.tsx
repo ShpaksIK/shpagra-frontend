@@ -1,23 +1,23 @@
 import React from 'react';
-import { Link } from 'react-router';
+import classNames from 'classnames';
 
 import style from './IconButton.module.scss';
 
 interface IconButtonProps {
-  to: string;
+  onClick: () => void;
   icon: React.ReactNode;
   text?: string;
   className?: string;
 }
 
-const IconButton: React.FC<IconButtonProps> = ({ to, text, icon }) => {
+const IconButton: React.FC<IconButtonProps> = ({ onClick, icon, text, className }) => {
   return (
-    <Link className={style.iconButton} to={to}>
+    <div className={classNames(style.iconButton, className ? className : '')} onClick={onClick}>
       {icon}
       <div className={style.iconButton__text}>
         <p>{text}</p>
       </div>
-    </Link>
+    </div>
   );
 };
 

@@ -1,13 +1,12 @@
 .article {
   background-color: var(--color-block);
   border-radius: var(--border-radius-large);
-  width: 400px;
-  min-width: 400px;
+  width: 100%;
+  min-width: 330px;
 
   &__banner {
     position: relative;
-    max-height: 300px;
-    height: 100%;
+    height: 400px;
     width: 100%;
     background-color: gray;
     border-top-left-radius: var(--border-radius-large);
@@ -21,20 +20,22 @@
     border-top-left-radius: var(--border-radius-large);
     border-top-right-radius: var(--border-radius-large);
     position: relative;
+    user-select: none;
 
     &__background {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(to top, 
-            rgba(0,0,0,1) 0%,
-            rgba(0,0,0,0.7) 25%,
-            rgba(0,0,0,0.3) 50%,
-            rgba(0,0,0,0) 100%
-        );
-        pointer-events: none;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 1) 0%,
+        rgba(0, 0, 0, 0.7) 25%,
+        rgba(0, 0, 0, 0.3) 50%,
+        rgba(0, 0, 0, 0) 100%
+      );
+      pointer-events: none;
     }
   }
 
@@ -59,14 +60,23 @@
     align-items: flex-end;
 
     &__author {
-        display: flex;
-        align-items: center;
-        gap: 5px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
 
     &__created {
-        font-size: var(--font-size-small);
-        color: var(--color-text-transparent);
+      font-size: var(--font-size-small);
+      color: var(--color-text-transparent);
+    }
+
+    &__controls {
+      display: flex;
+      gap: 5px;
+
+      &:hover:nth-child(1) {
+        scale: 1.2;
+      }
     }
   }
 }

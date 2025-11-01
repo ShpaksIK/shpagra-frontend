@@ -48,6 +48,7 @@
     --color-element-transparent: rgba(106, 164, 162, 0.2);
     --color-line: #e7e6e6;
     --color-line-hover: #dddddd;
+    --color-element-secondary: #a4a4a4;
 
     // Шрифты
     --font-family-base: 'Moderustic', sans-serif;
@@ -85,7 +86,7 @@ p {
     margin: 0;
 }
 
-a, button, input, textarea, svg * {
+a, button, input, textarea {
     transition: var(--transition-duration);
 }
 
@@ -114,4 +115,10 @@ a {
     bottom: 10px;
     left: 50%;
     transform: translateX(-50%);
+}
+
+.svg-hover:hover {
+    &, & g, & path {
+        stroke-width: 2;
+    }
 }

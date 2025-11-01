@@ -15,7 +15,7 @@ const AButtonSecondary: React.FC<AButtonSecondaryProps> = ({
   to,
   isMaxWidth = false,
   isDanger = false,
-  children
+  children,
 }) => {
   return (
     <Link

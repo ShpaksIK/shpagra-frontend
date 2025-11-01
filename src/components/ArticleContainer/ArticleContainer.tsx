@@ -7,17 +7,18 @@ const ArticleContainer = () => {
     {
       id: 1,
       title: 'Test Article',
-      description: 'Test description for this article',
+      description:
+        'Test description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this article',
       banner: null,
       content: [],
       status: 'published',
-      createdAt: 1761694917,
+      createdAt: Date.now(),
       updatedAt: null,
       authorLogin: 'shp0ks',
       authorUsername: 'Shpaks',
       authorAvatar: null,
       reactions: [],
-      comments: []
+      comments: [],
     },
     {
       id: 2,
@@ -26,20 +27,22 @@ const ArticleContainer = () => {
       banner: null,
       content: [],
       status: 'published',
-      createdAt: 1761695766,
+      createdAt: Date.now(),
       updatedAt: null,
       authorLogin: 'shp0ks',
       authorUsername: 'Shpaks',
       authorAvatar: null,
       reactions: [],
-      comments: []
-    }
+      comments: [],
+    },
   ];
 
   return (
-    <article className={style.articleContainer}>
-      {articles.map((article) => <Article key={article.id} article={article} />)}
-    </article>
+    <section className={style.articleContainer}>
+      {articles.map((article) => (
+        <Article key={article.id} article={article} />
+      ))}
+    </section>
   );
 };
 

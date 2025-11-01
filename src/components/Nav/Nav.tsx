@@ -12,14 +12,22 @@ const Nav = () => {
   return (
     <nav className={style.nav}>
       <div className={style.nav__links}>
-        <AButton to='/' isMaxWidth={true}>Статьи</AButton>
-        <AButton to='/profile' isMaxWidth={true}>Профиль</AButton>
-        <AButton to='/settings' isMaxWidth={true}>Настройки</AButton>
+        <AButton to="/" isMaxWidth={true}>
+          Статьи
+        </AButton>
+        <AButton to="/profile" isMaxWidth={true}>
+          Профиль
+        </AButton>
+        <AButton to="/settings" isMaxWidth={true}>
+          Настройки
+        </AButton>
       </div>
 
       <div className={style.nav__footer}>
-        <AButton to='/info' isMaxWidth={true}>Информация</AButton>
-        <AButtonSecondary to='/article-creator'>+</AButtonSecondary>
+        <AButton to="/info" isMaxWidth={true}>
+          Информация
+        </AButton>
+        <AButtonSecondary to="/article-creator">+</AButtonSecondary>
       </div>
     </nav>
   );

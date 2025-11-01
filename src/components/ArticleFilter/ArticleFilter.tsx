@@ -19,16 +19,19 @@ const ArticleFilter = () => {
 
   return (
     <div className={style.filter}>
-      <Box sx={{ minWidth: 400 }}>
+      <Box sx={{ minWidth: 300 }}>
         <FormControl fullWidth>
-          <InputLabel 
+          <InputLabel
             id="article-filter-select-label"
             sx={{
               fontFamily: 'inherit',
               '&.MuiInputLabel-shrink': {
-                color: 'var(--color-text-link)'
-              }
-            }}>Фильтрация статей</InputLabel>
+                color: 'var(--color-text-link)',
+              },
+            }}
+          >
+            Фильтрация статей
+          </InputLabel>
           <Select
             labelId="article-filter-select-label"
             id="article-filter-select"
@@ -38,49 +41,19 @@ const ArticleFilter = () => {
             sx={{
               fontFamily: 'inherit',
               '& .MuiOutlinedInput-notchedOutline': {
-                borderColor: 'var(--color-element)'
+                borderColor: 'var(--color-element)',
               },
               '&:hover .MuiOutlinedInput-notchedOutline': {
-                borderColor: 'var(--color-element-hover)'
+                borderColor: 'var(--color-element-hover)',
               },
               '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                borderColor: 'var(--color-element-hover)'
-              }
+                borderColor: 'var(--color-element-hover)',
+              },
             }}
           >
-            <MenuItem 
-              value="popular"
-              sx={{
-                fontFamily: 'inherit',
-                '&.Mui-selected': {
-                  backgroundColor: 'var(--color-element-transparent)'
-                },
-                '&.Mui-selected:hover': {
-                  backgroundColor: 'var(--color-element-transparent)'
-                },
-              }}>Популярные</MenuItem>
-            <MenuItem 
-              value="new"
-              sx={{
-                fontFamily: 'inherit',
-                '&.Mui-selected': {
-                  backgroundColor: 'var(--color-element-transparent)'
-                },
-                '&.Mui-selected:hover': {
-                  backgroundColor: 'var(--color-element-transparent)'
-                },
-              }}>Новые</MenuItem>
-            <MenuItem 
-              value="old"
-              sx={{
-                fontFamily: 'inherit',
-                '&.Mui-selected': {
-                  backgroundColor: 'var(--color-element-transparent)'
-                },
-                '&.Mui-selected:hover': {
-                  backgroundColor: 'var(--color-element-transparent)'
-                },
-              }}>Старые</MenuItem>
+            <MenuItem value="popular">Популярные</MenuItem>
+            <MenuItem value="new">Новые</MenuItem>
+            <MenuItem value="old">Старые</MenuItem>
           </Select>
         </FormControl>
       </Box>
