@@ -17,6 +17,22 @@ const ArticleFilter = () => {
     setFilter(selectedType);
   };
 
+  const menuItemSx = {
+    fontFamily: 'inherit',
+    '&.Mui-selected': {
+      backgroundColor: 'var(--color-element-transparent)',
+    },
+    '&.Mui-selected:hover': {
+      backgroundColor: 'var(--color-element-transparent)',
+    },
+    '&.Mui-focusVisible': {
+      backgroundColor: 'var(--color-element-transparent)',
+    },
+    '&.Mui-selected.Mui-focusVisible': {
+      backgroundColor: 'var(--color-element-transparent)',
+    },
+  };
+
   return (
     <div className={style.filter}>
       <Box sx={{ minWidth: 300 }}>
@@ -49,11 +65,23 @@ const ArticleFilter = () => {
               '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
                 borderColor: 'var(--color-element-hover)',
               },
+              '&.Mui-selected': {
+                borderColor: 'var(--color-element-transparent)',
+              },
+            }}
+            MenuProps={{
+              disableScrollLock: true
             }}
           >
-            <MenuItem value="popular">Популярные</MenuItem>
-            <MenuItem value="new">Новые</MenuItem>
-            <MenuItem value="old">Старые</MenuItem>
+            <MenuItem 
+              value="popular"
+              sx={menuItemSx}>Популярные</MenuItem>
+            <MenuItem 
+              value="new"
+              sx={menuItemSx}>Новые</MenuItem>
+            <MenuItem 
+              value="old"
+              sx={menuItemSx}>Старые</MenuItem>
           </Select>
         </FormControl>
       </Box>
