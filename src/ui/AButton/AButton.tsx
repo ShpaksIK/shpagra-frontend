@@ -21,8 +21,8 @@ const AButton: React.FC<AButtonProps> = ({
     <Link
       className={classNames(
         style.aButton,
-        isMaxWidth ? 'max-width' : '',
-        isDanger ? style.aButton_danger : '',
+        isMaxWidth && 'max-width',
+        isDanger && style.aButton_danger,
       )}
       to={to}
     >

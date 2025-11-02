@@ -57,7 +57,7 @@
   &__footer {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
 
     &__author {
       display: flex;
@@ -73,10 +73,46 @@
     &__controls {
       display: flex;
       gap: 5px;
+    }
+  }
 
-      &:hover:nth-child(1) {
-        scale: 1.2;
-      }
+  &__comments {
+    display: flex;
+    flex-direction: column;
+
+    &_no {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--color-text-transparent);
+      border-top: 1px solid var(--color-line);
+      padding-top: 10px;
+    }
+  }
+
+  &__send {
+    border: 1px solid var(--color-line);
+    border-radius: var(--border-radius-small);
+    margin: 10px;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    max-height: 400px;
+    height: auto;
+
+    &__textarea {
+      width: 100%;
+      border: none;
+      outline: none;
+      border-radius: var(--border-radius-large);
+      resize: none;
+    }
+
+    &__controls {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      margin-left: 5px;
     }
   }
 }

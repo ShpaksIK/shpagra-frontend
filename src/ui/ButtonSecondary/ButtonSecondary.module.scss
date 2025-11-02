@@ -22,4 +22,16 @@
       color: #fff;
     }
   }
+
+  &_circle {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+  }
+
+  &_disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
 }

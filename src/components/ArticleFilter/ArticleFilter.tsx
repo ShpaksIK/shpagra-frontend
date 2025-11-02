@@ -70,18 +70,18 @@ const ArticleFilter = () => {
               },
             }}
             MenuProps={{
-              disableScrollLock: true
+              disableScrollLock: true,
             }}
           >
-            <MenuItem 
-              value="popular"
-              sx={menuItemSx}>Популярные</MenuItem>
-            <MenuItem 
-              value="new"
-              sx={menuItemSx}>Новые</MenuItem>
-            <MenuItem 
-              value="old"
-              sx={menuItemSx}>Старые</MenuItem>
+            <MenuItem value="popular" sx={menuItemSx}>
+              Популярные
+            </MenuItem>
+            <MenuItem value="new" sx={menuItemSx}>
+              Новые
+            </MenuItem>
+            <MenuItem value="old" sx={menuItemSx}>
+              Старые
+            </MenuItem>
           </Select>
         </FormControl>
       </Box>

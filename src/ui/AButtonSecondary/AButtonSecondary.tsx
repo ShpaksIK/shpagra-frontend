@@ -1,4 +1,4 @@
-import React, { type ReactNode } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router';
 
@@ -8,7 +8,7 @@ interface AButtonSecondaryProps {
   to: string;
   isMaxWidth?: boolean;
   isDanger?: boolean;
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 const AButtonSecondary: React.FC<AButtonSecondaryProps> = ({
@@ -21,8 +21,8 @@ const AButtonSecondary: React.FC<AButtonSecondaryProps> = ({
     <Link
       className={classNames(
         style.aButtonSecondary,
-        isMaxWidth ? 'max-width' : '',
-        isDanger ? style.aButtonSecondary_danger : '',
+        isMaxWidth && 'max-width',
+        isDanger && style.aButtonSecondary_danger,
       )}
       to={to}
     >

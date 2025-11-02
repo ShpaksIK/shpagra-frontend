@@ -1,6 +1,6 @@
 import { ReactionType } from './reactionType';
 
-type RelatedType = 'article' | 'post';
+export type RelatedType = 'article' | 'post';
 
 export interface CommentType {
   id: number;

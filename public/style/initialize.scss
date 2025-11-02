@@ -1,3 +1,11 @@
+@function hex-to-rgb($hex-color) {
+  @return red($hex-color), green($hex-color), blue($hex-color);
+}
+
+@function hex-to-rgba($hex-color, $alpha) {
+  @return rgba(red($hex-color), green($hex-color), blue($hex-color), $alpha);
+}
+
 @font-face {
     font-family: 'Moderustic';
     src: url('./../fonts/Moderustic-Light.woff2') format('woff2');
@@ -121,4 +129,23 @@ a {
     &, & g, & path {
         stroke-width: 2;
     }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-element-secondary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hex-to-rgba(#a4a4a4, 0.5);
 }

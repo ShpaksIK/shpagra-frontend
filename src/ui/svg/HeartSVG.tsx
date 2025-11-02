@@ -9,6 +9,10 @@ const HeartSVG: React.FC<HeartSVGProps> = ({
   color = 'var(--color-element-secondary)',
   filled = false,
 }) => {
+  if (!filled) {
+    color = 'var(--color-element-secondary)';
+  }
+
   return (
     <svg
       width={size}

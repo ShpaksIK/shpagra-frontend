@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router';
+import TextareaAutosize from 'react-textarea-autosize';
 
 import { ArticleType } from '../../../types/entities/articleType';
 import style from './Article.module.scss';
@@ -11,6 +12,9 @@ import { copyToClipboard } from './../../../utils/copyToClipboard';
 import ShareSVG from '../../ui/svg/ShareSVG';
 import HeartSVG from '../../ui/svg/HeartSVG';
 import CommentSVG from '../../ui/svg/CommentSVG';
+import Comment from '../Comment/Comment';
+import Button from '../../ui/Button/Button';
+import SendSVG from '../../ui/svg/SendSVG';
 
 interface ArticleProps {
   article: ArticleType;
@@ -31,6 +35,19 @@ const Article: React.FC<ArticleProps> = ({ article }) => {
 
   const copyArticleLink = () => {
     copyToClipboard(`http://localhost:5173/article/${article.id}`);
+  };
+
+  const [isCorrectComment, setCorrectComment] = useState<boolean>(false);
+  const [commentValue, setCommentValue] = useState<string>('');
+  const handleCommentValue = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const newComment = event.target.value;
+    setCommentValue(newComment);
+
+    if (newComment.trim().length === 0 || newComment.trim().length > 1000) {
+      setCorrectComment(false);
+    } else {
+      setCorrectComment(true);
+    }
   };
 
   return (
@@ -57,7 +74,7 @@ const Article: React.FC<ArticleProps> = ({ article }) => {
           <div className={style.article__footer__controls}>
             <IconButton
               onClick={toggleReaction}
-              icon={isSentReaction ? <HeartSVG color="#ff0000" filled={true} /> : <HeartSVG />}
+              icon={<HeartSVG color="#ff0000" filled={isSentReaction} />}
               text="1488"
             />
             <IconButton
@@ -69,7 +86,35 @@ const Article: React.FC<ArticleProps> = ({ article }) => {
           </div>
         </div>
       </div>
-      {isOpenComments && <div className={style.article__comments}></div>}
+      {isOpenComments && (
+        <>
+          {article.comments.length === 0 && (
+            <div className={style.article__comments_no}>
+              <p>Прокомментируйте статью первым!</p>
+            </div>
+          )}
+          <section className={style.article__comments}>
+            {article.comments.map((comment) => (
+              <Comment key={comment.id} comment={comment} />
+            ))}
+          </section>
+          <div className={style.article__send}>
+            <TextareaAutosize
+              className={style.article__send__textarea}
+              minRows={1}
+              maxRows={5}
+              value={commentValue}
+              onChange={handleCommentValue}
+              placeholder="Прокомментируйте..."
+            />
+            <div className={style.article__send__controls}>
+              <Button isCircle={true} title="Отправить" disabled={!isCorrectComment}>
+                <SendSVG />
+              </Button>
+            </div>
+          </div>
+        </>
+      )}
     </article>
   );
 };
