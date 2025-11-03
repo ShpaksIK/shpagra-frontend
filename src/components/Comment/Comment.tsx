@@ -8,13 +8,14 @@ import Avatar from '../../ui/Avatar/Avatar';
 import IconButton from '../../ui/IconButton/IconButton';
 import DislikeSVG from '../../ui/svg/DislikeSVG';
 import LikeSVG from '../../ui/svg/LikeSVG';
-import ShareSVG from '../../ui/svg/ShareSVG';
+import ReplySVG from '../../ui/svg/ReplySVG';
 
 interface CommentProps {
   comment: CommentType;
+  setReplyCommentId: (commentId: number) => void;
 }
 
-const Comment: React.FC<CommentProps> = ({ comment }) => {
+const Comment: React.FC<CommentProps> = ({ comment, setReplyCommentId }) => {
   const createdAt = formatTimestamp(comment.createdAt);
 
   const [isSentLike, setLike] = useState<boolean>(false);
@@ -45,7 +46,7 @@ const Comment: React.FC<CommentProps> = ({ comment }) => {
           <p className={style.comment__content__header__created}>
             {createdAt} {comment.updatedAt ? '(изменено)' : ''}
           </p>
-          <IconButton onClick={() => {}} icon={<ShareSVG />} />
+          <IconButton onClick={() => setReplyCommentId(comment.id)} icon={<ReplySVG />} />
         </div>
         <div className={style.comment__content__text}>
           <p>{comment.content}</p>

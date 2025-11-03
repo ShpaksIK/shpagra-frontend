@@ -15,6 +15,7 @@ import CommentSVG from '../../ui/svg/CommentSVG';
 import Comment from '../Comment/Comment';
 import Button from '../../ui/Button/Button';
 import SendSVG from '../../ui/svg/SendSVG';
+import Chip from '../../ui/Chip/Chip';
 
 interface ArticleProps {
   article: ArticleType;
@@ -49,6 +50,8 @@ const Article: React.FC<ArticleProps> = ({ article }) => {
       setCorrectComment(true);
     }
   };
+
+  const [replyCommentId, setReplyCommentId] = useState<number | null>(null);
 
   return (
     <article className={style.article}>
@@ -95,9 +98,17 @@ const Article: React.FC<ArticleProps> = ({ article }) => {
           )}
           <section className={style.article__comments}>
             {article.comments.map((comment) => (
-              <Comment key={comment.id} comment={comment} />
+              <Comment key={comment.id} comment={comment} setReplyCommentId={setReplyCommentId} />
             ))}
           </section>
+          {replyCommentId && (
+            <div className={style.article__reply}>
+              <Chip
+                text={`Ответ ${article.comments.find((comment) => comment.id === replyCommentId)?.authorUsername}`}
+                onClose={() => setReplyCommentId(null)}
+              />
+            </div>
+          )}
           <div className={style.article__send}>
             <TextareaAutosize
               className={style.article__send__textarea}

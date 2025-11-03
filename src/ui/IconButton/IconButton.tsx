@@ -12,12 +12,12 @@ interface IconButtonProps {
 
 const IconButton: React.FC<IconButtonProps> = ({ onClick, icon, text, className }) => {
   return (
-    <div className={classNames(style.iconButton, className ? className : '')} onClick={onClick}>
+    <button className={classNames(style.iconButton, className ? className : '')} onClick={onClick}>
       {icon}
       <div className={style.iconButton__text}>
         <p>{text}</p>
       </div>
-    </div>
+    </button>
   );
 };
 

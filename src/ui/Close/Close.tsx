@@ -1,7 +1,7 @@
 import React from 'react';
 
 import style from './Close.module.scss';
-import CloseSVG from './CloseSVG';
+import CloseSVG from './../svg/CloseSVG';
 
 interface CloseProps {
   onClick?: () => void;
@@ -10,7 +10,7 @@ interface CloseProps {
 const Close: React.FC<CloseProps> = ({ onClick }) => {
   return (
     <button className={style.close} type="button" onClick={onClick} title="Закрыть">
-      <CloseSVG className={style.close__svg} />
+      <CloseSVG color="var(--color-element)" />
     </button>
   );
 };

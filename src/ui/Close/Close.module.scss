@@ -6,17 +6,12 @@
   background-color: var(--color-line);
   height: 30px;
   width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
-
-  .close__svg {
-    fill: var(--color-element);
-  }
 
   &:hover {
     background-color: var(--color-line-hover);
-
-    .close__svg {
-      fill: var(--color-element-hover);
-    }
   }
 }
