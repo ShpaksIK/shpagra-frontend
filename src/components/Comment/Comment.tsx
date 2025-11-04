@@ -9,6 +9,7 @@ import IconButton from '../../ui/IconButton/IconButton';
 import DislikeSVG from '../../ui/svg/DislikeSVG';
 import LikeSVG from '../../ui/svg/LikeSVG';
 import ReplySVG from '../../ui/svg/ReplySVG';
+import ReplyMessage from '../../ui/ReplyMessage/ReplyMessage';
 
 interface CommentProps {
   comment: CommentType;
@@ -35,7 +36,7 @@ const Comment: React.FC<CommentProps> = ({ comment, setReplyCommentId }) => {
   };
 
   return (
-    <article className={style.comment}>
+    <article className={style.comment} id={`${comment.id}`}>
       <div className={style.comment__content}>
         <div className={style.comment__content__header}>
           <Avatar
@@ -47,6 +48,9 @@ const Comment: React.FC<CommentProps> = ({ comment, setReplyCommentId }) => {
             {createdAt} {comment.updatedAt ? '(изменено)' : ''}
           </p>
           <IconButton onClick={() => setReplyCommentId(comment.id)} icon={<ReplySVG />} />
+        </div>
+        <div className={style.comment__content__reply}>
+          {comment.parentId && <ReplyMessage id={comment.id} authorUsername={comment.authorUsername} text={comment.content} />}
         </div>
         <div className={style.comment__content__text}>
           <p>{comment.content}</p>
