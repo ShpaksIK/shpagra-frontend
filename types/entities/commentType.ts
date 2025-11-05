@@ -10,7 +10,7 @@ export interface CommentType {
   authorLogin: string;
   authorUsername: string;
   authorAvatar: string | null;
-  parentId: number | null;
+  parent: ParentCommentType | null;
   relatedId: number;
   relatedType: RelatedType;
   reactions: ReactionType[];
@@ -22,4 +22,11 @@ export interface CommentSendType {
   relatedId: number;
   parentId: number | null;
   relatedType: RelatedType;
+}
+
+export interface ParentCommentType {
+  id: number;
+  authorUsername: string;
+  relatedType: RelatedType;
+  text: string;
 }

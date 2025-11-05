@@ -15,8 +15,10 @@
         color: var(--color-text-transparent);
       }
 
-      @media (max-width: 430px) {
-        gap: 5px;
+      @media (max-width: 450px) {
+        &__created {
+          margin-left: 10px;
+        }
       }
     }
 
@@ -27,7 +29,13 @@
 
   &__controls {
     display: flex;
-    align-items: flex-end;
     gap: 10px;
+
+    @media (max-width: 450px) {
+      & {
+        flex-direction: column;
+        gap: 0px;
+      }
+    }
   }
 }

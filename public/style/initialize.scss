@@ -63,7 +63,7 @@
     --font-family-accent: 'MontserratAlternates', sans-serif;
 
     // Размер шрифтов
-    --font-size-title: clamp(24px, 2.5rem, 64px);
+    --font-size-title: clamp(24px, 2.3rem, 48px);
     --font-size-accent: clamp(16px, 1.3rem, 32px);
     --font-size-text: clamp(14px, 1rem, 24px);
     --font-size-small: clamp(10px, 0.8rem, 16px);
@@ -79,6 +79,7 @@
     --transition-duration: 0.2s;
     --border-radius-large: 10px;
     --border-radius-small: 5px;
+    --media-width-phone: 700px;
 }
 
 body {

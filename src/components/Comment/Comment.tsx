@@ -36,7 +36,7 @@ const Comment: React.FC<CommentProps> = ({ comment, setReplyCommentId }) => {
   };
 
   return (
-    <article className={style.comment} id={`${comment.id}`}>
+    <article className={style.comment} id={`comment-${comment.relatedType}-${comment.id}`}>
       <div className={style.comment__content}>
         <div className={style.comment__content__header}>
           <Avatar
@@ -44,13 +44,22 @@ const Comment: React.FC<CommentProps> = ({ comment, setReplyCommentId }) => {
             profileId={comment.authorLogin}
             username={comment.authorUsername}
           />
-          <p className={style.comment__content__header__created}>
-            {createdAt} {comment.updatedAt ? '(изменено)' : ''}
-          </p>
+          <div className={style.comment__content__header__created}>
+            <p>
+              {createdAt} {comment.updatedAt ? '(изменено)' : ''}
+            </p>
+          </div>
           <IconButton onClick={() => setReplyCommentId(comment.id)} icon={<ReplySVG />} />
         </div>
         <div className={style.comment__content__reply}>
-          {comment.parentId && <ReplyMessage id={comment.id} authorUsername={comment.authorUsername} text={comment.content} />}
+          {comment.parent && (
+            <ReplyMessage
+              id={comment.parent.id}
+              authorUsername={comment.parent.authorUsername}
+              relatedType={comment.parent.relatedType}
+              text={comment.parent.text}
+            />
+          )}
         </div>
         <div className={style.comment__content__text}>
           <p>{comment.content}</p>
