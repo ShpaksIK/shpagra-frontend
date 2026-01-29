@@ -3,30 +3,12 @@ import classNames from 'classnames';
 
 import style from './Input.module.scss';
 
-interface InputProps {
-  type?: string;
-  onFocus?: () => void;
-  onBlur?: () => void;
-  placeholder?: string;
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   isMaxWidth?: boolean;
 }
 
-const Input: React.FC<InputProps> = ({
-  type = 'text',
-  onFocus,
-  onBlur,
-  placeholder = '',
-  isMaxWidth = false,
-}) => {
-  return (
-    <input
-      type={type}
-      className={classNames(style.input, isMaxWidth ? 'max-width' : '')}
-      onFocus={onFocus}
-      onBlur={onBlur}
-      placeholder={placeholder}
-    />
-  );
+const Input: React.FC<InputProps> = ({ isMaxWidth = false, ...rest }) => {
+  return <input className={classNames(style.input, isMaxWidth ? 'max-width' : '')} {...rest} />;
 };
 
 export default Input;

@@ -11,7 +11,6 @@ import Switch from '../../ui/Switch/Switch';
 import { SettingsType } from '../../types/settingsType';
 import TextButton from '../../ui/TextButton/TextButton';
 import ButtonSecondary from '../../ui/ButtonSecondary/ButtonSecondary';
-import Button from '../../ui/Button/Button';
 
 const ProfileSettingsPage = () => {
   const profile = useProfile();

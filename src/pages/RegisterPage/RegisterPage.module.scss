@@ -1,0 +1,43 @@
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.register {
+  padding: 20px;
+  border-radius: var(--border-radius-large);
+  background-color: var(--color-block);
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  max-width: 350px;
+  width: 100%;
+
+  h2 {
+    text-align: center;
+  }
+
+  &__fields {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    &__error {
+      color: var(--color-danger);
+    }
+  }
+
+  &__controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    :last-child {
+      align-self: center;
+    }
+  }
+}
