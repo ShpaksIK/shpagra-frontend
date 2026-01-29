@@ -36,7 +36,7 @@ const ProfilePage = () => {
             </div>
             <div className={style.header__controls}>
               <IconButton onClick={() => {}} icon={<ShareSVG />} />
-              {isMyProfile && <IconLink to="settings" icon={<SettingsSVG />} />}
+              {isMyProfile && <IconLink to="/profile-settings" icon={<SettingsSVG />} />}
             </div>
           </div>
 
@@ -44,7 +44,7 @@ const ProfilePage = () => {
             <h2 className={style.content__inner__title}>Статьи</h2>
           </TextLink>
 
-          <ArticleContainer maxArticles={1} />
+          <ArticleContainer articles={profile.articles} maxArticles={1} />
 
           <div className={style.blocks}>
             <div className={style.blocks__comments}>
@@ -52,7 +52,7 @@ const ProfilePage = () => {
                 <h2 className={style.content__inner__title}>Комментарии</h2>
               </TextLink>
 
-              <CommentContainer maxComments={2} />
+              <CommentContainer comments={profile.comments} maxComments={2} />
             </div>
 
             <div className={style.blocks__reactions}>
@@ -60,7 +60,7 @@ const ProfilePage = () => {
                 <h2 className={style.content__inner__title}>Реакции</h2>
               </TextLink>
 
-              <ReactionContainer maxReactions={2} />
+              <ReactionContainer reactions={profile.reactions} maxReactions={2} />
             </div>
           </div>
         </main>
