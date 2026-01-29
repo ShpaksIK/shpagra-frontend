@@ -1,0 +1,40 @@
+.comment {
+  padding: 10px;
+  border-top: 1px solid var(--color-line);
+
+  &__header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__text {
+      display: flex;
+      gap: 5px;
+
+      p {
+        color: var(--color-text-transparent);
+      }
+    }
+
+    &__controls {
+      display: flex;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    &__date {
+      color: var(--color-text-transparent);
+      font-size: var(--font-size-small);
+    }
+
+    &__controls {
+      display: flex;
+      gap: 5px;
+    }
+  }
+}

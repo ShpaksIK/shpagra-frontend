@@ -1,15 +1,20 @@
-const SettingsSVG = () => {
+interface SettingsSVGProps {
+  size?: number;
+  color?: string;
+}
+
+const SettingsSVG: React.FC<SettingsSVGProps> = ({ size = 30, color = '#69a4a2' }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       x="0px"
       y="0px"
-      width="30"
-      height="30"
+      width={size}
+      height={size}
       viewBox="0,0,256,256"
     >
       <g
-        fill="#69a4a2"
+        fill={color}
         fillRule="nonzero"
         stroke="none"
         strokeWidth="1"

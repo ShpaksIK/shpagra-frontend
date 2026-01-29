@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
 import style from './Comment.module.scss';
-import { CommentType } from '../../../types/entities/commentType';
-import { ReactionsTypes } from '../../../types/entities/reactionType';
-import { formatTimestamp } from '../../../utils/dateFormatter';
+import { CommentType } from '../../types/entities/commentType';
+import { ReactionsTypes } from '../../types/entities/reactionType';
+import { formatTimestamp } from '../../utils/dateFormatter';
 import Avatar from '../../ui/Avatar/Avatar';
 import IconButton from '../../ui/IconButton/IconButton';
 import DislikeSVG from '../../ui/svg/DislikeSVG';

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 
 import style from './ReplyMessage.module.scss';
-import { RelatedType } from '../../../types/entities/commentType';
+import { RelatedType } from '../../types/entities/commentType';
 
 interface ReplyMessageProps {
   id: number;

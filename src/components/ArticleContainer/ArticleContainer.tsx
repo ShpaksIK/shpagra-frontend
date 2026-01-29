@@ -1,8 +1,13 @@
-import { ArticleType } from '../../../types/entities/articleType';
+import { ArticleType } from '../../types/entities/articleType';
 import Article from '../Article/Article';
 import style from './ArticleContainer.module.scss';
 
-const ArticleContainer = () => {
+interface ArticleContainerProps {
+  maxVisible?: number;
+  maxArticles?: number;
+}
+
+const ArticleContainer: React.FC<ArticleContainerProps> = ({ maxVisible, maxArticles }) => {
   const articles: ArticleType[] = [
     {
       id: 1,
@@ -69,9 +74,11 @@ const ArticleContainer = () => {
     },
   ];
 
+  const sliced = articles.slice(0, maxArticles);
+
   return (
     <section className={style.articleContainer}>
-      {articles.map((article) => (
+      {sliced.map((article) => (
         <Article key={article.id} article={article} />
       ))}
     </section>

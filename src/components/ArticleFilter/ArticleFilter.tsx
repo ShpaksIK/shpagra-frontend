@@ -7,7 +7,7 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 import style from './ArticleFilter.module.scss';
-import { ArticleFilterType } from './../../../types/entities/articleType';
+import { ArticleFilterType } from '../../types/entities/articleType';
 
 const ArticleFilter = () => {
   const [filter, setFilter] = useState<ArticleFilterType>('new');

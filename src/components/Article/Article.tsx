@@ -2,13 +2,13 @@ import { useState } from 'react';
 import { Link } from 'react-router';
 import TextareaAutosize from 'react-textarea-autosize';
 
-import { ArticleType } from '../../../types/entities/articleType';
+import { ArticleType } from '../../types/entities/articleType';
 import style from './Article.module.scss';
 import bannerIMG from './../../../public/img/test.png';
 import Avatar from '../../ui/Avatar/Avatar';
-import { formatTimestamp } from './../../../utils/dateFormatter';
+import { formatTimestamp } from '../../utils/dateFormatter';
 import IconButton from '../../ui/IconButton/IconButton';
-import { copyToClipboard } from './../../../utils/copyToClipboard';
+import { copyToClipboard } from '../../utils/copyToClipboard';
 import ShareSVG from '../../ui/svg/ShareSVG';
 import HeartSVG from '../../ui/svg/HeartSVG';
 import CommentSVG from '../../ui/svg/CommentSVG';
