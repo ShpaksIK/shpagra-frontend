@@ -1,16 +1,16 @@
 .buttonSecondary {
   padding: 5px 10px;
-  background-color: var(--color-element);
+  background-color: transparent;
   text-decoration: none;
   color: var(--color-text-link);
-  outline: none;
   border-radius: 5px;
-  border: none;
+  border: 1px solid var(--color-element);
   display: inline-flex;
   justify-content: center;
 
   &:hover {
-    background-color: var(--color-element-hover);
+    border-color: var(--color-element-hover);
+    color: var(--color-text-link-hover);
   }
 
   &_danger {

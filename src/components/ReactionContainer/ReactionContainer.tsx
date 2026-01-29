@@ -5,10 +5,14 @@ import style from './ReactionContainer.module.scss';
 interface ReactionContainerProps {
   maxVisible?: number;
   maxReactions?: number;
-  reactions: ReactionType[]
+  reactions: ReactionType[];
 }
 
-const ReactionContainer: React.FC<ReactionContainerProps> = ({ maxVisible, maxReactions, reactions }) => {
+const ReactionContainer: React.FC<ReactionContainerProps> = ({
+  maxVisible,
+  maxReactions,
+  reactions,
+}) => {
   const sliced = reactions.slice(0, maxReactions);
 
   return (

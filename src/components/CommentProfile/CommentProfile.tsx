@@ -18,21 +18,21 @@ const CommentProfile: React.FC<CommentProfileProps> = ({ comment }) => {
   const createdAt = formatTimestamp(comment.createdAt);
 
   const [isSentLike, setLike] = useState<boolean>(false);
-    const [isSentDislike, setDislike] = useState<boolean>(false);
-    const switchReaction = (reaction: ReactionsTypes) => {
-      if (reaction === 'like') {
-        setLike((prev) => !prev);
-        if (isSentDislike) {
-          setDislike(false);
-        }
-      } else if (reaction === 'dislike') {
-        setDislike((prev) => !prev);
-        if (isSentLike) {
-          setLike(false);
-        }
+  const [isSentDislike, setDislike] = useState<boolean>(false);
+  const switchReaction = (reaction: ReactionsTypes) => {
+    if (reaction === 'like') {
+      setLike((prev) => !prev);
+      if (isSentDislike) {
+        setDislike(false);
       }
-    };
-  
+    } else if (reaction === 'dislike') {
+      setDislike((prev) => !prev);
+      if (isSentLike) {
+        setLike(false);
+      }
+    }
+  };
+
   return (
     <article className={style.comment}>
       <header className={style.comment__header}>
@@ -41,7 +41,10 @@ const CommentProfile: React.FC<CommentProfileProps> = ({ comment }) => {
           {comment.parent && <p>(ответ {comment.parent.authorUsername})</p>}
         </div>
         <div className={style.comment__header__controls}>
-          <IconButton icon={<SettingsSVG color='var(--color-element-secondary)' />} onClick={() => {}} />
+          <IconButton
+            icon={<SettingsSVG color="var(--color-element-secondary)" />}
+            onClick={() => {}}
+          />
           <IconButton icon={<ShareSVG />} onClick={() => {}} />
         </div>
       </header>

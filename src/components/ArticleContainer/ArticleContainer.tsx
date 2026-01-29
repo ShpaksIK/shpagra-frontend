@@ -5,10 +5,14 @@ import style from './ArticleContainer.module.scss';
 interface ArticleContainerProps {
   maxVisible?: number;
   maxArticles?: number;
-  articles: ArticleType[]
+  articles: ArticleType[];
 }
 
-const ArticleContainer: React.FC<ArticleContainerProps> = ({ maxVisible, maxArticles, articles }) => {
+const ArticleContainer: React.FC<ArticleContainerProps> = ({
+  maxVisible,
+  maxArticles,
+  articles,
+}) => {
   const sliced = articles.slice(0, maxArticles);
 
   return (

@@ -18,8 +18,8 @@ const Reaction: React.FC<ReactionProps> = ({ reaction }) => {
       default:
         return <LikeSVG />;
     }
-  }
-  
+  };
+
   return (
     <article className={style.reaction}>
       <div className={style.reaction__content}>

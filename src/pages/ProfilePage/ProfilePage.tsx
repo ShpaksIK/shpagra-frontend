@@ -36,7 +36,7 @@ const ProfilePage = () => {
             </div>
             <div className={style.header__controls}>
               <IconButton onClick={() => {}} icon={<ShareSVG />} />
-              {isMyProfile && <IconLink to="/profile-settings" icon={<SettingsSVG />} />}
+              {isMyProfile && <IconLink to="/settings" icon={<SettingsSVG />} />}
             </div>
           </div>
 

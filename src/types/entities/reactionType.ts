@@ -1,4 +1,4 @@
-import { RelatedType } from "./commentType";
+import { RelatedType } from './commentType';
 
 export type ReactionsTypes = 'like' | 'dislike' | 'heart' | 'poop';
 

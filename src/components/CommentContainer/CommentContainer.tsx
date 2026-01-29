@@ -5,10 +5,14 @@ import style from './CommentContainer.module.scss';
 interface CommentContainerProps {
   maxVisible?: number;
   maxComments?: number;
-  comments: CommentType[]
+  comments: CommentType[];
 }
 
-const CommentContainer: React.FC<CommentContainerProps> = ({ maxVisible, maxComments, comments }) => {
+const CommentContainer: React.FC<CommentContainerProps> = ({
+  maxVisible,
+  maxComments,
+  comments,
+}) => {
   const sliced = comments.slice(0, maxComments);
 
   return (
