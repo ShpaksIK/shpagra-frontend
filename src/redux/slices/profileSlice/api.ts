@@ -5,11 +5,10 @@ import { AxiosError } from 'axios';
 import { ErrorType } from '../../../types/errorType';
 
 export const getProfile = createAsyncThunk(
-  'profile/getProfile ',
+  'profile/getProfile',
   async (login: string, { dispatch }) => {
     try {
       const response = await instance.get(`profile/${login}`);
-
       if (response.status >= 400) {
         const error: ErrorType = {
           status: response.status,

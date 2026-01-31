@@ -40,7 +40,7 @@ const ProfilePage = () => {
             </div>
           </div>
 
-          <TextLink to="/profile-articles">
+          <TextLink to={`/profile/${profile.login}/articles`}>
             <h2 className={style.content__inner__title}>Статьи</h2>
           </TextLink>
 
@@ -48,7 +48,7 @@ const ProfilePage = () => {
 
           <div className={style.blocks}>
             <div className={style.blocks__comments}>
-              <TextLink to="/profile-comments">
+              <TextLink to={`/profile/${profile.login}/comments`}>
                 <h2 className={style.content__inner__title}>Комментарии</h2>
               </TextLink>
 
@@ -56,7 +56,7 @@ const ProfilePage = () => {
             </div>
 
             <div className={style.blocks__reactions}>
-              <TextLink to="/profile-reactions">
+              <TextLink to={`/profile/${profile.login}/reactions`}>
                 <h2 className={style.content__inner__title}>Реакции</h2>
               </TextLink>
 

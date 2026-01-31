@@ -3,7 +3,7 @@ export abstract class ErrorType {
   abstract readonly message: string;
 
   public static [Symbol.hasInstance](instance: unknown): instance is ErrorType {
-    if (instance === null || (typeof instance !== 'object' && !(instance instanceof ErrorType))) {
+    if (instance === null || (typeof instance !== 'object')) {
       return false;
     }
 
