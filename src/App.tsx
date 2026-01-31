@@ -6,8 +6,19 @@ import ProfilePage from './pages/ProfilePage/ProfilePage';
 import ProfileSettingsPage from './pages/ProfileSettingsPage/ProfileSettingsPage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import RegisterPage from './pages/RegisterPage/RegisterPage';
+import Alert from './components/Alert/Alert';
+import { useAppDispatch, useAppSelector } from './hooks/useStore';
+import { getProfile } from './redux/slices/profileSlice/api';
+import { useEffect } from 'react';
 
 const App = () => {
+  const dispatch = useAppDispatch();
+  const alert = useAppSelector((state) => state.app.alert);
+
+  useEffect(() => {
+    dispatch(getProfile('test'));
+  }, []);
+
   return (
     <>
       <Routes>
@@ -21,6 +32,8 @@ const App = () => {
         <Route path="/info/terms" element={<>Terms</>} />
         <Route path="/info/site" element={<>Site</>} />
       </Routes>
+
+      <Alert alert={alert} />
     </>
   );
 };

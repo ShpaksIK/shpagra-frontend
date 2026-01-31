@@ -10,3 +10,7 @@ export interface ProfileType {
   comments: CommentType[];
   reactions: ReactionType[];
 }
+
+export interface MyProfileType extends ProfileType {
+  email: string | null;
+}

@@ -3,13 +3,13 @@ import errorSVG from './../../assets/svg/error.svg';
 import { AlertType } from './../../types/alertType';
 
 interface AlertProps {
-  alert: AlertType;
+  alert: AlertType | null;
 }
 
 const Alert: React.FC<AlertProps> = ({ alert }) => {
   return (
     <div className={style.alert_block}>
-      {alert.isExists && (
+      {alert && (
         <div className={style.alert}>
           {alert.type === 'error' && <img src={errorSVG} alt="Ошибка" />}
           {alert.type === 'info' && <img src={errorSVG} alt="Информация" />}
