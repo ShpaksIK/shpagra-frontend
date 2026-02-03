@@ -7,10 +7,23 @@ import style from './LoginPage.module.scss';
 import A from '../../ui/A/A';
 import { LoginFormType } from '../../types/formsType';
 import Input from '../../ui/Input/Input';
+import { useAppDispatch } from '../../hooks/useStore';
+import { login } from '../../redux/slices/authSlice/api';
+import { useNavigate } from 'react-router';
 
 const LoginPage = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
   const handleSubmit = () => {
-    console.log('Test');
+    dispatch(
+      login({
+        login: 'Test',
+        password: 'Test',
+      }),
+    );
+
+    navigate('/profile');
   };
 
   const inititalValues: LoginFormType = {

@@ -4,12 +4,17 @@ import style from './ProfileArticlesPage.module.scss';
 import Header from '../../components/Header/Header';
 import Nav from '../../components/Nav/Nav';
 import { useProfile } from '../../hooks/useProfile';
-import { useDefineProfile } from '../../hooks/useDefineProfile';
+import { useDefineMyProfile } from '../../hooks/useDefineMyProfile';
 import ArticleContainer from '../../components/ArticleContainer/ArticleContainer';
+import ProfileLoading from '../../components/ProfileLoading/ProfileLoading';
 
 const ProfileArticlesPage = () => {
   const profile = useProfile();
-  const isMyProfile = useDefineProfile();
+  const isMyProfile = useDefineMyProfile();
+
+  if (!profile) {
+    return <ProfileLoading />;
+  }
 
   return (
     <>

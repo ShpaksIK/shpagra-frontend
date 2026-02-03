@@ -4,12 +4,17 @@ import style from './ProfileCommentsPage.module.scss';
 import Header from '../../components/Header/Header';
 import Nav from '../../components/Nav/Nav';
 import { useProfile } from '../../hooks/useProfile';
-import { useDefineProfile } from '../../hooks/useDefineProfile';
+import { useDefineMyProfile } from '../../hooks/useDefineMyProfile';
 import CommentContainer from '../../components/CommentContainer/CommentContainer';
+import ProfileLoading from '../../components/ProfileLoading/ProfileLoading';
 
 const ProfileCommentsPage = () => {
   const profile = useProfile();
-  const isMyProfile = useDefineProfile();
+  const isMyProfile = useDefineMyProfile();
+
+  if (!profile) {
+    return <ProfileLoading />;
+  }
 
   return (
     <>
@@ -18,7 +23,7 @@ const ProfileCommentsPage = () => {
         <Nav />
         <main className={style.content__inner}>
           <h2 className={style.content__inner__title}>
-            {isMyProfile ? 'Мои статьи' : `Статьи ${profile.login}`}
+            {isMyProfile ? 'Мои комментарии' : `Комментарии ${profile.login}`}
           </h2>
 
           <CommentContainer comments={profile.comments} />

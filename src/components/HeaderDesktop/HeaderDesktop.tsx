@@ -7,8 +7,12 @@ import Input from '../../ui/Input/Input';
 import IconLink from '../../ui/IconLink/IconLink';
 import UserSVG from '../../ui/svg/UserSVG';
 import SettingsSVG from '../../ui/svg/SettingsSVG';
+import { useAuth } from '../../hooks/useAuth';
+import AButton from '../../ui/AButton/AButton';
 
 const HeaderDesktop = () => {
+  const profile = useAuth();
+
   return (
     <header className={classNames('container', style.header)}>
       <div className={style.header__logo}>
@@ -20,8 +24,13 @@ const HeaderDesktop = () => {
         <Input placeholder="Найти статью..." isMaxWidth={true} />
       </div>
       <div className={style.header__nav}>
-        <IconLink to="/settings" text="Настройки" icon={<SettingsSVG />} />
-        <IconLink to="/profile" text="Профиль" icon={<UserSVG />} />
+        {profile && (
+          <>
+            <IconLink to="/settings" text="Настройки" icon={<SettingsSVG />} />
+            <IconLink to="/profile" text="Профиль" icon={<UserSVG />} />
+          </>
+        )}
+        {!profile && <AButton to="/sign-in">Войти</AButton>}
       </div>
     </header>
   );

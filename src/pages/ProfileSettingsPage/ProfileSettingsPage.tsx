@@ -11,9 +11,14 @@ import Switch from '../../ui/Switch/Switch';
 import { SettingsType } from '../../types/settingsType';
 import TextButton from '../../ui/TextButton/TextButton';
 import ButtonSecondary from '../../ui/ButtonSecondary/ButtonSecondary';
+import ProfileLoading from '../../components/ProfileLoading/ProfileLoading';
 
 const ProfileSettingsPage = () => {
   const profile = useProfile();
+
+  if (!profile) {
+    return <ProfileLoading />;
+  }
 
   const switchSetting = (checked: boolean, type: SettingsType) => {
     switch (type) {

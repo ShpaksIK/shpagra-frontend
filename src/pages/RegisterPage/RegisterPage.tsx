@@ -17,6 +17,7 @@ const RegisterPage = () => {
     login: '',
     password: '',
     repeatPassword: '',
+    username: '',
   };
 
   const validationSchema = Yup.object().shape({
@@ -28,6 +29,10 @@ const RegisterPage = () => {
     repeatPassword: Yup.string()
       .required('Повторите пароль')
       .oneOf([Yup.ref('password')], 'Пароли не совпадают'),
+    username: Yup.string()
+      .required('Имя пользователя является обязательным')
+      .min(3, 'Имя пользователя должно содержать не менее 3 символов')
+      .max(32, 'Имя пользователя должно содержать не более 32 символов'),
   });
 
   return (
@@ -70,6 +75,16 @@ const RegisterPage = () => {
               <ErrorMessage
                 name="repeatPassword"
                 component="div"
+                className={style.register__fields__error}
+              />
+            </div>
+            <div>
+              <Field name="username">
+                {({ field }: FieldProps) => <Input {...field} placeholder="Имя пользователя" />}
+              </Field>
+              <ErrorMessage
+                name="username"
+                component="p"
                 className={style.register__fields__error}
               />
             </div>

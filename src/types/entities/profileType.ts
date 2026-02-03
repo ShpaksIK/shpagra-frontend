@@ -11,6 +11,4 @@ export interface ProfileType {
   reactions: ReactionType[];
 }
 
-export interface MyProfileType extends ProfileType {
-  email: string | null;
-}
+export interface MyProfileType extends ProfileType {}
