@@ -1,0 +1,33 @@
+.quote {
+  border-left: 3px solid var(--color-element);
+  padding: 5px;
+
+  p {
+    font-style: italic;
+  }
+}
+
+.image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  img {
+    max-height: 400px;
+    cursor: pointer;
+  }
+
+  p {
+    font-style: italic;
+    color: var(--color-text-transparent);
+  }
+}
+
+.list {
+  list-style-position: inside;
+
+  &_ul {
+    list-style: disc;
+    list-style-position: inside;
+  }
+}

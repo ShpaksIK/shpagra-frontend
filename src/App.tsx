@@ -13,6 +13,7 @@ import { useEffect } from 'react';
 import ProfileArticlesPage from './pages/ProfileArticle/ProfileArticlesPage';
 import ProfileReactionsPage from './pages/ProfileReactions/ProfileReactionsPage';
 import ProfileCommentsPage from './pages/ProfileCommentsPage/ProfileCommentsPage';
+import ArticlePage from './pages/ArticlePage/ArticlePage';
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -26,7 +27,7 @@ const App = () => {
     <>
       <Routes>
         <Route path="/" element={<MainPage />} />
-        <Route path="/info" element={<InformationPage />} />
+        <Route path="/article/:articleId?" element={<ArticlePage />} />
         <Route path="/profile/:profileId?" element={<ProfilePage />} />
         <Route path="/profile/:profileId/articles" element={<ProfileArticlesPage />} />
         <Route path="/profile/:profileId/comments" element={<ProfileCommentsPage />} />
@@ -34,6 +35,7 @@ const App = () => {
         <Route path="/settings" element={<ProfileSettingsPage />} />
         <Route path="/sign-in" element={<LoginPage />} />
         <Route path="/sign-up" element={<RegisterPage />} />
+        <Route path="/info" element={<InformationPage />} />
         <Route path="/info/privacy" element={<>Privacy</>} />
         <Route path="/info/terms" element={<>Terms</>} />
         <Route path="/info/site" element={<>Site</>} />

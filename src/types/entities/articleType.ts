@@ -3,11 +3,14 @@ import { ReactionType } from './reactionType';
 
 type ArticleStatusType = 'published' | 'review' | 'draft';
 
-interface ArticleContentType {
-  type: string;
+type ArticleContentTypesType = 'text' | 'title' | 'img' | 'quote' | 'ol' | 'ul';
+
+export interface ArticleContentType {
+  type: ArticleContentTypesType;
   file?: string;
   text?: string;
   src?: string;
+  list?: string[];
 }
 
 export interface ArticleType {

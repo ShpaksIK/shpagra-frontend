@@ -9,8 +9,39 @@ export const articles: ArticleType[] = [
     title: 'Test Article',
     description:
       'Test description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this articleTest description for this article',
-    banner: null,
-    content: [],
+    banner:
+      'https://habrastorage.org/r/w1560/getpro/habr/upload_files/a05/7e4/65c/a057e465c18222626573b33218de2cde.png',
+    content: [
+      {
+        type: 'title',
+        text: 'Заголовок 1',
+      },
+      {
+        type: 'text',
+        text: 'Параграф №1. Это текст.',
+      },
+      {
+        type: 'img',
+        src: 'https://habrastorage.org/r/w1560/getpro/habr/upload_files/e7e/70c/b44/e7e70cb44ac6efa98a3458812989b333.png',
+        text: 'Описание картинки',
+      },
+      {
+        type: 'title',
+        text: 'Заголовок 2',
+      },
+      {
+        type: 'quote',
+        text: 'Параграф №2. Это текст.',
+      },
+      {
+        type: 'ol',
+        list: ['Первый случай', 'Второй случай', 'Третий случай'],
+      },
+      {
+        type: 'ul',
+        list: ['Первый случай', 'Второй случай', 'Третий случай'],
+      },
+    ],
     status: 'published',
     createdAt: Date.now(),
     updatedAt: null,

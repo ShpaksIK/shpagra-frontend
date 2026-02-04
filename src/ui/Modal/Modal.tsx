@@ -1,6 +1,7 @@
 import Background from '../Background/Background';
 import style from './Modal.module.scss';
 import Close from '../Close/Close';
+import Block from '../Block/Block';
 
 interface ModalProps {
   onClick: () => void;
@@ -9,17 +10,14 @@ interface ModalProps {
 
 const Modal: React.FC<ModalProps> = ({ onClick, children }) => {
   return (
-    <>
-      <Background onClick={onClick} />
-      <div className={style.modal}>
-        <div className={style.modal__inner}>
-          <div className={style.modal__close}>
-            <Close />
-          </div>
-          {children}
+    <Background onClick={onClick}>
+      <Block className={style.modal} onClick={(e) => e.stopPropagation()}>
+        <div className={style.modal__close}>
+          <Close onClick={onClick} />
         </div>
-      </div>
-    </>
+        {children}
+      </Block>
+    </Background>
   );
 };
 

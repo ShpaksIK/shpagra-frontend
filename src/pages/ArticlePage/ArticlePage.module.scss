@@ -1,0 +1,23 @@
+.header {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  &__controls {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+
+  &__author {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    p {
+      color: var(--color-text-transparent);
+      font-size: var(--font-size-small);
+    }
+  }
+}

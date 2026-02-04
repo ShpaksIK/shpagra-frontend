@@ -1,0 +1,10 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  &__noContent {
+    text-align: center;
+    color: var(--color-text-transparent);
+  }
+}
