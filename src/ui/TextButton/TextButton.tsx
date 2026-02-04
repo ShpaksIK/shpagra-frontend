@@ -1,5 +1,3 @@
-import React from 'react';
-
 import style from './TextButton.module.scss';
 
 interface TextButtonProps {

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import style from './Chip.module.scss';
 import Close from '../Close/Close';
 

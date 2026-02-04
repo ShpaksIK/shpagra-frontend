@@ -8,6 +8,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 import style from './ArticleFilter.module.scss';
 import { ArticleFilterType } from '../../types/entities/articleType';
+import Block from '../../ui/Block/Block';
 
 const ArticleFilter = () => {
   const [filter, setFilter] = useState<ArticleFilterType>('new');
@@ -34,7 +35,7 @@ const ArticleFilter = () => {
   };
 
   return (
-    <div className={style.filter}>
+    <Block>
       <Box sx={{ minWidth: 300 }}>
         <FormControl fullWidth>
           <InputLabel
@@ -85,7 +86,7 @@ const ArticleFilter = () => {
           </Select>
         </FormControl>
       </Box>
-    </div>
+    </Block>
   );
 };
 

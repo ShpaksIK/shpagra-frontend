@@ -7,6 +7,7 @@ import style from './RegisterPage.module.scss';
 import A from '../../ui/A/A';
 import { RegisterFormType } from '../../types/formsType';
 import Input from '../../ui/Input/Input';
+import Block from '../../ui/Block/Block';
 
 const RegisterPage = () => {
   const handleSubmit = () => {
@@ -43,58 +44,64 @@ const RegisterPage = () => {
         onSubmit={handleSubmit}
       >
         <Form className={style.register}>
-          <h2>Регистрация</h2>
+          <Block className={style.register}>
+            <h2>Регистрация</h2>
 
-          <div className={style.register__fields}>
-            <div>
-              <Field name="login">
-                {({ field }: FieldProps) => <Input {...field} placeholder="Логин" />}
-              </Field>
-              <ErrorMessage name="login" component="p" className={style.register__fields__error} />
+            <div className={style.register__fields}>
+              <div>
+                <Field name="login">
+                  {({ field }: FieldProps) => <Input {...field} placeholder="Логин" />}
+                </Field>
+                <ErrorMessage
+                  name="login"
+                  component="p"
+                  className={style.register__fields__error}
+                />
+              </div>
+
+              <div>
+                <Field name="password">
+                  {({ field }: FieldProps) => (
+                    <Input {...field} type="password" placeholder="Пароль" />
+                  )}
+                </Field>
+                <ErrorMessage
+                  name="password"
+                  component="div"
+                  className={style.register__fields__error}
+                />
+              </div>
+
+              <div>
+                <Field name="repeatPassword">
+                  {({ field }: FieldProps) => (
+                    <Input {...field} type="password" placeholder="Повтор пароля" />
+                  )}
+                </Field>
+                <ErrorMessage
+                  name="repeatPassword"
+                  component="div"
+                  className={style.register__fields__error}
+                />
+              </div>
+              <div>
+                <Field name="username">
+                  {({ field }: FieldProps) => <Input {...field} placeholder="Имя пользователя" />}
+                </Field>
+                <ErrorMessage
+                  name="username"
+                  component="p"
+                  className={style.register__fields__error}
+                />
+              </div>
             </div>
 
-            <div>
-              <Field name="password">
-                {({ field }: FieldProps) => (
-                  <Input {...field} type="password" placeholder="Пароль" />
-                )}
-              </Field>
-              <ErrorMessage
-                name="password"
-                component="div"
-                className={style.register__fields__error}
-              />
+            <div className={style.register__controls}>
+              <Button type="submit">Зарегистрироваться</Button>
+              <AButtonSecondary to="/sign-in">Уже есть профиль</AButtonSecondary>
+              <A to="/">На главную</A>
             </div>
-
-            <div>
-              <Field name="repeatPassword">
-                {({ field }: FieldProps) => (
-                  <Input {...field} type="password" placeholder="Повтор пароля" />
-                )}
-              </Field>
-              <ErrorMessage
-                name="repeatPassword"
-                component="div"
-                className={style.register__fields__error}
-              />
-            </div>
-            <div>
-              <Field name="username">
-                {({ field }: FieldProps) => <Input {...field} placeholder="Имя пользователя" />}
-              </Field>
-              <ErrorMessage
-                name="username"
-                component="p"
-                className={style.register__fields__error}
-              />
-            </div>
-          </div>
-
-          <div className={style.register__controls}>
-            <Button type="submit">Зарегистрироваться</Button>
-            <AButtonSecondary to="/sign-in">Уже есть профиль</AButtonSecondary>
-            <A to="/">На главную</A>
-          </div>
+          </Block>
         </Form>
       </Formik>
     </main>

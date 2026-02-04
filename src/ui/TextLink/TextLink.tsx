@@ -1,5 +1,3 @@
-import React from 'react';
-
 import style from './TextLink.module.scss';
 import { Link } from 'react-router';
 import ShareSVG from '../svg/ShareSVG';

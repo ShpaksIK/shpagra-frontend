@@ -1,5 +1,3 @@
-import React from 'react';
-
 import style from './Line.module.scss';
 
 const Line: React.FC = () => {

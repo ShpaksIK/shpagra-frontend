@@ -1,10 +1,15 @@
-const UserSVG = () => {
+interface UserSVGProps {
+  size?: number;
+  color?: string;
+}
+
+const UserSVG: React.FC<UserSVGProps> = ({ size = 30, color = 'var(--color-element)' }) => {
   return (
     <svg
-      width="30"
-      height="30"
+      width={size}
+      height={size}
       viewBox="2 3 12 11"
-      fill="#69a4a2"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg"
     >
       <circle cx="8" cy="5" r="2" />

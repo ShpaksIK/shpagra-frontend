@@ -11,7 +11,6 @@ interface AlertProps {
 }
 
 const Alert: React.FC<AlertProps> = ({ alert }) => {
-  console.log(alert)
   return (
     <div className={style.alert_block}>
       {alert && (

@@ -14,5 +14,4 @@ export const useNavigateMyProfile = () => {
       navigate('/profile');
     }
   }, [profile]);
-
 };

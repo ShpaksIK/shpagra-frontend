@@ -1,12 +1,9 @@
-interface InformationSVGProps {
+interface EditSVGProps {
   size?: number;
   color?: string;
 }
 
-const InformationSVG: React.FC<InformationSVGProps> = ({
-  size = 30,
-  color = 'var(--color-alert-info-text)',
-}) => {
+const EditSVG: React.FC<EditSVGProps> = ({ size = 25, color = 'var(--color-element)' }) => {
   return (
     <svg
       width={size}
@@ -16,22 +13,28 @@ const InformationSVG: React.FC<InformationSVGProps> = ({
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+        d="M16 3L21 8L8 21H3V16L16 3Z"
         stroke={color}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
-        d="M12 16V12"
+        d="M13 6L18 11"
         stroke={color}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <circle cx="12" cy="8" r="1" fill={color} />
+      <path
+        d="M12 22H21"
+        stroke={color}
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 };
 
-export default InformationSVG;
+export default EditSVG;

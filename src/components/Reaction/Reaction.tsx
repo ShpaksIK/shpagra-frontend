@@ -1,4 +1,5 @@
 import { ReactionType } from '../../types/entities/reactionType';
+import Block from '../../ui/Block/Block';
 import DislikeSVG from '../../ui/svg/DislikeSVG';
 import LikeSVG from '../../ui/svg/LikeSVG';
 import ShareSVG from '../../ui/svg/ShareSVG';
@@ -21,13 +22,15 @@ const Reaction: React.FC<ReactionProps> = ({ reaction }) => {
   };
 
   return (
-    <article className={style.reaction}>
-      <div className={style.reaction__content}>
-        <b>{reaction.relatedType === 'article' ? 'К статье' : 'К комментарию'}</b>
-        {renderReactionSVG()}
-      </div>
+    <article>
+      <Block className={style.reaction}>
+        <div className={style.reaction__content}>
+          <b>{reaction.relatedType === 'article' ? 'К статье' : 'К комментарию'}</b>
+          {renderReactionSVG()}
+        </div>
 
-      <ShareSVG />
+        <ShareSVG />
+      </Block>
     </article>
   );
 };

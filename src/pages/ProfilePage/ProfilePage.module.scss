@@ -1,29 +1,6 @@
-.content {
-  display: flex;
-  gap: 20px;
-  margin: 20px 0;
-
-  &__inner {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin-bottom: 20px;
-
-    @media (max-width: 700px) {
-      &__title {
-        margin-left: 10px;
-      }
-    }
-  }
-}
-
 .header {
   display: flex;
   justify-content: space-between;
-  background-color: var(--color-block);
-  border-radius: var(--border-radius-large);
-  padding: 10px;
 }
 
 .header__avatar {
@@ -59,15 +36,9 @@
 .blocks__comments {
   flex-grow: 1;
   min-width: 300px;
-  background-color: var(--color-block);
-  border-radius: var(--border-radius-large);
-  padding: 10px;
 }
 
 .blocks__reactions {
   flex-grow: 1;
   min-width: 300px;
-  background-color: var(--color-block);
-  border-radius: var(--border-radius-large);
-  padding: 10px;
 }

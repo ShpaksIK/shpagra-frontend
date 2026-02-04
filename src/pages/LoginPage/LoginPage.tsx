@@ -10,6 +10,7 @@ import Input from '../../ui/Input/Input';
 import { useAppDispatch } from '../../hooks/useStore';
 import { login } from '../../redux/slices/authSlice/api';
 import { useNavigate } from 'react-router';
+import Block from '../../ui/Block/Block';
 
 const LoginPage = () => {
   const dispatch = useAppDispatch();
@@ -46,36 +47,38 @@ const LoginPage = () => {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        <Form className={style.login}>
-          <h2>Вход в аккаунт</h2>
+        <Form>
+          <Block className={style.login}>
+            <h2>Вход в аккаунт</h2>
 
-          <div className={style.login__fields}>
-            <div>
-              <Field name="login">
-                {({ field }: FieldProps) => <Input {...field} placeholder="Логин" />}
-              </Field>
-              <ErrorMessage name="login" component="p" className={style.login__fields__error} />
+            <div className={style.login__fields}>
+              <div>
+                <Field name="login">
+                  {({ field }: FieldProps) => <Input {...field} placeholder="Логин" />}
+                </Field>
+                <ErrorMessage name="login" component="p" className={style.login__fields__error} />
+              </div>
+
+              <div>
+                <Field name="password">
+                  {({ field }: FieldProps) => (
+                    <Input {...field} type="password" placeholder="Пароль" />
+                  )}
+                </Field>
+                <ErrorMessage
+                  name="password"
+                  component="div"
+                  className={style.login__fields__error}
+                />
+              </div>
             </div>
 
-            <div>
-              <Field name="password">
-                {({ field }: FieldProps) => (
-                  <Input {...field} type="password" placeholder="Пароль" />
-                )}
-              </Field>
-              <ErrorMessage
-                name="password"
-                component="div"
-                className={style.login__fields__error}
-              />
+            <div className={style.login__controls}>
+              <Button type="submit">Войти</Button>
+              <AButtonSecondary to="/sign-up">Создать аккаунт</AButtonSecondary>
+              <A to="/">На главную</A>
             </div>
-          </div>
-
-          <div className={style.login__controls}>
-            <Button type="submit">Войти</Button>
-            <AButtonSecondary to="/sign-up">Создать аккаунт</AButtonSecondary>
-            <A to="/">На главную</A>
-          </div>
+          </Block>
         </Form>
       </Formik>
     </main>

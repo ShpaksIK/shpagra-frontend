@@ -15,6 +15,8 @@ import { getProfile } from '../../redux/slices/profileSlice/api';
 import { useAppSelector } from '../../hooks/useStore';
 import ProfileLoading from '../../components/ProfileLoading/ProfileLoading';
 import { useNavigateMyProfile } from '../../hooks/useNavigateMyProfile';
+import LayoutBase from '../../components/LayoutBase/LayoutBase';
+import Block from '../../ui/Block/Block';
 
 const OtherProfilePage = () => {
   const profile = useAppSelector((state) => state.profile.profile);
@@ -29,49 +31,43 @@ const OtherProfilePage = () => {
   }
 
   return (
-    <>
-      <Header />
-      <div className={classNames('container', style.content)}>
-        <Nav />
-        <main className={style.content__inner}>
-          <h2 className={style.content__inner__title}>Профиль {profile.login}</h2>
-          <div className={style.header}>
-            <div className={style.header__avatar}>
-              <img src={profile.avatar ? profile.avatar : userIMG} />
-              <b>{profile.username}</b>
-              <p>{profile.login}</p>
-            </div>
-            <div className={style.header__controls}>
-              <IconButton onClick={() => {}} icon={<ShareSVG />} />
-            </div>
-          </div>
+    <LayoutBase>
+      <h2>Профиль {profile.login}</h2>
+      <Block className={style.header}>
+        <div className={style.header__avatar}>
+          <img src={profile.avatar ? profile.avatar : userIMG} />
+          <b>{profile.username}</b>
+          <p>{profile.login}</p>
+        </div>
+        <div className={style.header__controls}>
+          <IconButton onClick={() => {}} icon={<ShareSVG />} />
+        </div>
+      </Block>
 
-          <TextLink to={`/profile/${profile.login}/articles`}>
-            <h2 className={style.content__inner__title}>Статьи</h2>
+      <TextLink to={`/profile/${profile.login}/articles`}>
+        <h2>Статьи</h2>
+      </TextLink>
+
+      <ArticleContainer articles={profile.articles} maxArticles={1} />
+
+      <div className={style.blocks}>
+        <Block className={style.blocks__comments}>
+          <TextLink to={`/profile/${profile.login}/comments`}>
+            <h2>Комментарии</h2>
           </TextLink>
 
-          <ArticleContainer articles={profile.articles} maxArticles={1} />
+          <CommentContainer comments={profile.comments} maxComments={2} />
+        </Block>
 
-          <div className={style.blocks}>
-            <div className={style.blocks__comments}>
-              <TextLink to={`/profile/${profile.login}/comments`}>
-                <h2 className={style.content__inner__title}>Комментарии</h2>
-              </TextLink>
+        <Block className={style.blocks__reactions}>
+          <TextLink to={`/profile/${profile.login}/reactions`}>
+            <h2>Реакции</h2>
+          </TextLink>
 
-              <CommentContainer comments={profile.comments} maxComments={2} />
-            </div>
-
-            <div className={style.blocks__reactions}>
-              <TextLink to={`/profile/${profile.login}/reactions`}>
-                <h2 className={style.content__inner__title}>Реакции</h2>
-              </TextLink>
-
-              <ReactionContainer reactions={profile.reactions} maxReactions={2} />
-            </div>
-          </div>
-        </main>
+          <ReactionContainer reactions={profile.reactions} maxReactions={2} />
+        </Block>
       </div>
-    </>
+    </LayoutBase>
   );
 };
 

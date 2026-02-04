@@ -1,5 +1,3 @@
-import React from 'react';
-
 import style from './Close.module.scss';
 import CloseSVG from './../svg/CloseSVG';
 

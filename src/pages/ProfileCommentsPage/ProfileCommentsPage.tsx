@@ -1,12 +1,8 @@
-import classNames from 'classnames';
-
-import style from './ProfileCommentsPage.module.scss';
-import Header from '../../components/Header/Header';
-import Nav from '../../components/Nav/Nav';
 import { useProfile } from '../../hooks/useProfile';
 import { useDefineMyProfile } from '../../hooks/useDefineMyProfile';
 import CommentContainer from '../../components/CommentContainer/CommentContainer';
 import ProfileLoading from '../../components/ProfileLoading/ProfileLoading';
+import LayoutBase from '../../components/LayoutBase/LayoutBase';
 
 const ProfileCommentsPage = () => {
   const profile = useProfile();
@@ -17,19 +13,11 @@ const ProfileCommentsPage = () => {
   }
 
   return (
-    <>
-      <Header />
-      <div className={classNames('container', style.content)}>
-        <Nav />
-        <main className={style.content__inner}>
-          <h2 className={style.content__inner__title}>
-            {isMyProfile ? 'Мои комментарии' : `Комментарии ${profile.login}`}
-          </h2>
+    <LayoutBase>
+      <h2>{isMyProfile ? 'Мои комментарии' : `Комментарии ${profile.login}`}</h2>
 
-          <CommentContainer comments={profile.comments} />
-        </main>
-      </div>
-    </>
+      <CommentContainer comments={profile.comments} />
+    </LayoutBase>
   );
 };
 

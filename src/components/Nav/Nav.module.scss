@@ -3,14 +3,14 @@
   max-width: 300px;
   min-width: 200px;
   height: 100%;
-  background-color: var(--color-block);
-  border-radius: var(--border-radius-large);
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  gap: 200px;
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 200px;
+  }
 
   &__links {
     width: 100%;
