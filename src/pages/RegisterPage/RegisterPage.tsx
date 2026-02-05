@@ -8,10 +8,11 @@ import A from '../../ui/A/A';
 import { RegisterFormType } from '../../types/formsType';
 import Input from '../../ui/Input/Input';
 import Block from '../../ui/Block/Block';
+import InputPassword from '../../ui/InputPassword/InputPassword';
 
 const RegisterPage = () => {
-  const handleSubmit = () => {
-    console.log('Test');
+  const handleSubmit = (values: RegisterFormType) => {
+    console.log(values);
   };
 
   const inititalValues: RegisterFormType = {
@@ -61,9 +62,7 @@ const RegisterPage = () => {
 
               <div>
                 <Field name="password">
-                  {({ field }: FieldProps) => (
-                    <Input {...field} type="password" placeholder="Пароль" />
-                  )}
+                  {({ field }: FieldProps) => <InputPassword {...field} placeholder="Пароль" />}
                 </Field>
                 <ErrorMessage
                   name="password"
@@ -75,7 +74,7 @@ const RegisterPage = () => {
               <div>
                 <Field name="repeatPassword">
                   {({ field }: FieldProps) => (
-                    <Input {...field} type="password" placeholder="Повтор пароля" />
+                    <InputPassword {...field} placeholder="Повтор пароля" />
                   )}
                 </Field>
                 <ErrorMessage

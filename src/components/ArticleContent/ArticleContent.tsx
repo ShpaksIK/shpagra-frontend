@@ -16,12 +16,15 @@ const ArticleContent: React.FC<ArticleContentProps> = ({ content }) => {
     return <p className={style.content__noContent}>Автор статьи ничего не написал</p>;
   }
 
+  let titleCount = 0;
+
   return (
     <div className={style.content}>
       {content.map((block) => {
         switch (block.type) {
           case 'title':
-            return <Title text={block.text} />;
+            titleCount += 1;
+            return <Title text={block.text} hrefId={titleCount} />;
           case 'text':
             return <Text text={block.text} />;
           case 'quote':

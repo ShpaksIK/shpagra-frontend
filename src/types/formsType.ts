@@ -9,3 +9,14 @@ export interface RegisterFormType {
   repeatPassword: string;
   username: string;
 }
+
+export interface ProfileSettingFormType {
+  login: string;
+  username: string;
+}
+
+export interface ChangePasswordFormType {
+  currentPassword: string;
+  password: string;
+  repeatPassword: string;
+}

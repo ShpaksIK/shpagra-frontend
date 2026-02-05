@@ -1,4 +1,4 @@
-import LayoutBase from '../LayoutBase/LayoutBase';
+import LayoutBase from '../Layouts/LayoutBase/LayoutBase';
 
 const ProfileLoading = () => {
   return (

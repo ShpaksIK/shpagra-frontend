@@ -1,6 +1,4 @@
 import style from './ArticlePage.module.scss';
-import A from '../../ui/A/A';
-import LayoutBase from '../../components/LayoutBase/LayoutBase';
 import Block from '../../ui/Block/Block';
 import { useNavigateArticle } from '../../hooks/useNavigateArticle';
 import { useEffect } from 'react';
@@ -13,6 +11,7 @@ import Avatar from '../../ui/Avatar/Avatar';
 import { formatTimestamp } from '../../utils/dateFormatter';
 import CommentContainer from '../../components/CommentContainer/CommentContainer';
 import ArticleContent from '../../components/ArticleContent/ArticleContent';
+import LayoutArticle from '../../components/Layouts/LayoutArticle/LayoutArticle';
 
 interface ArticlePageProps {
   articleId: number;
@@ -35,7 +34,7 @@ const ArticlePage: React.FC<ArticlePageProps> = ({ articleId }) => {
   const formatDate = formatTimestamp(article.createdAt);
 
   return (
-    <LayoutBase>
+    <LayoutArticle articleTitles={article.content.filter((e) => e.type === 'title')}>
       <Block className={style.header}>
         <div className={style.header__controls}>
           <IconButton icon={<ShareSVG />} onClick={() => {}} />
@@ -63,7 +62,7 @@ const ArticlePage: React.FC<ArticlePageProps> = ({ articleId }) => {
         <h2>Комментарии</h2>
         <CommentContainer comments={article.comments} />
       </Block>
-    </LayoutBase>
+    </LayoutArticle>
   );
 };
 

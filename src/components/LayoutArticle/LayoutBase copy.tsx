@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 
-import Header from '../Header/Header';
-import Nav from '../Nav/Nav';
+import Header from '../../Header/Header';
+import Nav from '../../Nav/Nav';
 import style from './LayoutBase.module.scss';
 
 interface LayoutBaseProps {

@@ -11,16 +11,17 @@ import { useAppDispatch } from '../../hooks/useStore';
 import { login } from '../../redux/slices/authSlice/api';
 import { useNavigate } from 'react-router';
 import Block from '../../ui/Block/Block';
+import InputPassword from '../../ui/InputPassword/InputPassword';
 
 const LoginPage = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const handleSubmit = () => {
+  const handleSubmit = (values: LoginFormType) => {
     dispatch(
       login({
-        login: 'Test',
-        password: 'Test',
+        login: values.login,
+        password: values.password,
       }),
     );
 
@@ -61,9 +62,7 @@ const LoginPage = () => {
 
               <div>
                 <Field name="password">
-                  {({ field }: FieldProps) => (
-                    <Input {...field} type="password" placeholder="Пароль" />
-                  )}
+                  {({ field }: FieldProps) => <InputPassword {...field} placeholder="Пароль" />}
                 </Field>
                 <ErrorMessage
                   name="password"

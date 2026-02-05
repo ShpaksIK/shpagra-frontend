@@ -1,6 +1,6 @@
 import style from './InformationPage.module.scss';
 import A from '../../ui/A/A';
-import LayoutBase from '../../components/LayoutBase/LayoutBase';
+import LayoutBase from '../../components/Layouts/LayoutBase/LayoutBase';
 import Block from '../../ui/Block/Block';
 
 const InformationPage = () => {

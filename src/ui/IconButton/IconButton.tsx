@@ -11,7 +11,11 @@ interface IconButtonProps {
 
 const IconButton: React.FC<IconButtonProps> = ({ onClick, icon, text, className }) => {
   return (
-    <button className={classNames(style.iconButton, className ? className : '')} onClick={onClick}>
+    <button
+      className={classNames(style.iconButton, className ? className : '')}
+      onClick={onClick}
+      type="button"
+    >
       {icon}
       <div className={style.iconButton__text}>
         <p>{text}</p>

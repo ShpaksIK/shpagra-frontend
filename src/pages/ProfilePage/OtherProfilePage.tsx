@@ -15,7 +15,7 @@ import { getProfile } from '../../redux/slices/profileSlice/api';
 import { useAppSelector } from '../../hooks/useStore';
 import ProfileLoading from '../../components/ProfileLoading/ProfileLoading';
 import { useNavigateMyProfile } from '../../hooks/useNavigateMyProfile';
-import LayoutBase from '../../components/LayoutBase/LayoutBase';
+import LayoutBase from '../../components/Layouts/LayoutBase/LayoutBase';
 import Block from '../../ui/Block/Block';
 
 const OtherProfilePage = () => {

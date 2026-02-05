@@ -1,0 +1,35 @@
+.content {
+  display: flex;
+  gap: 20px;
+  margin: 20px 0;
+
+  &__inner {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+
+  &__aside {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    &__info {
+      h2 {
+        font-size: var(--font-size-accent);
+      }
+
+      &__line {
+        margin: 10px 0;
+      }
+
+      ul {
+        list-style-position: inside;
+        margin: 0;
+        padding: 0;
+      }
+    }
+  }
+}

@@ -7,12 +7,19 @@ import { SettingsType } from '../../types/settingsType';
 import TextButton from '../../ui/TextButton/TextButton';
 import ButtonSecondary from '../../ui/ButtonSecondary/ButtonSecondary';
 import ProfileLoading from '../../components/ProfileLoading/ProfileLoading';
-import LayoutBase from '../../components/LayoutBase/LayoutBase';
+import LayoutBase from '../../components/Layouts/LayoutBase/LayoutBase';
 import Block from '../../ui/Block/Block';
 import EditSVG from '../../ui/svg/EditSVG';
+import { useAuthRedirect } from '../../hooks/useAuthRedirect';
+import { useState } from 'react';
+import ProfileSettingModal from '../../components/Modals/ProfileSettingModal/ProfileSettingModal';
+import ChangePasswordModal from '../../components/Modals/ChangePasswordModal/ChangePasswordModal';
 
 const ProfileSettingsPage = () => {
+  useAuthRedirect();
   const profile = useProfile();
+  const [isOpenEditProfile, setIsOpenEditProfile] = useState(false);
+  const [isOpenChangePassword, setIsOpenChangePassword] = useState(false);
 
   if (!profile) {
     return <ProfileLoading />;
@@ -31,6 +38,16 @@ const ProfileSettingsPage = () => {
 
   return (
     <LayoutBase>
+      {isOpenEditProfile && (
+        <ProfileSettingModal
+          onClose={() => setIsOpenEditProfile(false)}
+          username={profile.username}
+          login={profile.login}
+        />
+      )}
+      {isOpenChangePassword && (
+        <ChangePasswordModal onClose={() => setIsOpenChangePassword(false)} />
+      )}
       <h2>Настройки профиля</h2>
       <Block className={style.settings}>
         <div className={style.settings__info}>
@@ -38,7 +55,7 @@ const ProfileSettingsPage = () => {
           <div className={style.settings__info__name}>
             <b>{profile.username}</b>
             <p>{profile.login}</p>
-            <IconButton icon={<EditSVG />} onClick={() => {}} />
+            <IconButton icon={<EditSVG size={22} />} onClick={() => setIsOpenEditProfile(true)} />
           </div>
         </div>
 
@@ -57,7 +74,7 @@ const ProfileSettingsPage = () => {
           </div>
           <div className={style.settings__controls__control}>
             <p>Текущий пароль</p>
-            <TextButton text="Изменить" onClick={() => {}} />
+            <TextButton text="Изменить" onClick={() => setIsOpenChangePassword(true)} />
           </div>
         </div>
 

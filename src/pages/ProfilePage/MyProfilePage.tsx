@@ -14,7 +14,7 @@ import { useAppSelector } from '../../hooks/useStore';
 import { getMyProfile } from '../../redux/slices/authSlice/api';
 import { useNavigate } from 'react-router';
 import ProfileLoading from '../../components/ProfileLoading/ProfileLoading';
-import LayoutBase from '../../components/LayoutBase/LayoutBase';
+import LayoutBase from '../../components/Layouts/LayoutBase/LayoutBase';
 import Block from '../../ui/Block/Block';
 
 const MyProfilePage = () => {
