@@ -6,13 +6,12 @@ const instance = axios.create({
   headers: {},
 });
 
-instance.interceptors.request.use(
-  (response) => response,
-  (error) => {
-    if (error.response.status === 401) {
-    }
-    return Promise.reject(error);
-  },
-);
+instance.interceptors.request.use((config) => {
+  const accessToken = localStorage.getItem('accessToken');
+  if (accessToken) {
+    config.headers.Authorization = `Bearer ${accessToken}`;
+  }
+  return config;
+});
 
 export { instance };

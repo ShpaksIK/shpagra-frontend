@@ -1,11 +1,10 @@
-import { useLocation } from 'react-router';
+import { useParams } from 'react-router';
 
 export const useDefineMyProfile = (): boolean => {
-  const location = useLocation();
+  const params = useParams();
+  const profileLogin = params.profileLogin;
 
-  const splitLocation = location.pathname.split('/');
-
-  if (location.pathname === '/profile' || !splitLocation[1]) {
+  if (!profileLogin) {
     return true;
   }
 

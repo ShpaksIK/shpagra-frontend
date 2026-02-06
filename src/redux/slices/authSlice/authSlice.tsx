@@ -1,14 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { MyProfileType } from '../../../types/entities/profileType';
-import { login } from './api';
+import { getMyProfile, login, logout } from './api';
 
+/*
+  profile - профиль пользователя, если авторизован
+*/
 interface AuthState {
-  isAuth: boolean;
   profile: MyProfileType | null;
 }
 
 const initialState: AuthState = {
-  isAuth: false,
   profile: null,
 };
 
@@ -19,7 +20,12 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(login.fulfilled, (state, action: PayloadAction<MyProfileType>) => {
       state.profile = action.payload;
-      state.isAuth = true;
+    });
+    builder.addCase(logout.fulfilled, (state) => {
+      state.profile = null;
+    });
+    builder.addCase(getMyProfile.fulfilled, (state, action: PayloadAction<MyProfileType>) => {
+      state.profile = action.payload;
     });
   },
 });

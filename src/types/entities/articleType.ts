@@ -1,7 +1,7 @@
 import { CommentType } from './commentType';
 import { ReactionType } from './reactionType';
 
-type ArticleStatusType = 'published' | 'review' | 'draft';
+export type ArticleStatusType = 'public' | 'moderation' | 'draft' | 'deny' | 'check';
 
 type ArticleContentTypesType = 'text' | 'title' | 'img' | 'quote' | 'ol' | 'ul';
 
@@ -30,3 +30,11 @@ export interface ArticleType {
 }
 
 export type ArticleFilterType = 'new' | 'old' | 'popular';
+
+export interface CreateArticleType {
+  title: string;
+  description: string;
+  banner: string | null;
+  content: ArticleContentType[];
+  authorId: string;
+}

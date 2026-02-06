@@ -9,10 +9,18 @@ import { RegisterFormType } from '../../types/formsType';
 import Input from '../../ui/Input/Input';
 import Block from '../../ui/Block/Block';
 import InputPassword from '../../ui/InputPassword/InputPassword';
+import { useAppDispatch } from '../../hooks/useStore';
+import { register } from '../../redux/slices/authSlice/api';
 
 const RegisterPage = () => {
+  const dispatch = useAppDispatch();
+
   const handleSubmit = (values: RegisterFormType) => {
-    console.log(values);
+    dispatch(
+      register({
+        ...values,
+      }),
+    );
   };
 
   const inititalValues: RegisterFormType = {

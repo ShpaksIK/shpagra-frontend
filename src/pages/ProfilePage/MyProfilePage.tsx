@@ -10,7 +10,7 @@ import TextLink from '../../ui/TextLink/TextLink';
 import ArticleContainer from '../../components/ArticleContainer/ArticleContainer';
 import CommentContainer from '../../components/CommentContainer/CommentContainer';
 import ReactionContainer from '../../components/ReactionContainer/ReactionContainer';
-import { useAppSelector } from '../../hooks/useStore';
+import { useAppDispatch, useAppSelector } from '../../hooks/useStore';
 import { getMyProfile } from '../../redux/slices/authSlice/api';
 import { useNavigate } from 'react-router';
 import ProfileLoading from '../../components/ProfileLoading/ProfileLoading';
@@ -19,16 +19,16 @@ import Block from '../../ui/Block/Block';
 
 const MyProfilePage = () => {
   const profile = useAppSelector((state) => state.auth.profile);
-  const isAuth = useAppSelector((state) => state.auth.isAuth);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (!isAuth) {
+    if (!profile) {
       navigate('/sign-in');
     } else {
-      getMyProfile();
+      dispatch(getMyProfile());
     }
-  }, [isAuth, navigate]);
+  }, [profile, navigate]);
 
   if (!profile) {
     return <ProfileLoading />;

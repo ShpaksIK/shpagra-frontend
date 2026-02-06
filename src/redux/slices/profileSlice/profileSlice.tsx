@@ -1,16 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ProfileType } from '../../../types/entities/profileType';
-import { getProfile, getProfileArticles } from './api';
+import { getProfile, getProfileArticles, getProfileComments, getProfileReactions } from './api';
 import { ArticleType } from '../../../types/entities/articleType';
+import { CommentType } from '../../../types/entities/commentType';
+import { ReactionType } from '../../../types/entities/reactionType';
 
+/*
+  profile - открытый профиль пользователя
+*/
 interface ProfileState {
   profile: ProfileType | null;
-  articles: ArticleType[] | null;
 }
 
 const initialState: ProfileState = {
   profile: null,
-  articles: null,
 };
 
 const profileSlice = createSlice({
@@ -22,8 +25,23 @@ const profileSlice = createSlice({
       state.profile = action.payload;
     });
     builder.addCase(getProfileArticles.fulfilled, (state, action: PayloadAction<ArticleType[]>) => {
-      state.articles = action.payload;
+      if (state.profile) {
+        state.profile.articles = action.payload;
+      }
     });
+    builder.addCase(getProfileComments.fulfilled, (state, action: PayloadAction<CommentType[]>) => {
+      if (state.profile) {
+        state.profile.comments = action.payload;
+      }
+    });
+    builder.addCase(
+      getProfileReactions.fulfilled,
+      (state, action: PayloadAction<ReactionType[]>) => {
+        if (state.profile) {
+          state.profile.reactions = action.payload;
+        }
+      },
+    );
   },
 });
 

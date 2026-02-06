@@ -2,6 +2,6 @@ type AlertModeType = 'success' | 'info' | 'warning' | 'error';
 
 export interface AlertType {
   content: string;
-  status: number;
+  status?: number;
   type: AlertModeType;
 }

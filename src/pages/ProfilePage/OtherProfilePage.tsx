@@ -1,9 +1,6 @@
 import { useEffect } from 'react';
-import classNames from 'classnames';
 
 import style from './ProfilePage.module.scss';
-import Header from '../../components/Header/Header';
-import Nav from '../../components/Nav/Nav';
 import userIMG from './../../../public/img/user.png';
 import IconButton from '../../ui/IconButton/IconButton';
 import ShareSVG from '../../ui/svg/ShareSVG';
@@ -12,18 +9,22 @@ import ArticleContainer from '../../components/ArticleContainer/ArticleContainer
 import CommentContainer from '../../components/CommentContainer/CommentContainer';
 import ReactionContainer from '../../components/ReactionContainer/ReactionContainer';
 import { getProfile } from '../../redux/slices/profileSlice/api';
-import { useAppSelector } from '../../hooks/useStore';
+import { useAppDispatch, useAppSelector } from '../../hooks/useStore';
 import ProfileLoading from '../../components/ProfileLoading/ProfileLoading';
 import { useNavigateMyProfile } from '../../hooks/useNavigateMyProfile';
 import LayoutBase from '../../components/Layouts/LayoutBase/LayoutBase';
 import Block from '../../ui/Block/Block';
+import { useParams } from 'react-router';
 
 const OtherProfilePage = () => {
   const profile = useAppSelector((state) => state.profile.profile);
+  const params = useParams();
+  const dispatch = useAppDispatch();
+  const profileLogin = params.profileLogin as string;
   useNavigateMyProfile();
 
   useEffect(() => {
-    getProfile('test');
+    dispatch(getProfile(profileLogin));
   }, []);
 
   if (!profile) {

@@ -12,3 +12,9 @@ export interface ProfileType {
 }
 
 export interface MyProfileType extends ProfileType {}
+
+export interface UpdateMyProfileType {
+  login?: string;
+  username?: string;
+  avatar?: string | null;
+}

@@ -1,21 +1,22 @@
-import { useState } from 'react';
-
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
-import style from './ArticleFilter.module.scss';
 import { ArticleFilterType } from '../../types/entities/articleType';
 import Block from '../../ui/Block/Block';
+import { useAppDispatch, useAppSelector } from '../../hooks/useStore';
+import { setFilter } from '../../redux/slices/articleSlice/articleSlice';
 
 const ArticleFilter = () => {
-  const [filter, setFilter] = useState<ArticleFilterType>('new');
+  const dispatch = useAppDispatch();
+
+  const filter = useAppSelector((state) => state.article.filter);
 
   const handleChange = (event: SelectChangeEvent) => {
     const selectedType = event.target.value as ArticleFilterType;
-    setFilter(selectedType);
+    dispatch(setFilter(selectedType));
   };
 
   const menuItemSx = {

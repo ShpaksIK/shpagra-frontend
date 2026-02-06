@@ -12,19 +12,18 @@ import { formatTimestamp } from '../../utils/dateFormatter';
 import CommentContainer from '../../components/CommentContainer/CommentContainer';
 import ArticleContent from '../../components/ArticleContent/ArticleContent';
 import LayoutArticle from '../../components/Layouts/LayoutArticle/LayoutArticle';
+import { useParams } from 'react-router';
 
-interface ArticlePageProps {
-  articleId: number;
-}
-
-const ArticlePage: React.FC<ArticlePageProps> = ({ articleId }) => {
+const ArticlePage = () => {
   useNavigateArticle();
 
   const dispatch = useAppDispatch();
   const article = useAppSelector((state) => state.article.article);
+  const params = useParams();
+  const articleId = params.articleId as string;
 
   useEffect(() => {
-    dispatch(getArticle(articleId));
+    dispatch(getArticle(parseInt(articleId)));
   }, [articleId]);
 
   if (!article) {
