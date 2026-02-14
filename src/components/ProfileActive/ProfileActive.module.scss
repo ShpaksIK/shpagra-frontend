@@ -1,0 +1,7 @@
+.profile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba($color: var(--color-element-rgb), $alpha: 0.2);
+  cursor: pointer;
+}

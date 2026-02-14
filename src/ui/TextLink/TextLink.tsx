@@ -1,6 +1,6 @@
 import style from './TextLink.module.scss';
 import { Link } from 'react-router';
-import ShareSVG from '../svg/ShareSVG';
+import ArrowSVG from '../svg/ArrowSVG';
 
 interface TextLinkProps {
   to: string;
@@ -11,7 +11,7 @@ const TextLink: React.FC<TextLinkProps> = ({ to, children }) => {
   return (
     <Link to={to} className={style.textLink}>
       {children}
-      <ShareSVG />
+      <ArrowSVG />
     </Link>
   );
 };

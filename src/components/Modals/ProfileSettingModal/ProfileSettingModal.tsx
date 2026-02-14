@@ -7,14 +7,24 @@ import { ProfileSettingFormType } from '../../../types/formsType';
 import Button from '../../../ui/Button/Button';
 import ButtonSecondary from '../../../ui/ButtonSecondary/ButtonSecondary';
 import Input from '../../../ui/Input/Input';
+import { useAppDispatch } from '../../../hooks/useStore';
+import { updateMyProfile } from '../../../redux/slices/authSlice/api';
 
 interface ProfileSettingModalProps extends ProfileSettingFormType {
   onClose: () => void;
 }
 
 const ProfileSettingModal: React.FC<ProfileSettingModalProps> = ({ onClose, login, username }) => {
+  const dispatch = useAppDispatch();
+
   const handleSubmit = (values: ProfileSettingFormType) => {
-    console.log(values);
+    dispatch(
+      updateMyProfile({
+        profile: {
+          ...values,
+        },
+      }),
+    );
     onClose();
   };
 

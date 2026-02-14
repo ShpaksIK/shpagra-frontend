@@ -1,5 +1,7 @@
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
+
 import style from './ProfileSettingsPage.module.scss';
-import { useProfile } from '../../hooks/useProfile';
 import userIMG from './../../../public/img/user.png';
 import IconButton from '../../ui/IconButton/IconButton';
 import Switch from '../../ui/Switch/Switch';
@@ -10,16 +12,26 @@ import ProfileLoading from '../../components/ProfileLoading/ProfileLoading';
 import LayoutBase from '../../components/Layouts/LayoutBase/LayoutBase';
 import Block from '../../ui/Block/Block';
 import EditSVG from '../../ui/svg/EditSVG';
-import { useAuthRedirect } from '../../hooks/useAuthRedirect';
-import { useState } from 'react';
 import ProfileSettingModal from '../../components/Modals/ProfileSettingModal/ProfileSettingModal';
 import ChangePasswordModal from '../../components/Modals/ChangePasswordModal/ChangePasswordModal';
+import { useAppDispatch, useAppSelector } from '../../hooks/useStore';
+import { getMyProfile, logout, updateMyProfile } from '../../redux/slices/authSlice/api';
 
 const ProfileSettingsPage = () => {
-  useAuthRedirect();
-  const profile = useProfile();
+  const profile = useAppSelector((state) => state.auth.profile);
+  const isInitialized = useAppSelector((state) => state.auth.initialized);
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const [isOpenEditProfile, setIsOpenEditProfile] = useState(false);
   const [isOpenChangePassword, setIsOpenChangePassword] = useState(false);
+
+  useEffect(() => {
+    if (!profile && isInitialized) {
+      navigate('/sign-in');
+    } else {
+      dispatch(getMyProfile());
+    }
+  }, [isInitialized]);
 
   if (!profile) {
     return <ProfileLoading />;
@@ -28,12 +40,38 @@ const ProfileSettingsPage = () => {
   const switchSetting = (checked: boolean, type: SettingsType) => {
     switch (type) {
       case 'visible-articles':
+        dispatch(
+          updateMyProfile({
+            settings: {
+              is_visible_articles: checked,
+            },
+          }),
+        );
         break;
       case 'visible-comments':
+        dispatch(
+          updateMyProfile({
+            settings: {
+              is_visible_comments: checked,
+            },
+          }),
+        );
         break;
       case 'visible-reactions':
+        dispatch(
+          updateMyProfile({
+            settings: {
+              is_visible_reactions: checked,
+            },
+          }),
+        );
         break;
     }
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate('/');
   };
 
   return (
@@ -51,7 +89,7 @@ const ProfileSettingsPage = () => {
       <h2>Настройки профиля</h2>
       <Block className={style.settings}>
         <div className={style.settings__info}>
-          <img src={profile.avatar || userIMG} alt="Фото профиля" />
+          <img src={profile?.avatar || userIMG} alt="Фото профиля" />
           <div className={style.settings__info__name}>
             <b>{profile.username}</b>
             <p>{profile.login}</p>
@@ -62,15 +100,27 @@ const ProfileSettingsPage = () => {
         <div className={style.settings__controls}>
           <div className={style.settings__controls__control}>
             <p>Отображать мои статьи</p>
-            <Switch checked={false} type="visible-articles" onChange={switchSetting} />
+            <Switch
+              checked={profile.is_visible_articles}
+              type="visible-articles"
+              onChange={switchSetting}
+            />
           </div>
           <div className={style.settings__controls__control}>
             <p>Отображать мои комментарии</p>
-            <Switch checked={false} type="visible-comments" onChange={switchSetting} />
+            <Switch
+              checked={profile.is_visible_comments}
+              type="visible-comments"
+              onChange={switchSetting}
+            />
           </div>
           <div className={style.settings__controls__control}>
             <p>Отображать мои реакции</p>
-            <Switch checked={false} type="visible-reactions" onChange={switchSetting} />
+            <Switch
+              checked={profile.is_visible_reactions}
+              type="visible-reactions"
+              onChange={switchSetting}
+            />
           </div>
           <div className={style.settings__controls__control}>
             <p>Текущий пароль</p>
@@ -78,7 +128,7 @@ const ProfileSettingsPage = () => {
           </div>
         </div>
 
-        <ButtonSecondary>Выйти</ButtonSecondary>
+        <ButtonSecondary onClick={handleLogout}>Выйти</ButtonSecondary>
       </Block>
     </LayoutBase>
   );

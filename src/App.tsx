@@ -8,7 +8,6 @@ import LoginPage from './pages/LoginPage/LoginPage';
 import RegisterPage from './pages/RegisterPage/RegisterPage';
 import Alert from './components/Alert/Alert';
 import { useAppDispatch, useAppSelector } from './hooks/useStore';
-import { getProfile } from './redux/slices/profileSlice/api';
 import { useEffect } from 'react';
 import ProfileArticlesPage from './pages/ProfileArticle/ProfileArticlesPage';
 import ProfileReactionsPage from './pages/ProfileReactions/ProfileReactionsPage';

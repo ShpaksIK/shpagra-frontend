@@ -7,21 +7,35 @@ import { ChangePasswordFormType } from '../../../types/formsType';
 import Button from '../../../ui/Button/Button';
 import ButtonSecondary from '../../../ui/ButtonSecondary/ButtonSecondary';
 import InputPassword from '../../../ui/InputPassword/InputPassword';
+import { useAppDispatch } from '../../../hooks/useStore';
+import { changePassword } from '../../../redux/slices/authSlice/api';
 
 interface ProfileSettingModalProps {
   onClose: () => void;
 }
 
 const ChangePasswordModal: React.FC<ProfileSettingModalProps> = ({ onClose }) => {
+  const dispatch = useAppDispatch();
+
   const handleSubmit = (values: ChangePasswordFormType) => {
-    console.log(values);
+    dispatch(
+      changePassword({
+        currentPassword: values.currentPassword,
+        password: values.password,
+      }),
+    );
     onClose();
   };
 
   const validationSchema = Yup.object().shape({
-    currentPassword: Yup.string().required('Введите текущий пароль'),
-    password: Yup.string().required('Новый пароль обязателен'),
+    currentPassword: Yup.string()
+      .min(5, 'Пароль должен содержать не менее 5 символов')
+      .required('Введите текущий пароль'),
+    password: Yup.string()
+      .min(5, 'Пароль должен содержать не менее 5 символов')
+      .required('Новый пароль обязателен'),
     repeatPassword: Yup.string()
+      .min(5, 'Пароль должен содержать не менее 5 символов')
       .required('Повторите пароль')
       .oneOf([Yup.ref('password')], 'Пароли не совпадают'),
   });
@@ -59,7 +73,9 @@ const ChangePasswordModal: React.FC<ProfileSettingModalProps> = ({ onClose }) =>
 
               <div>
                 <Field name="password">
-                  {({ field }: FieldProps) => <InputPassword {...field} placeholder="Пароль" />}
+                  {({ field }: FieldProps) => (
+                    <InputPassword {...field} placeholder="Новый пароль" />
+                  )}
                 </Field>
                 <ErrorMessage
                   name="password"

@@ -7,7 +7,7 @@ import ProfileLoading from '../../components/ProfileLoading/ProfileLoading';
 import { getArticle } from '../../redux/slices/articleSlice/api';
 import IconButton from '../../ui/IconButton/IconButton';
 import ShareSVG from '../../ui/svg/ShareSVG';
-import Avatar from '../../ui/Avatar/Avatar';
+import AvatarLink from '../../ui/AvatarLink/AvatarLink';
 import { formatTimestamp } from '../../utils/dateFormatter';
 import CommentContainer from '../../components/CommentContainer/CommentContainer';
 import ArticleContent from '../../components/ArticleContent/ArticleContent';
@@ -40,7 +40,7 @@ const ArticlePage = () => {
         </div>
 
         <div className={style.header__author}>
-          <Avatar
+          <AvatarLink
             profileAvatar={article.authorAvatar}
             profileId={article.authorLogin}
             username={article.authorUsername}

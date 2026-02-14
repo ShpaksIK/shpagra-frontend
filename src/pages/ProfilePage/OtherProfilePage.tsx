@@ -37,8 +37,10 @@ const OtherProfilePage = () => {
       <Block className={style.header}>
         <div className={style.header__avatar}>
           <img src={profile.avatar ? profile.avatar : userIMG} />
-          <b>{profile.username}</b>
-          <p>{profile.login}</p>
+          <div>
+            <b>{profile.username}</b>
+            <p>{profile.login}</p>
+          </div>
         </div>
         <div className={style.header__controls}>
           <IconButton onClick={() => {}} icon={<ShareSVG />} />

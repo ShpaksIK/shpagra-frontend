@@ -6,7 +6,7 @@ export interface LoginFormType {
 export interface RegisterFormType {
   login: string;
   password: string;
-  repeatPassword: string;
+  repeatPassword?: string;
   username: string;
 }
 

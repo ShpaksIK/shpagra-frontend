@@ -5,7 +5,7 @@ import TextareaAutosize from 'react-textarea-autosize';
 import { ArticleType } from '../../types/entities/articleType';
 import style from './Article.module.scss';
 import bannerIMG from './../../../public/img/test.png';
-import Avatar from '../../ui/Avatar/Avatar';
+import AvatarLink from '../../ui/AvatarLink/AvatarLink';
 import { formatTimestamp } from '../../utils/dateFormatter';
 import IconButton from '../../ui/IconButton/IconButton';
 import { copyToClipboard } from '../../utils/copyToClipboard';
@@ -66,7 +66,7 @@ const Article: React.FC<ArticleProps> = ({ article }) => {
         <p className={style.article__content__description}>{article.description}</p>
         <div className={style.article__footer}>
           <div className={style.article__footer__author}>
-            <Avatar
+            <AvatarLink
               profileAvatar={article.authorAvatar}
               profileId={article.authorLogin}
               username={article.authorUsername}

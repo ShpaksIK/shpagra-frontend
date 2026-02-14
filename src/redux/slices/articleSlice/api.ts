@@ -11,10 +11,10 @@ export const getArticle = createAsyncThunk(
     try {
       const response = await instance.get(`articles/${articleId}`);
 
-      if (response.status >= 400) {
+      if (!response.data.success) {
         const error: ErrorType = {
-          status: response.status,
-          message: response.statusText,
+          status: response.data.status,
+          message: response.data.message,
         };
         throw error;
       }
@@ -32,8 +32,8 @@ export const getArticles = createAsyncThunk('profile/getarticles', async (_, { d
 
     if (response.status >= 400) {
       const error: ErrorType = {
-        status: response.status,
-        message: response.statusText,
+        status: response.data.status,
+        message: response.data.message,
       };
       throw error;
     }
@@ -60,10 +60,10 @@ export const createArticle = createAsyncThunk(
         to: to,
       });
 
-      if (response.status >= 400) {
+      if (!response.data.success) {
         const error: ErrorType = {
-          status: response.status,
-          message: response.statusText,
+          status: response.data.status,
+          message: response.data.message,
         };
         throw error;
       }
@@ -85,10 +85,10 @@ export const removeArticle = createAsyncThunk(
   async (articleId: number, { dispatch }) => {
     try {
       const response = await instance.delete(`articles/${articleId}`);
-      if (response.status >= 400) {
+      if (!response.data.success) {
         const error: ErrorType = {
-          status: response.status,
-          message: response.statusText,
+          status: response.data.status,
+          message: response.data.message,
         };
         throw error;
       }
@@ -118,10 +118,10 @@ export const updateArticle = createAsyncThunk(
         ...article,
       });
 
-      if (response.status >= 400) {
+      if (!response.data.success) {
         const error: ErrorType = {
-          status: response.status,
-          message: response.statusText,
+          status: response.data.status,
+          message: response.data.message,
         };
         throw error;
       }

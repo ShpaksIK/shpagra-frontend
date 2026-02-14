@@ -4,7 +4,7 @@ import { ErrorType } from '../../../types/errorType';
 import { showTimeoutAlert } from '../../../utils/showAlert';
 import { LoginFormType, RegisterFormType } from '../../../types/formsType';
 import { errorHandler } from '../../../utils/errorHandler';
-import { UpdateMyProfileType } from '../../../types/entities/profileType';
+import { MyProfileSettingsType, UpdateMyProfileType } from '../../../types/entities/profileType';
 
 export const login = createAsyncThunk(
   'auth/login',
@@ -16,18 +16,20 @@ export const login = createAsyncThunk(
 
       showTimeoutAlert(dispatch, {
         type: 'success',
-        content: 'Успешный вход',
+        content: response.data.message,
       });
 
-      if (response.status >= 400) {
+      if (!response.data.success) {
         const error: ErrorType = {
-          status: response.status,
-          message: response.statusText,
+          status: response.data.status,
+          message: response.data.message,
         };
         throw error;
       }
 
-      return response.data;
+      localStorage.setItem('accessToken', response.data.data.access_token);
+
+      return response.data.data;
     } catch (error) {
       errorHandler(error, dispatch);
     }
@@ -36,26 +38,30 @@ export const login = createAsyncThunk(
 
 export const register = createAsyncThunk(
   'auth/register',
-  async (registerData: RegisterFormType, { dispatch }) => {
+  async (registerData: Pick<RegisterFormType, 'repeatPassword'>, { dispatch }) => {
     try {
-      const response = await instance.post('auth/registration', {
+      if (registerData.repeatPassword) {
+        delete registerData.repeatPassword;
+      }
+
+      const response = await instance.post('auth/register', {
         ...registerData,
       });
 
       showTimeoutAlert(dispatch, {
         type: 'success',
-        content: 'Успешная регистрация',
+        content: response.data.message,
       });
 
-      if (response.status >= 400) {
+      if (!response.data.success) {
         const error: ErrorType = {
-          status: response.status,
-          message: response.statusText,
+          status: response.data.status,
+          message: response.data.message,
         };
         throw error;
       }
 
-      return response.data;
+      return response.data.success;
     } catch (error) {
       errorHandler(error, dispatch);
     }
@@ -64,17 +70,17 @@ export const register = createAsyncThunk(
 
 export const logout = createAsyncThunk('auth/logout ', async (_, { dispatch }) => {
   try {
-    const response = await instance.get('auth/logout');
+    const response = await instance.post('auth/logout');
 
-    if (response.status >= 400) {
+    localStorage.removeItem('accessToken');
+
+    if (!response.data.success) {
       const error: ErrorType = {
-        status: response.status,
-        message: response.statusText,
+        status: response.data.status,
+        message: response.data.message,
       };
       throw error;
     }
-
-    return response.data;
   } catch (error) {
     errorHandler(error, dispatch);
   }
@@ -82,49 +88,58 @@ export const logout = createAsyncThunk('auth/logout ', async (_, { dispatch }) =
 
 export const getMyProfile = createAsyncThunk('auth/getmyprofile ', async (_, { dispatch }) => {
   try {
-    const response = await instance.get('auth/me');
+    const response = await instance.get('profiles/me');
 
-    if (response.status >= 400) {
+    if (!response.data.success) {
       const error: ErrorType = {
-        status: response.status,
-        message: response.statusText,
+        status: response.data.status,
+        message: response.data.message,
       };
       throw error;
     }
 
-    return response.data;
+    return response.data.data;
   } catch (error) {
     errorHandler(error, dispatch);
   }
 });
 
 interface UpdateMyProfileThunkType {
-  profile: UpdateMyProfileType;
-  login: string;
+  profile?: UpdateMyProfileType;
+  settings?: Partial<MyProfileSettingsType>;
 }
 
 export const updateMyProfile = createAsyncThunk(
   'auth/updatemyprofile ',
-  async ({ profile, login }: UpdateMyProfileThunkType, { dispatch }) => {
+  async ({ profile, settings }: UpdateMyProfileThunkType, { dispatch }) => {
     try {
-      const response = await instance.put(`profile/${login}`, {
-        ...profile,
+      const response = await instance.put(`profiles`, {
+        profile: {
+          ...profile,
+        },
+        settings: {
+          ...settings,
+        },
       });
 
-      if (response.status >= 400) {
+      if (!response.data.success) {
         const error: ErrorType = {
-          status: response.status,
-          message: response.statusText,
+          status: response.data.status,
+          message: response.data.message,
         };
         throw error;
       }
 
       showTimeoutAlert(dispatch, {
         type: 'success',
-        content: 'Профиль изменен',
+        content: response.data.message,
       });
 
-      return response.data;
+      return {
+        ...response.data.data,
+        ...profile,
+        ...settings,
+      };
     } catch (error) {
       errorHandler(error, dispatch);
     }
@@ -140,25 +155,23 @@ export const changePassword = createAsyncThunk(
   'auth/updatemyprofile ',
   async ({ currentPassword, password }: ChangePasswordThunkType, { dispatch }) => {
     try {
-      const response = await instance.put(`auth/changepassword`, {
+      const response = await instance.post(`auth/changepassword`, {
         currentPassword,
         password,
       });
 
-      if (response.status >= 400) {
+      if (!response.data.success) {
         const error: ErrorType = {
-          status: response.status,
-          message: response.statusText,
+          status: response.data.status,
+          message: response.data.message,
         };
         throw error;
       }
 
       showTimeoutAlert(dispatch, {
         type: 'success',
-        content: 'Пароль изменен',
+        content: response.data.message,
       });
-
-      return response.data;
     } catch (error) {
       errorHandler(error, dispatch);
     }

@@ -9,11 +9,23 @@ import { RegisterFormType } from '../../types/formsType';
 import Input from '../../ui/Input/Input';
 import Block from '../../ui/Block/Block';
 import InputPassword from '../../ui/InputPassword/InputPassword';
-import { useAppDispatch } from '../../hooks/useStore';
+import { useAppDispatch, useAppSelector } from '../../hooks/useStore';
 import { register } from '../../redux/slices/authSlice/api';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router';
+import { resetAuthLoading } from '../../redux/slices/authSlice/authSlice';
 
 const RegisterPage = () => {
   const dispatch = useAppDispatch();
+  const authLoading = useAppSelector((state) => state.auth.loadings.auth);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (authLoading.isSuccess) {
+      dispatch(resetAuthLoading());
+      navigate('/sign-in');
+    }
+  }, [authLoading.isLoading]);
 
   const handleSubmit = (values: RegisterFormType) => {
     dispatch(
@@ -35,8 +47,13 @@ const RegisterPage = () => {
       .required('Логин обязателен')
       .min(3, 'Логин должен содержать не менее 3 символов')
       .max(32, 'Логин должен содержать не более 32 символов'),
-    password: Yup.string().required('Пароль обязателен'),
+    password: Yup.string()
+      .min(5, 'Пароль должен содержать не менее 5 символов')
+      .max(255, 'Пароль должен содержать не более 255 символов')
+      .required('Пароль обязателен'),
     repeatPassword: Yup.string()
+      .min(5, 'Пароль должен содержать не менее 5 символов')
+      .max(255, 'Пароль должен содержать не более 255 символов')
       .required('Повторите пароль')
       .oneOf([Yup.ref('password')], 'Пароли не совпадают'),
     username: Yup.string()

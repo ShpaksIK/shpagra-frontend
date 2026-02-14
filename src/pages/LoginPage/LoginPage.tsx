@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Formik, Form, ErrorMessage, Field, FieldProps } from 'formik';
 import * as Yup from 'yup';
 
@@ -7,15 +8,19 @@ import style from './LoginPage.module.scss';
 import A from '../../ui/A/A';
 import { LoginFormType } from '../../types/formsType';
 import Input from '../../ui/Input/Input';
-import { useAppDispatch } from '../../hooks/useStore';
+import { useAppDispatch, useAppSelector } from '../../hooks/useStore';
 import { login } from '../../redux/slices/authSlice/api';
 import { useNavigate } from 'react-router';
 import Block from '../../ui/Block/Block';
 import InputPassword from '../../ui/InputPassword/InputPassword';
+import { resetAuthLoading } from '../../redux/slices/authSlice/authSlice';
+import ProfileActive from '../../components/ProfileActive/ProfileActive';
 
 const LoginPage = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const authLoading = useAppSelector((state) => state.auth.loadings.auth);
+  const profile = useAppSelector((state) => state.auth.profile);
 
   const handleSubmit = (values: LoginFormType) => {
     dispatch(
@@ -24,9 +29,14 @@ const LoginPage = () => {
         password: values.password,
       }),
     );
-
-    navigate('/profile');
   };
+
+  useEffect(() => {
+    if (authLoading.isSuccess) {
+      dispatch(resetAuthLoading());
+      navigate('/profile');
+    }
+  }, [authLoading.isLoading]);
 
   const inititalValues: LoginFormType = {
     login: '',
@@ -38,7 +48,10 @@ const LoginPage = () => {
       .required('Логин обязателен')
       .min(3, 'Логин должен содержать не менее 3 символов')
       .max(32, 'Логин должен содержать не более 32 символов'),
-    password: Yup.string().required('Пароль обязателен'),
+    password: Yup.string()
+      .min(5, 'Пароль должен содержать не менее 5 символов')
+      .max(255, 'Пароль должен содержать не более 255 символов')
+      .required('Пароль обязателен'),
   });
 
   return (
@@ -51,6 +64,13 @@ const LoginPage = () => {
         <Form>
           <Block className={style.login}>
             <h2>Вход в аккаунт</h2>
+
+            {profile && (
+              <div className={style.login__active}>
+                <p>Активная сессия</p>
+                <ProfileActive profile={profile} />
+              </div>
+            )}
 
             <div className={style.login__fields}>
               <div>

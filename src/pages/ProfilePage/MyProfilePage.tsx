@@ -16,19 +16,22 @@ import { useNavigate } from 'react-router';
 import ProfileLoading from '../../components/ProfileLoading/ProfileLoading';
 import LayoutBase from '../../components/Layouts/LayoutBase/LayoutBase';
 import Block from '../../ui/Block/Block';
+import { resetAuthLoading } from '../../redux/slices/authSlice/authSlice';
 
 const MyProfilePage = () => {
   const profile = useAppSelector((state) => state.auth.profile);
+  const authLoading = useAppSelector((state) => state.auth.loadings.auth);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (!profile) {
+    if (!profile && authLoading.isDone) {
+      resetAuthLoading();
       navigate('/sign-in');
     } else {
       dispatch(getMyProfile());
     }
-  }, [profile, navigate]);
+  }, [authLoading.isDone, profile?.login]);
 
   if (!profile) {
     return <ProfileLoading />;
@@ -40,8 +43,10 @@ const MyProfilePage = () => {
       <Block className={style.header}>
         <div className={style.header__avatar}>
           <img src={profile.avatar ? profile.avatar : userIMG} />
-          <b>{profile.username}</b>
-          <p>{profile.login}</p>
+          <div>
+            <b>{profile.username}</b>
+            <p>{profile.login}</p>
+          </div>
         </div>
         <div className={style.header__controls}>
           <IconButton onClick={() => {}} icon={<ShareSVG />} />

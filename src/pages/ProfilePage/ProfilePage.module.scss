@@ -36,9 +36,17 @@
 .blocks__comments {
   flex-grow: 1;
   min-width: 300px;
+
+  h2 {
+    font-size: var(--font-size-accent);
+  }
 }
 
 .blocks__reactions {
   flex-grow: 1;
   min-width: 300px;
+
+  h2 {
+    font-size: var(--font-size-accent);
+  }
 }

@@ -23,6 +23,10 @@ const profileSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getProfile.fulfilled, (state, action: PayloadAction<ProfileType>) => {
       state.profile = action.payload;
+      state.profile.avatar = null;
+      state.profile.articles = [];
+      state.profile.comments = [];
+      state.profile.reactions = [];
     });
     builder.addCase(getProfileArticles.fulfilled, (state, action: PayloadAction<ArticleType[]>) => {
       if (state.profile) {

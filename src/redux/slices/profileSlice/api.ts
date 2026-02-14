@@ -7,12 +7,12 @@ export const getProfile = createAsyncThunk(
   'profile/getprofile',
   async (login: string, { dispatch }) => {
     try {
-      const response = await instance.get(`profile/${login}`);
+      const response = await instance.get(`profiles/${login}`);
 
-      if (response.status >= 400) {
+      if (!response.data.success) {
         const error: ErrorType = {
-          status: response.status,
-          message: response.statusText,
+          status: response.data.status,
+          message: response.data.message,
         };
         throw error;
       }
@@ -28,12 +28,12 @@ export const getProfileArticles = createAsyncThunk(
   'profile/getprofilearticles',
   async (login: string, { dispatch }) => {
     try {
-      const response = await instance.get(`profile/${login}/articles`);
+      const response = await instance.get(`profiles/${login}/articles`);
 
-      if (response.status >= 400) {
+      if (!response.data.success) {
         const error: ErrorType = {
-          status: response.status,
-          message: response.statusText,
+          status: response.data.status,
+          message: response.data.message,
         };
         throw error;
       }
@@ -49,12 +49,12 @@ export const getProfileComments = createAsyncThunk(
   'profile/getprofilecomments',
   async (login: string, { dispatch }) => {
     try {
-      const response = await instance.get(`profile/${login}/comments`);
+      const response = await instance.get(`profiles/${login}/comments`);
 
-      if (response.status >= 400) {
+      if (!response.data.success) {
         const error: ErrorType = {
-          status: response.status,
-          message: response.statusText,
+          status: response.data.status,
+          message: response.data.message,
         };
         throw error;
       }
@@ -70,12 +70,12 @@ export const getProfileReactions = createAsyncThunk(
   'profile/getprofilereactions',
   async (login: string, { dispatch }) => {
     try {
-      const response = await instance.get(`profile/${login}/reactions`);
+      const response = await instance.get(`profiles/${login}/reactions`);
 
-      if (response.status >= 400) {
+      if (!response.data.success) {
         const error: ErrorType = {
-          status: response.status,
-          message: response.statusText,
+          status: response.data.status,
+          message: response.data.message,
         };
         throw error;
       }

@@ -38,42 +38,121 @@
     font-display: swap;
 }
 
+$color-text-title: #000000;
+$color-text-base: #000000;
+$color-text-transparent: rgba(0, 0, 0, 0.5);
+$color-text-link: #2b4a4a;
+$color-text-link-hover: #223838;
+
+$color-danger: #ab3c3c;
+$color-danger-hover: #852d2d;
+
+$color-background: #e7e6e6;
+$color-block: #ffffff;
+
+$color-element: #69a4a2;
+$color-element-hover: #296a6b;
+$color-element-transparent: rgba(106, 164, 162, 0.2);
+$color-line: #e7e6e6;
+$color-line-hover: #dddddd;
+$color-element-secondary: #a4a4a4;
+
+$color-alert-error-border: #f5c2c7;
+$color-alert-error-background: #f8d7da;
+$color-alert-error-text: #842029;
+
+$color-alert-info-border: #b6d4fe;
+$color-alert-info-background: #cfe2ff;
+$color-alert-info-text: #084298;
+
+$color-alert-warning-border: #ffecb5;
+$color-alert-warning-background: #fff3cd;
+$color-alert-warning-text: #664d03;
+
+$color-alert-success-border: #badbcc;
+$color-alert-success-background: #d1e7dd;
+$color-alert-success-text: #0f5132;
+
 :root {
     // Цвета
-    --color-text-title: #000000;
-    --color-text-base: #000000;
-    --color-text-transparent: rgba(0, 0, 0, 0.5);
-    --color-text-link: #2b4a4a;
-    --color-text-link-hover: #223838;
-
-    --color-danger: #ab3c3c;
-    --color-danger-hover: #852d2d;
+    --color-text-title: #{$color-text-title};
+    --color-text-title-rgb: #{red($color-text-title), green($color-text-title), blue($color-text-title)};
     
-    --color-background: #e7e6e6;
-    --color-block: #ffffff;
-
-    --color-element: #69a4a2;
-    --color-element-hover: #296a6b;
-    --color-element-transparent: rgba(106, 164, 162, 0.2);
-    --color-line: #e7e6e6;
-    --color-line-hover: #dddddd;
-    --color-element-secondary: #a4a4a4;
-
-    --color-alert-error-border: #f5c2c7;
-    --color-alert-error-background: #f8d7da;
-    --color-alert-error-text: #842029;
-
-    --color-alert-info-border: #b6d4fe;
-    --color-alert-info-background: #cfe2ff;
-    --color-alert-info-text: #084298;
-
-    --color-alert-warning-border: #ffecb5;
-    --color-alert-warning-background: #fff3cd;
-    --color-alert-warning-text: #664d03;
-
-    --color-alert-success-border: #badbcc;
-    --color-alert-success-background: #d1e7dd;
-    --color-alert-success-text: #0f5132;
+    --color-text-base: #{$color-text-base};
+    --color-text-base-rgb: #{red($color-text-base), green($color-text-base), blue($color-text-base)};
+    
+    --color-text-transparent: #{$color-text-transparent};
+    
+    --color-text-link: #{$color-text-link};
+    --color-text-link-rgb: #{red($color-text-link), green($color-text-link), blue($color-text-link)};
+    
+    --color-text-link-hover: #{$color-text-link-hover};
+    --color-text-link-hover-rgb: #{red($color-text-link-hover), green($color-text-link-hover), blue($color-text-link-hover)};
+    
+    --color-danger: #{$color-danger};
+    --color-danger-rgb: #{red($color-danger), green($color-danger), blue($color-danger)};
+    
+    --color-danger-hover: #{$color-danger-hover};
+    --color-danger-hover-rgb: #{red($color-danger-hover), green($color-danger-hover), blue($color-danger-hover)};
+    
+    --color-background: #{$color-background};
+    --color-background-rgb: #{red($color-background), green($color-background), blue($color-background)};
+    
+    --color-block: #{$color-block};
+    --color-block-rgb: #{red($color-block), green($color-block), blue($color-block)};
+    
+    --color-element: #{$color-element};
+    --color-element-rgb: #{red($color-element), green($color-element), blue($color-element)};
+    
+    --color-element-hover: #{$color-element-hover};
+    --color-element-hover-rgb: #{red($color-element-hover), green($color-element-hover), blue($color-element-hover)};
+    
+    --color-element-transparent: #{$color-element-transparent};
+    
+    --color-line: #{$color-line};
+    --color-line-rgb: #{red($color-line), green($color-line), blue($color-line)};
+    
+    --color-line-hover: #{$color-line-hover};
+    --color-line-hover-rgb: #{red($color-line-hover), green($color-line-hover), blue($color-line-hover)};
+    
+    --color-element-secondary: #{$color-element-secondary};
+    --color-element-secondary-rgb: #{red($color-element-secondary), green($color-element-secondary), blue($color-element-secondary)};
+    
+    --color-alert-error-border: #{$color-alert-error-border};
+    --color-alert-error-border-rgb: #{red($color-alert-error-border), green($color-alert-error-border), blue($color-alert-error-border)};
+    
+    --color-alert-error-background: #{$color-alert-error-background};
+    --color-alert-error-background-rgb: #{red($color-alert-error-background), green($color-alert-error-background), blue($color-alert-error-background)};
+    
+    --color-alert-error-text: #{$color-alert-error-text};
+    --color-alert-error-text-rgb: #{red($color-alert-error-text), green($color-alert-error-text), blue($color-alert-error-text)};
+    
+    --color-alert-info-border: #{$color-alert-info-border};
+    --color-alert-info-border-rgb: #{red($color-alert-info-border), green($color-alert-info-border), blue($color-alert-info-border)};
+    
+    --color-alert-info-background: #{$color-alert-info-background};
+    --color-alert-info-background-rgb: #{red($color-alert-info-background), green($color-alert-info-background), blue($color-alert-info-background)};
+    
+    --color-alert-info-text: #{$color-alert-info-text};
+    --color-alert-info-text-rgb: #{red($color-alert-info-text), green($color-alert-info-text), blue($color-alert-info-text)};
+    
+    --color-alert-warning-border: #{$color-alert-warning-border};
+    --color-alert-warning-border-rgb: #{red($color-alert-warning-border), green($color-alert-warning-border), blue($color-alert-warning-border)};
+    
+    --color-alert-warning-background: #{$color-alert-warning-background};
+    --color-alert-warning-background-rgb: #{red($color-alert-warning-background), green($color-alert-warning-background), blue($color-alert-warning-background)};
+    
+    --color-alert-warning-text: #{$color-alert-warning-text};
+    --color-alert-warning-text-rgb: #{red($color-alert-warning-text), green($color-alert-warning-text), blue($color-alert-warning-text)};
+    
+    --color-alert-success-border: #{$color-alert-success-border};
+    --color-alert-success-border-rgb: #{red($color-alert-success-border), green($color-alert-success-border), blue($color-alert-success-border)};
+    
+    --color-alert-success-background: #{$color-alert-success-background};
+    --color-alert-success-background-rgb: #{red($color-alert-success-background), green($color-alert-success-background), blue($color-alert-success-background)};
+    
+    --color-alert-success-text: #{$color-alert-success-text};
+    --color-alert-success-text-rgb: #{red($color-alert-success-text), green($color-alert-success-text), blue($color-alert-success-text)};
 
     // Шрифты
     --font-family-base: 'Moderustic', sans-serif;

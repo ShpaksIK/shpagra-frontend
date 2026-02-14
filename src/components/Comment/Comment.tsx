@@ -4,7 +4,7 @@ import style from './Comment.module.scss';
 import { CommentType } from '../../types/entities/commentType';
 import { ReactionsTypes } from '../../types/entities/reactionType';
 import { formatTimestamp } from '../../utils/dateFormatter';
-import Avatar from '../../ui/Avatar/Avatar';
+import AvatarLink from '../../ui/AvatarLink/AvatarLink';
 import IconButton from '../../ui/IconButton/IconButton';
 import DislikeSVG from '../../ui/svg/DislikeSVG';
 import LikeSVG from '../../ui/svg/LikeSVG';
@@ -39,7 +39,7 @@ const Comment: React.FC<CommentProps> = ({ comment, setReplyCommentId }) => {
     <article className={style.comment} id={`comment-${comment.relatedType}-${comment.id}`}>
       <div className={style.comment__content}>
         <div className={style.comment__content__header}>
-          <Avatar
+          <AvatarLink
             profileAvatar={comment.authorAvatar}
             profileId={comment.authorLogin}
             username={comment.authorUsername}

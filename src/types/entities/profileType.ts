@@ -11,9 +11,15 @@ export interface ProfileType {
   reactions: ReactionType[];
 }
 
-export interface MyProfileType extends ProfileType {}
+export interface MyProfileType extends ProfileType, MyProfileSettingsType {}
 
-export interface UpdateMyProfileType {
+export interface MyProfileSettingsType {
+  is_visible_articles: boolean;
+  is_visible_comments: boolean;
+  is_visible_reactions: boolean;
+}
+
+export interface UpdateMyProfileType extends Partial<MyProfileSettingsType> {
   login?: string;
   username?: string;
   avatar?: string | null;
