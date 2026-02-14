@@ -14,4 +14,29 @@ instance.interceptors.request.use((config) => {
   return config;
 });
 
+instance.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config;
+
+    if (error.response.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+
+      try {
+        const response = await instance.post('auth/refresh');
+        const accessToken = response.data.data.access_token;
+        localStorage.setItem('accessToken', accessToken);
+
+        originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+        return instance(originalRequest);
+      } catch (refreshError) {
+        localStorage.removeItem('accessToken');
+        return Promise.reject(refreshError);
+      }
+    }
+
+    return Promise.reject(error);
+  },
+);
+
 export { instance };
