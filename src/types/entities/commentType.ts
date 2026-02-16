@@ -5,14 +5,14 @@ export type RelatedType = 'article' | 'post';
 export interface CommentType {
   id: number;
   content: string;
-  createdAt: number;
-  updatedAt: number | null;
-  authorLogin: string;
-  authorUsername: string;
-  authorAvatar: string | null;
+  created_at: number;
+  updated_at: number | null;
+  author_login: string;
+  author_username: string;
+  author_avatar: string | null;
   parent: ParentCommentType | null;
-  relatedId: number;
-  relatedType: RelatedType;
+  id_parent: number;
+  related_type: RelatedType;
   reactions: ReactionType[];
 }
 

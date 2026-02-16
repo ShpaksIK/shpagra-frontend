@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import TextareaAutosize from 'react-textarea-autosize';
 
@@ -16,22 +16,48 @@ import Comment from '../Comment/Comment';
 import Button from '../../ui/Button/Button';
 import SendSVG from '../../ui/svg/SendSVG';
 import Chip from '../../ui/Chip/Chip';
+import { useAppDispatch, useAppSelector } from '../../hooks/useStore';
+import { createReaction, getArticleComments } from '../../redux/slices/articleSlice/api';
 
 interface ArticleProps {
   article: ArticleType;
 }
 
-const Article: React.FC<ArticleProps> = ({ article }) => {
-  const createdAt = formatTimestamp(article.createdAt);
-
+const Article: React.FC<ArticleProps> = React.memo(({ article }) => {
+  const dispatch = useAppDispatch();
+  const profile = useAppSelector((state) => state.auth.profile);
+  const createdAt = formatTimestamp(article.created_at);
   const [isOpenComments, setOpenComments] = useState<boolean>(false);
+
   const toggleOpenComments = () => {
-    setOpenComments((prev) => !prev);
+    if (!isOpenComments) {
+      setOpenComments(true);
+      dispatch(getArticleComments(article.id));
+    } else {
+      setOpenComments(false);
+    }
   };
 
-  const [isSentReaction, setReaction] = useState<boolean>(false);
+  const [isSentReaction, setReaction] = useState<boolean>(
+    article.reactions.findIndex((r) => r.author_login === profile?.login) !== -1,
+  );
+  useEffect(() => {
+    if (profile) {
+      setReaction(article.reactions.findIndex((r) => r.author_login === profile?.login) !== -1);
+    }
+  }, [profile]);
   const toggleReaction = () => {
+    if (!profile) {
+      return;
+    }
     setReaction((prev) => !prev);
+    dispatch(
+      createReaction({
+        articleId: article.id,
+        content: 'like',
+        profileLogin: profile.login,
+      }),
+    );
   };
 
   const copyArticleLink = () => {
@@ -67,9 +93,9 @@ const Article: React.FC<ArticleProps> = ({ article }) => {
         <div className={style.article__footer}>
           <div className={style.article__footer__author}>
             <AvatarLink
-              profileAvatar={article.authorAvatar}
-              profileId={article.authorLogin}
-              username={article.authorUsername}
+              profileAvatar={article.author_avatar}
+              profileId={article.author_login}
+              username={article.author_username}
             />
             <p className={style.article__footer__created}>| {createdAt}</p>
           </div>
@@ -78,12 +104,12 @@ const Article: React.FC<ArticleProps> = ({ article }) => {
             <IconButton
               onClick={toggleReaction}
               icon={<HeartSVG color="#ff0000" filled={isSentReaction} />}
-              text="1488"
+              text={`${article.reactions.length}`}
             />
             <IconButton
               onClick={toggleOpenComments}
               icon={isOpenComments ? <CommentSVG color="#000000" /> : <CommentSVG />}
-              text="12"
+              text={`${article.comments_length}`}
             />
             <IconButton onClick={copyArticleLink} icon={<ShareSVG />} />
           </div>
@@ -104,7 +130,7 @@ const Article: React.FC<ArticleProps> = ({ article }) => {
           {replyCommentId && (
             <div className={style.article__reply}>
               <Chip
-                text={`Ответ ${article.comments.find((comment) => comment.id === replyCommentId)?.authorUsername}`}
+                text={`Ответ ${article.comments.find((comment) => comment.id === replyCommentId)?.author_username}`}
                 onClose={() => setReplyCommentId(null)}
               />
             </div>
@@ -128,6 +154,6 @@ const Article: React.FC<ArticleProps> = ({ article }) => {
       )}
     </article>
   );
-};
+});
 
 export default Article;

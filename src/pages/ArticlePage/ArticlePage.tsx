@@ -1,7 +1,9 @@
+import { useEffect } from 'react';
+import { useParams } from 'react-router';
+
 import style from './ArticlePage.module.scss';
 import Block from '../../ui/Block/Block';
 import { useNavigateArticle } from '../../hooks/useNavigateArticle';
-import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/useStore';
 import ProfileLoading from '../../components/ProfileLoading/ProfileLoading';
 import { getArticle } from '../../redux/slices/articleSlice/api';
@@ -12,7 +14,6 @@ import { formatTimestamp } from '../../utils/dateFormatter';
 import CommentContainer from '../../components/CommentContainer/CommentContainer';
 import ArticleContent from '../../components/ArticleContent/ArticleContent';
 import LayoutArticle from '../../components/Layouts/LayoutArticle/LayoutArticle';
-import { useParams } from 'react-router';
 
 const ArticlePage = () => {
   useNavigateArticle();
@@ -30,7 +31,7 @@ const ArticlePage = () => {
     return <ProfileLoading />;
   }
 
-  const formatDate = formatTimestamp(article.createdAt);
+  const formatDate = formatTimestamp(article.created_at);
 
   return (
     <LayoutArticle articleTitles={article.content.filter((e) => e.type === 'title')}>
@@ -41,9 +42,9 @@ const ArticlePage = () => {
 
         <div className={style.header__author}>
           <AvatarLink
-            profileAvatar={article.authorAvatar}
-            profileId={article.authorLogin}
-            username={article.authorUsername}
+            profileAvatar={article.author_avatar}
+            profileId={article.author_login}
+            username={article.author_username}
           />
           <p>{formatDate}</p>
         </div>
@@ -59,7 +60,7 @@ const ArticlePage = () => {
 
       <Block>
         <h2>Комментарии</h2>
-        <CommentContainer comments={article.comments} />
+        <CommentContainer comments={article.comments || []} />
       </Block>
     </LayoutArticle>
   );

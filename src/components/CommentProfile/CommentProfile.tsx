@@ -16,7 +16,7 @@ interface CommentProfileProps {
 }
 
 const CommentProfile: React.FC<CommentProfileProps> = ({ comment }) => {
-  const createdAt = formatTimestamp(comment.createdAt);
+  const createdAt = formatTimestamp(comment.created_at);
 
   const [isSentLike, setLike] = useState<boolean>(false);
   const [isSentDislike, setDislike] = useState<boolean>(false);
@@ -39,7 +39,7 @@ const CommentProfile: React.FC<CommentProfileProps> = ({ comment }) => {
       <Block>
         <header className={style.comment__header}>
           <div className={style.comment__header__text}>
-            <b>{comment.relatedType === 'article' ? 'К статье' : 'К посту'}</b>
+            <b>{comment.related_type === 'article' ? 'К статье' : 'К посту'}</b>
             {comment.parent && <p>(ответ {comment.parent.authorUsername})</p>}
           </div>
           <div className={style.comment__header__controls}>

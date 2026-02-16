@@ -20,13 +20,15 @@ export interface ArticleType {
   banner: string | null;
   content: ArticleContentType[];
   status: ArticleStatusType;
-  createdAt: number;
-  updatedAt: number | null;
-  authorLogin: string;
-  authorUsername: string;
-  authorAvatar: string | null;
+  created_at: number;
+  updated_at: number | null;
+  author_login: string;
+  author_username: string;
+  author_avatar: string | null;
   reactions: ReactionType[];
+  reactions_length: number;
   comments: CommentType[];
+  comments_length: number;
 }
 
 export type ArticleFilterType = 'new' | 'old' | 'popular';

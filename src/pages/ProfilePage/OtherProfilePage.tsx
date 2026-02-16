@@ -47,28 +47,36 @@ const OtherProfilePage = () => {
         </div>
       </Block>
 
-      <TextLink to={`/profile/${profile.login}/articles`}>
-        <h2>Статьи</h2>
-      </TextLink>
+      {profile.articles.length > 0 && (
+        <>
+          <TextLink to={`/profile/${profile.login}/articles`}>
+            <h2>Статьи</h2>
+          </TextLink>
 
-      <ArticleContainer articles={profile.articles} maxArticles={1} />
+          <ArticleContainer articles={profile.articles} maxArticles={1} />
+        </>
+      )}
 
       <div className={style.blocks}>
-        <Block className={style.blocks__comments}>
-          <TextLink to={`/profile/${profile.login}/comments`}>
-            <h2>Комментарии</h2>
-          </TextLink>
+        {profile.comments.length > 0 && (
+          <Block className={style.blocks__comments}>
+            <TextLink to={`/profile/${profile.login}/comments`}>
+              <h2>Комментарии</h2>
+            </TextLink>
 
-          <CommentContainer comments={profile.comments} maxComments={2} />
-        </Block>
+            <CommentContainer comments={profile.comments} maxComments={2} />
+          </Block>
+        )}
 
-        <Block className={style.blocks__reactions}>
-          <TextLink to={`/profile/${profile.login}/reactions`}>
-            <h2>Реакции</h2>
-          </TextLink>
+        {profile.reactions.length > 0 && (
+          <Block className={style.blocks__reactions}>
+            <TextLink to={`/profile/${profile.login}/reactions`}>
+              <h2>Реакции</h2>
+            </TextLink>
 
-          <ReactionContainer reactions={profile.reactions} maxReactions={2} />
-        </Block>
+            <ReactionContainer reactions={profile.reactions} maxReactions={2} />
+          </Block>
+        )}
       </div>
     </LayoutBase>
   );

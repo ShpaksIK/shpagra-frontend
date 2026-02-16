@@ -17,7 +17,7 @@ interface CommentProps {
 }
 
 const Comment: React.FC<CommentProps> = ({ comment, setReplyCommentId }) => {
-  const createdAt = formatTimestamp(comment.createdAt);
+  const createdAt = formatTimestamp(comment.created_at);
 
   const [isSentLike, setLike] = useState<boolean>(false);
   const [isSentDislike, setDislike] = useState<boolean>(false);
@@ -36,17 +36,17 @@ const Comment: React.FC<CommentProps> = ({ comment, setReplyCommentId }) => {
   };
 
   return (
-    <article className={style.comment} id={`comment-${comment.relatedType}-${comment.id}`}>
+    <article className={style.comment} id={`comment-${comment.related_type}-${comment.id}`}>
       <div className={style.comment__content}>
         <div className={style.comment__content__header}>
           <AvatarLink
-            profileAvatar={comment.authorAvatar}
-            profileId={comment.authorLogin}
-            username={comment.authorUsername}
+            profileAvatar={comment.author_avatar}
+            profileId={comment.author_login}
+            username={comment.author_username}
           />
           <div className={style.comment__content__header__created}>
             <p>
-              {createdAt} {comment.updatedAt ? '(изменено)' : ''}
+              {createdAt} {comment.updated_at ? '(изменено)' : ''}
             </p>
           </div>
           <IconButton onClick={() => setReplyCommentId(comment.id)} icon={<ReplySVG />} />

@@ -24,17 +24,17 @@ const ArticleContent: React.FC<ArticleContentProps> = ({ content }) => {
         switch (block.type) {
           case 'title':
             titleCount += 1;
-            return <Title text={block.text} hrefId={titleCount} />;
+            return <Title key={`${block.type}-${block}`} text={block.text} hrefId={titleCount} />;
           case 'text':
-            return <Text text={block.text} />;
+            return <Text key={`${block.type}-${block}`} text={block.text} />;
           case 'quote':
-            return <Quote text={block.text} />;
+            return <Quote key={`${block.type}-${block}`} text={block.text} />;
           case 'img':
-            return <Image src={block.src} text={block.text} />;
+            return <Image key={`${block.type}-${block}`} src={block.src} text={block.text} />;
           case 'ol':
-            return <NumberedList list={block.list} />;
+            return <NumberedList key={`${block.type}-${block}`} list={block.list} />;
           case 'ul':
-            return <BulletedList list={block.list} />;
+            return <BulletedList key={`${block.type}-${block}`} list={block.list} />;
         }
       })}
     </div>
