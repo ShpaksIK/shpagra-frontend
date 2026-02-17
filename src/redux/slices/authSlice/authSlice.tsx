@@ -1,17 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { MyProfileType } from '../../../types/entities/profileType';
 import { getMyProfile, login, logout, register, updateMyProfile } from './api';
+import { LoadingType } from '../../../types/reduxType';
 
 /*
   profile - профиль пользователя, если авторизован
   initialized - состояние до и после попытки авторизации (false - до, true - после)
   loadings - данные о состояниях загрузки приложения
 */
-type LoadingType = {
-  isLoading: boolean;
-  isSuccess: boolean;
-  isDone: boolean;
-};
 interface AuthState {
   profile: MyProfileType | null;
   initialized: boolean;

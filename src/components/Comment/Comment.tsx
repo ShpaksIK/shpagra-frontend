@@ -10,6 +10,7 @@ import DislikeSVG from '../../ui/svg/DislikeSVG';
 import LikeSVG from '../../ui/svg/LikeSVG';
 import ReplySVG from '../../ui/svg/ReplySVG';
 import ReplyMessage from '../../ui/ReplyMessage/ReplyMessage';
+import A from '../../ui/A/A';
 
 interface CommentProps {
   comment: CommentType;
@@ -46,10 +47,21 @@ const Comment: React.FC<CommentProps> = ({ comment, setReplyCommentId }) => {
           />
           <div className={style.comment__content__header__created}>
             <p>
-              {createdAt} {comment.updated_at ? '(изменено)' : ''}
+              {createdAt}
+              {comment.updated_at ? '(изменено)' : ''}
             </p>
+            {comment.id_parent && (
+              <>
+                <span>ответ </span>
+                <A to={`/profile/${comment.login_parent}`}>{comment.login_parent}</A>
+              </>
+            )}
           </div>
-          <IconButton onClick={() => setReplyCommentId(comment.id)} icon={<ReplySVG />} />
+          <IconButton
+            className={style.comment__content__header__reply}
+            onClick={() => setReplyCommentId(comment.id)}
+            icon={<ReplySVG />}
+          />
         </div>
         <div className={style.comment__content__reply}>
           {comment.parent && (

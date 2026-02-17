@@ -12,16 +12,14 @@ export interface CommentType {
   author_avatar: string | null;
   parent: ParentCommentType | null;
   id_parent: number;
+  login_parent: string;
   related_type: RelatedType;
   reactions: ReactionType[];
 }
 
 export interface CommentSendType {
-  authorLogin: string;
   content: string;
-  relatedId: number;
-  parentId: number | null;
-  relatedType: RelatedType;
+  id_parent: number | null;
 }
 
 export interface ParentCommentType {

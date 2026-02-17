@@ -15,15 +15,15 @@
         color: var(--color-text-transparent);
       }
 
+      &__reply {
+        align-self: flex-start;
+      }
+
       @media (max-width: 450px) {
         &__created {
           margin-left: 10px;
         }
       }
-    }
-
-    &__reply {
-      margin: 10px 0;
     }
   }
 

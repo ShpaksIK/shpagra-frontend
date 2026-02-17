@@ -8,9 +8,10 @@ import {
   CreateArticleType,
 } from '../../../types/entities/articleType';
 import { showTimeoutAlert } from '../../../utils/showAlert';
-import { ReactionsTypes } from '../../../types/entities/reactionType';
+import { ReactionsTypes, ReactionType } from '../../../types/entities/reactionType';
 import { decrementReaction } from './articleSlice';
 import { RootState } from '../..';
+import { CommentSendType } from '../../../types/entities/commentType';
 
 export const getArticle = createAsyncThunk(
   'article/getarticle',
@@ -69,7 +70,7 @@ export const getArticles = createAsyncThunk(
 
 export const getArticleComments = createAsyncThunk(
   'article/getarticlecomments',
-  async (articleId: number, { dispatch, rejectWithValue }) => {
+  async (articleId: number, { dispatch }) => {
     try {
       const response = await instance.get(`articles/${articleId}/comments`);
 
@@ -84,10 +85,9 @@ export const getArticleComments = createAsyncThunk(
       return {
         articleId,
         comments: response.data.data,
-      };
+      } as any;
     } catch (error) {
       errorHandler(error, dispatch);
-      return rejectWithValue(error);
     }
   },
 );
@@ -194,10 +194,7 @@ interface ArticleReactionType {
 
 export const createReaction = createAsyncThunk(
   'article/createreaction',
-  async (
-    { articleId, profileLogin, content }: ArticleReactionType,
-    { dispatch, getState, rejectWithValue },
-  ) => {
+  async ({ articleId, profileLogin, content }: ArticleReactionType, { dispatch, getState }) => {
     try {
       const isReactionSetted = (getState() as RootState).article.articles
         .find((a) => a.id === articleId)
@@ -229,10 +226,72 @@ export const createReaction = createAsyncThunk(
       return {
         articleId: articleId,
         reaction: response.data.data,
-      };
+      } as any;
     } catch (error) {
       errorHandler(error, dispatch);
-      return rejectWithValue(error);
+    }
+  },
+);
+
+interface CreateCommentType {
+  articleId: number;
+  comment: CommentSendType;
+}
+
+export const createArticleComment = createAsyncThunk(
+  'article/createarticlecomment',
+  async ({ articleId, comment }: CreateCommentType, { dispatch }) => {
+    try {
+      const response = await instance.post(`articles/${articleId}/comments`, {
+        ...comment,
+      });
+
+      if (!response.data.success) {
+        const error: ErrorType = {
+          status: response.data.status,
+          message: response.data.message,
+        };
+        throw error;
+      }
+
+      return {
+        articleId,
+        comment: response.data.data,
+      } as any;
+    } catch (error) {
+      errorHandler(error, dispatch);
+    }
+  },
+);
+
+interface CreateCommentType {
+  articleId: number;
+  commentId: number;
+  content: string;
+}
+
+export const createArticleCommentReaction = createAsyncThunk(
+  'article/createarticlecommentreaction',
+  async ({ articleId, commentId, content }: CreateCommentType, { dispatch }) => {
+    try {
+      const response = await instance.post(`articles/${articleId}/comments/${commentId}`, {
+        content,
+      });
+
+      if (!response.data.success) {
+        const error: ErrorType = {
+          status: response.data.status,
+          message: response.data.message,
+        };
+        throw error;
+      }
+
+      return {
+        articleId,
+        reaction: response.data.data,
+      } as any;
+    } catch (error) {
+      errorHandler(error, dispatch);
     }
   },
 );

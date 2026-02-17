@@ -1,8 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { createReaction, getArticle, getArticleComments, getArticles } from './api';
+import {
+  createArticleComment,
+  createReaction,
+  getArticle,
+  getArticleComments,
+  getArticles,
+} from './api';
 import { ArticleFilterType, ArticleType } from '../../../types/entities/articleType';
 import { CommentType } from '../../../types/entities/commentType';
 import { ReactionType } from '../../../types/entities/reactionType';
+import { LoadingType } from '../../../types/reduxType';
 
 /*
   article - состояние текущей редактируемой статьи
@@ -12,12 +19,22 @@ interface ArticleState {
   article: ArticleType | null;
   articles: ArticleType[];
   filter: ArticleFilterType;
+  loadings: {
+    comment: LoadingType;
+  };
 }
 
 const initialState: ArticleState = {
   article: null,
   articles: [],
   filter: 'popular',
+  loadings: {
+    comment: {
+      isLoading: false,
+      isSuccess: false,
+      isDone: false,
+    },
+  },
 };
 
 const articleSlice = createSlice({
@@ -37,6 +54,13 @@ const articleSlice = createSlice({
           article.reactions_length -= 1;
         }
       }
+    },
+    resetCommentLoading: (state) => {
+      state.loadings.comment = {
+        isLoading: false,
+        isSuccess: false,
+        isDone: false,
+      };
     },
   },
   extraReducers: (builder) => {
@@ -70,9 +94,26 @@ const articleSlice = createSlice({
         }
       },
     );
+    builder.addCase(createArticleComment.pending, (state) => {
+      state.loadings.comment.isLoading = true;
+    });
+    builder.addCase(
+      createArticleComment.fulfilled,
+      (state, action: PayloadAction<{ articleId: number; comment: CommentType }>) => {
+        if (action.payload.comment) {
+          const article = state.articles.find((a) => a.id === action.payload.articleId);
+          if (article) {
+            article.comments.push(action.payload.comment);
+            article.comments_length += 1;
+            state.loadings.comment.isSuccess = true;
+          }
+        }
+        state.loadings.comment.isLoading = false;
+      },
+    );
   },
 });
 
-export const { setFilter, decrementReaction } = articleSlice.actions;
+export const { setFilter, decrementReaction, resetCommentLoading } = articleSlice.actions;
 
 export default articleSlice.reducer;

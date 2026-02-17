@@ -17,7 +17,12 @@ import Button from '../../ui/Button/Button';
 import SendSVG from '../../ui/svg/SendSVG';
 import Chip from '../../ui/Chip/Chip';
 import { useAppDispatch, useAppSelector } from '../../hooks/useStore';
-import { createReaction, getArticleComments } from '../../redux/slices/articleSlice/api';
+import {
+  createArticleComment,
+  createReaction,
+  getArticleComments,
+} from '../../redux/slices/articleSlice/api';
+import { resetCommentLoading } from '../../redux/slices/articleSlice/articleSlice';
 
 interface ArticleProps {
   article: ArticleType;
@@ -66,18 +71,47 @@ const Article: React.FC<ArticleProps> = React.memo(({ article }) => {
 
   const [isCorrectComment, setCorrectComment] = useState<boolean>(false);
   const [commentValue, setCommentValue] = useState<string>('');
+  const [replyCommentId, setReplyCommentId] = useState<number | null>(null);
+  const [isTextareaReadOnly, setTextareaReadOnly] = useState<boolean>(false);
+  const commentLoading = useAppSelector((state) => state.article.loadings.comment);
+
+  useEffect(() => {
+    setTextareaReadOnly(commentLoading.isLoading);
+    setCorrectComment(!commentLoading.isLoading);
+  }, [commentLoading.isLoading]);
+
+  useEffect(() => {
+    if (commentLoading.isSuccess) {
+      setCommentValue('');
+      setReplyCommentId(null);
+    }
+  }, [commentLoading.isSuccess]);
+
   const handleCommentValue = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newComment = event.target.value;
     setCommentValue(newComment);
 
-    if (newComment.trim().length === 0 || newComment.trim().length > 1000) {
+    if (newComment.trim().length === 0 || newComment.trim().length > 2048) {
       setCorrectComment(false);
     } else {
       setCorrectComment(true);
     }
   };
 
-  const [replyCommentId, setReplyCommentId] = useState<number | null>(null);
+  const handleSubmitComment = () => {
+    if (isCorrectComment) {
+      dispatch(resetCommentLoading());
+      dispatch(
+        createArticleComment({
+          articleId: article.id,
+          comment: {
+            content: commentValue,
+            id_parent: replyCommentId,
+          },
+        }),
+      );
+    }
+  };
 
   return (
     <article className={style.article}>
@@ -142,10 +176,16 @@ const Article: React.FC<ArticleProps> = React.memo(({ article }) => {
               maxRows={5}
               value={commentValue}
               onChange={handleCommentValue}
+              readOnly={isTextareaReadOnly}
               placeholder="Прокомментируйте..."
             />
             <div className={style.article__send__controls}>
-              <Button isCircle={true} title="Отправить" disabled={!isCorrectComment}>
+              <Button
+                isCircle={true}
+                title="Отправить"
+                disabled={!isCorrectComment}
+                onClick={handleSubmitComment}
+              >
                 <SendSVG />
               </Button>
             </div>
