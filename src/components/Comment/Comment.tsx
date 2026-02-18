@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import style from './Comment.module.scss';
 import { CommentType } from '../../types/entities/commentType';
@@ -11,6 +11,11 @@ import LikeSVG from '../../ui/svg/LikeSVG';
 import ReplySVG from '../../ui/svg/ReplySVG';
 import ReplyMessage from '../../ui/ReplyMessage/ReplyMessage';
 import A from '../../ui/A/A';
+import {
+  createArticleCommentReaction,
+  deleteArticleCommentReaction,
+} from '../../redux/slices/articleSlice/api';
+import { useAppDispatch, useAppSelector } from '../../hooks/useStore';
 
 interface CommentProps {
   comment: CommentType;
@@ -18,21 +23,60 @@ interface CommentProps {
 }
 
 const Comment: React.FC<CommentProps> = ({ comment, setReplyCommentId }) => {
-  const createdAt = formatTimestamp(comment.created_at);
+  const dispatch = useAppDispatch();
 
-  const [isSentLike, setLike] = useState<boolean>(false);
-  const [isSentDislike, setDislike] = useState<boolean>(false);
+  const createdAt = formatTimestamp(comment.created_at);
+  const likeReactionsLength = useMemo(() => {
+    return comment.reactions.filter((r) => r.content === 'like').length;
+  }, [comment.reactions.length]);
+  const dislikeReactionsLength = useMemo(() => {
+    return comment.reactions.filter((r) => r.content === 'dislike').length;
+  }, [comment.reactions.length]);
+
+  const profile = useAppSelector((state) => state.auth.profile);
+  const reactionLoading = useAppSelector((state) => state.article.loadings.commentReaction);
+
+  const [sentReaction, setReaction] = useState<ReactionsTypes | null>(null);
+
+  useEffect(() => {
+    if (profile) {
+      setReaction(comment.reactions.find((r) => r.author_login === profile.login)?.content || null);
+    }
+  }, [comment.reactions.length]);
+
+  const removeReaction = () => {
+    const reactionId = comment.reactions.find((r) => r.author_login === profile?.login)?.id;
+    if (!reactionId) return;
+
+    dispatch(
+      deleteArticleCommentReaction({
+        reactionId,
+        commentId: comment.id,
+      }),
+    );
+  };
+
   const switchReaction = (reaction: ReactionsTypes) => {
-    if (reaction === 'like') {
-      setLike((prev) => !prev);
-      if (isSentDislike) {
-        setDislike(false);
-      }
-    } else if (reaction === 'dislike') {
-      setDislike((prev) => !prev);
-      if (isSentLike) {
-        setLike(false);
-      }
+    if (!profile) return;
+    if (reactionLoading[comment.id]?.isLoading) return;
+
+    if (reaction === sentReaction) {
+      removeReaction();
+    } else if (comment.reactions.find((r) => r.author_login === profile.login)) {
+      removeReaction();
+      dispatch(
+        createArticleCommentReaction({
+          commentId: comment.id,
+          content: reaction,
+        }),
+      );
+    } else {
+      dispatch(
+        createArticleCommentReaction({
+          commentId: comment.id,
+          content: reaction,
+        }),
+      );
     }
   };
 
@@ -80,13 +124,13 @@ const Comment: React.FC<CommentProps> = ({ comment, setReplyCommentId }) => {
       <div className={style.comment__controls}>
         <IconButton
           onClick={() => switchReaction('like')}
-          icon={<LikeSVG filled={isSentLike} color="var(--color-element)" />}
-          text="14"
+          icon={<LikeSVG filled={sentReaction === 'like'} color="var(--color-element)" />}
+          text={`${likeReactionsLength}`}
         />
         <IconButton
           onClick={() => switchReaction('dislike')}
-          icon={<DislikeSVG filled={isSentDislike} />}
-          text="1"
+          icon={<DislikeSVG filled={sentReaction === 'dislike'} />}
+          text={`${dislikeReactionsLength}`}
         />
       </div>
     </article>

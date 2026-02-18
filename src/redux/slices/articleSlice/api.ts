@@ -208,7 +208,7 @@ export const createReaction = createAsyncThunk(
             profileLogin,
           }),
         );
-        response = await instance.delete(`articles/${articleId}/reactions/${isReactionSetted.id}`);
+        response = await instance.delete(`reactions/${isReactionSetted.id}`);
       } else {
         response = await instance.post(`articles/${articleId}/reactions`, {
           content,
@@ -264,17 +264,16 @@ export const createArticleComment = createAsyncThunk(
   },
 );
 
-interface CreateCommentType {
-  articleId: number;
+interface CreateCommentReactionType {
   commentId: number;
-  content: string;
+  content: ReactionsTypes;
 }
 
 export const createArticleCommentReaction = createAsyncThunk(
   'article/createarticlecommentreaction',
-  async ({ articleId, commentId, content }: CreateCommentType, { dispatch }) => {
+  async ({ commentId, content }: CreateCommentReactionType, { dispatch }) => {
     try {
-      const response = await instance.post(`articles/${articleId}/comments/${commentId}`, {
+      const response = await instance.post(`comments/${commentId}/reactions`, {
         content,
       });
 
@@ -286,9 +285,38 @@ export const createArticleCommentReaction = createAsyncThunk(
         throw error;
       }
 
+      return response.data.data;
+    } catch (error) {
+      errorHandler(error, dispatch);
+    }
+  },
+);
+
+interface DeleteCommentReactionType {
+  commentId: number;
+  reactionId: number;
+}
+
+export const deleteArticleCommentReaction = createAsyncThunk(
+  'article/deletearticlecommentreaction',
+  async ({ reactionId, commentId }: DeleteCommentReactionType, { dispatch }) => {
+    if (commentId) {
+    }
+
+    try {
+      const response = await instance.delete(`reactions/${reactionId}`);
+
+      if (!response.data.success) {
+        const error: ErrorType = {
+          status: response.data.status,
+          message: response.data.message,
+        };
+        throw error;
+      }
+
       return {
-        articleId,
-        reaction: response.data.data,
+        success: response.data.success,
+        reactionId,
       } as any;
     } catch (error) {
       errorHandler(error, dispatch);

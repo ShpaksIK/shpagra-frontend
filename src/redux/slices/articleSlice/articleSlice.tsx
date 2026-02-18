@@ -1,14 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
   createArticleComment,
+  createArticleCommentReaction,
   createReaction,
+  deleteArticleCommentReaction,
   getArticle,
   getArticleComments,
   getArticles,
 } from './api';
 import { ArticleFilterType, ArticleType } from '../../../types/entities/articleType';
 import { CommentType } from '../../../types/entities/commentType';
-import { ReactionType } from '../../../types/entities/reactionType';
+import { CreateReactionType, ReactionType } from '../../../types/entities/reactionType';
 import { LoadingType } from '../../../types/reduxType';
 
 /*
@@ -21,6 +23,7 @@ interface ArticleState {
   filter: ArticleFilterType;
   loadings: {
     comment: LoadingType;
+    commentReaction: Record<number, { isLoading: boolean }>;
   };
 }
 
@@ -34,6 +37,7 @@ const initialState: ArticleState = {
       isSuccess: false,
       isDone: false,
     },
+    commentReaction: {},
   },
 };
 
@@ -103,12 +107,62 @@ const articleSlice = createSlice({
         if (action.payload.comment) {
           const article = state.articles.find((a) => a.id === action.payload.articleId);
           if (article) {
-            article.comments.push(action.payload.comment);
+            article.comments.unshift(action.payload.comment);
             article.comments_length += 1;
             state.loadings.comment.isSuccess = true;
           }
         }
         state.loadings.comment.isLoading = false;
+      },
+    );
+    builder.addCase(createArticleCommentReaction.pending, (state, action) => {
+      const { commentId } = action.meta.arg;
+      state.loadings.commentReaction[commentId] = {
+        isLoading: true,
+      };
+    });
+    builder.addCase(deleteArticleCommentReaction.pending, (state, action) => {
+      const { commentId } = action.meta.arg;
+      state.loadings.commentReaction[commentId] = {
+        isLoading: true,
+      };
+    });
+    builder.addCase(
+      createArticleCommentReaction.fulfilled,
+      (state, action: PayloadAction<CreateReactionType, string, any>) => {
+        const { commentId } = action.meta.arg;
+
+        if (action.payload) {
+          const comment = state.articles
+            .flatMap((article) => article.comments)
+            .find((comment) => comment.id === action.payload.id_entity);
+
+          if (comment) {
+            comment.reactions.push({
+              id: action.payload.id,
+              content: action.payload.content,
+              author_login: action.payload.author_login,
+            });
+          }
+        }
+        state.loadings.commentReaction[commentId].isLoading = false;
+      },
+    );
+    builder.addCase(
+      deleteArticleCommentReaction.fulfilled,
+      (state, action: PayloadAction<{ success: boolean; reactionId: number }, string, any>) => {
+        const { commentId } = action.meta.arg;
+
+        if (action.payload.success) {
+          const comment = state.articles
+            .flatMap((article) => article.comments)
+            .find((comment) => comment.reactions.some((r) => r.id === action.payload.reactionId));
+
+          if (comment) {
+            comment.reactions = comment.reactions.filter((r) => r.id !== action.payload.reactionId);
+          }
+        }
+        state.loadings.commentReaction[commentId].isLoading = false;
       },
     );
   },
