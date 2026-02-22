@@ -12,6 +12,8 @@ import { ArticleFilterType, ArticleType } from '../../../types/entities/articleT
 import { CommentType } from '../../../types/entities/commentType';
 import { CreateReactionType, ReactionType } from '../../../types/entities/reactionType';
 import { LoadingType } from '../../../types/reduxType';
+import { getMyProfile } from '../authSlice/api';
+import { MyProfileResponseType } from '../../../types/entities/profileType';
 
 /*
   article - состояние текущей редактируемой статьи
@@ -72,10 +74,7 @@ const articleSlice = createSlice({
       state.article = action.payload;
     });
     builder.addCase(getArticles.fulfilled, (state, action: PayloadAction<ArticleType[]>) => {
-      state.articles = action.payload.map((article) => ({
-        ...article,
-        comments: [],
-      }));
+      state.articles = action.payload;
     });
     builder.addCase(
       getArticleComments.fulfilled,
@@ -89,7 +88,7 @@ const articleSlice = createSlice({
     builder.addCase(
       createReaction.fulfilled,
       (state, action: PayloadAction<{ articleId: number; reaction: ReactionType }>) => {
-        if (action.payload.reaction) {
+        if (action.payload?.reaction) {
           const article = state.articles.find((a) => a.id === action.payload.articleId);
           if (article) {
             article.reactions.push(action.payload.reaction);
@@ -104,7 +103,7 @@ const articleSlice = createSlice({
     builder.addCase(
       createArticleComment.fulfilled,
       (state, action: PayloadAction<{ articleId: number; comment: CommentType }>) => {
-        if (action.payload.comment) {
+        if (action.payload?.comment) {
           const article = state.articles.find((a) => a.id === action.payload.articleId);
           if (article) {
             article.comments.unshift(action.payload.comment);
@@ -153,7 +152,7 @@ const articleSlice = createSlice({
       (state, action: PayloadAction<{ success: boolean; reactionId: number }, string, any>) => {
         const { commentId } = action.meta.arg;
 
-        if (action.payload.success) {
+        if (action.payload?.success) {
           const comment = state.articles
             .flatMap((article) => article.comments)
             .find((comment) => comment.reactions.some((r) => r.id === action.payload.reactionId));
@@ -163,6 +162,13 @@ const articleSlice = createSlice({
           }
         }
         state.loadings.commentReaction[commentId].isLoading = false;
+      },
+    );
+    builder.addCase(
+      getMyProfile.fulfilled,
+      (state, action: PayloadAction<MyProfileResponseType>) => {
+        if (!action.payload || !action.payload.articles) return;
+        state.articles = action.payload.articles;
       },
     );
   },

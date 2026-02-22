@@ -5,6 +5,7 @@ import { showTimeoutAlert } from '../../../utils/showAlert';
 import { LoginFormType, RegisterFormType } from '../../../types/formsType';
 import { errorHandler } from '../../../utils/errorHandler';
 import { MyProfileSettingsType, UpdateMyProfileType } from '../../../types/entities/profileType';
+import { ReactionsTypes } from '../../../types/entities/reactionType';
 
 export const login = createAsyncThunk(
   'auth/login',
@@ -86,7 +87,7 @@ export const logout = createAsyncThunk('auth/logout ', async (_, { dispatch }) =
   }
 });
 
-export const getMyProfile = createAsyncThunk('auth/getmyprofile ', async (_, { dispatch }) => {
+export const getMyProfile = createAsyncThunk('auth/getmyprofile', async (_, { dispatch }) => {
   try {
     const response = await instance.get('profiles/me');
 
@@ -110,7 +111,7 @@ interface UpdateMyProfileThunkType {
 }
 
 export const updateMyProfile = createAsyncThunk(
-  'auth/updatemyprofile ',
+  'auth/updatemyprofile',
   async ({ profile, settings }: UpdateMyProfileThunkType, { dispatch }) => {
     try {
       const response = await instance.put(`profiles`, {
@@ -152,7 +153,7 @@ interface ChangePasswordThunkType {
 }
 
 export const changePassword = createAsyncThunk(
-  'auth/updatemyprofile ',
+  'auth/updatemyprofile',
   async ({ currentPassword, password }: ChangePasswordThunkType, { dispatch }) => {
     try {
       const response = await instance.post(`auth/changepassword`, {

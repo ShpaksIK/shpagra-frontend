@@ -97,7 +97,7 @@ const Comment: React.FC<CommentProps> = ({ comment, setReplyCommentId }) => {
             {comment.id_parent && (
               <>
                 <span>ответ </span>
-                <A to={`/profile/${comment.login_parent}`}>{comment.login_parent}</A>
+                <A to={`/profile/${comment.login_parent}`}>{comment.username_parent}</A>
               </>
             )}
           </div>

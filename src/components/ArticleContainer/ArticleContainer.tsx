@@ -13,9 +13,11 @@ const ArticleContainer: React.FC<ArticleContainerProps> = ({
   maxArticles,
   articles,
 }) => {
+  const sliced = articles.slice(0, maxArticles);
+
   return (
     <section className={style.articleContainer}>
-      {articles.map((article) => (
+      {sliced.map((article) => (
         <Article key={article.id} article={article} />
       ))}
     </section>

@@ -20,6 +20,8 @@ import { resetAuthLoading } from '../../redux/slices/authSlice/authSlice';
 
 const MyProfilePage = () => {
   const profile = useAppSelector((state) => state.auth.profile);
+  const articles = useAppSelector((state) => state.article.articles);
+  const comments = useAppSelector((state) => state.profile.profileComments);
   const authLoading = useAppSelector((state) => state.auth.loadings.auth);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -54,23 +56,24 @@ const MyProfilePage = () => {
         </div>
       </Block>
 
-      {profile.articles.length > 0 && (
+      {articles.length > 0 && (
         <>
           <TextLink to={`/profile/${profile.login}/articles`}>
             <h2>Мои статьи</h2>
           </TextLink>
-          <ArticleContainer articles={profile.articles} maxArticles={1} />
+
+          <ArticleContainer articles={articles} maxArticles={1} />
         </>
       )}
 
       <div className={style.blocks}>
-        {profile.comments.length > 0 && (
+        {comments.length > 0 && (
           <Block className={style.blocks__comments}>
             <TextLink to={`/profile/${profile.login}/comments`}>
               <h2>Мои комментарии</h2>
             </TextLink>
 
-            <CommentContainer comments={profile.comments} maxComments={2} />
+            <CommentContainer comments={comments} maxComments={2} />
           </Block>
         )}
 

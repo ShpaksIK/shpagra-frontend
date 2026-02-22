@@ -21,6 +21,29 @@
     }
   }
 
+  &__content {
+    &__header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      &__created {
+        font-size: var(--font-size-small);
+        color: var(--color-text-transparent);
+      }
+
+      &__reply {
+        align-self: flex-start;
+      }
+
+      @media (max-width: 450px) {
+        &__created {
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+
   &__footer {
     display: flex;
     justify-content: space-between;

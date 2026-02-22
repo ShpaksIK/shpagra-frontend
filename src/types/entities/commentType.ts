@@ -13,6 +13,7 @@ export interface CommentType {
   parent: ParentCommentType | null;
   id_parent: number;
   login_parent: string;
+  username_parent: string;
   related_type: RelatedType;
   reactions: ReactionType[];
 }
