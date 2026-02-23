@@ -4,9 +4,9 @@ export interface ReactionType {
   id: number;
   content: ReactionsTypes;
   author_login: string;
-  // type: ReactionsTypes;
-  // author_username: string;
-  // created_at: string;
+  type_entity: 'article' | 'comment';
+  text: string;
+  id_entity: number;
 }
 
 export interface CreateReactionType extends ReactionType {

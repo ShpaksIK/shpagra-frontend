@@ -17,6 +17,14 @@
 
       &__reply {
         align-self: flex-start;
+        position: relative;
+      }
+
+      &__dropdown {
+        border: 1px solid var(--color-line);
+        display: flex;
+        gap: 5px;
+        flex-direction: column;
       }
 
       @media (max-width: 450px) {

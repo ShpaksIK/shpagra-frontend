@@ -1,0 +1,30 @@
+.buttonAction {
+  padding: 5px 10px;
+  background-color: rgba(var(--color-element-rgb), 0.2);
+  text-decoration: none;
+  color: var(--color-element);
+  border-radius: 5px;
+  border: none;
+  display: flex;
+  gap: 10px;
+
+  &:hover {
+    border-color: var(--color-element-hover);
+    background-color: rgba(var(--color-element-rgb), 0.3);
+  }
+
+  &_danger {
+    background-color: rgba(var(--color-danger-rgb), 0.2);
+    color: var(--color-danger);
+
+    &:hover {
+      background-color: rgba(var(--color-danger-rgb), 0.3);
+      color: var(--color-danger);
+    }
+  }
+
+  &_disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+}

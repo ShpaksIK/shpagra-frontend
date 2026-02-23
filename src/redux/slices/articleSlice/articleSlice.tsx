@@ -4,6 +4,7 @@ import {
   createArticleCommentReaction,
   createReaction,
   deleteArticleCommentReaction,
+  deleteComment,
   getArticle,
   getArticleComments,
   getArticles,
@@ -13,7 +14,7 @@ import { CommentType } from '../../../types/entities/commentType';
 import { CreateReactionType, ReactionType } from '../../../types/entities/reactionType';
 import { LoadingType } from '../../../types/reduxType';
 import { getMyProfile } from '../authSlice/api';
-import { MyProfileResponseType } from '../../../types/entities/profileType';
+import { ProfileResponseType } from '../../../types/entities/profileType';
 
 /*
   article - состояние текущей редактируемой статьи
@@ -137,11 +138,7 @@ const articleSlice = createSlice({
             .find((comment) => comment.id === action.payload.id_entity);
 
           if (comment) {
-            comment.reactions.push({
-              id: action.payload.id,
-              content: action.payload.content,
-              author_login: action.payload.author_login,
-            });
+            comment.reactions.push(action.payload);
           }
         }
         state.loadings.commentReaction[commentId].isLoading = false;
@@ -164,11 +161,25 @@ const articleSlice = createSlice({
         state.loadings.commentReaction[commentId].isLoading = false;
       },
     );
+    builder.addCase(getMyProfile.fulfilled, (state, action: PayloadAction<ProfileResponseType>) => {
+      if (!action.payload || !action.payload.articles) return;
+      state.articles = action.payload.articles;
+    });
     builder.addCase(
-      getMyProfile.fulfilled,
-      (state, action: PayloadAction<MyProfileResponseType>) => {
-        if (!action.payload || !action.payload.articles) return;
-        state.articles = action.payload.articles;
+      deleteComment.fulfilled,
+      (state, action: PayloadAction<{ commentId: number }>) => {
+        const { commentId } = action.payload;
+
+        const articleIndex = state.articles.findIndex((article) =>
+          article.comments.some((comment) => comment.id === commentId),
+        );
+
+        if (articleIndex !== -1) {
+          state.articles[articleIndex].comments = state.articles[articleIndex].comments.filter(
+            (comment) => comment.id !== commentId,
+          );
+          state.articles[articleIndex].comments_length -= 1;
+        }
       },
     );
   },

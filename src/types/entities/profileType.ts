@@ -6,7 +6,6 @@ export interface ProfileType {
   login: string;
   username: string;
   avatar: string | null;
-  reactions: ReactionType[];
 }
 
 export interface MyProfileSettingsType {
@@ -23,7 +22,8 @@ export interface UpdateMyProfileType extends Partial<MyProfileSettingsType> {
   avatar?: string | null;
 }
 
-export interface MyProfileResponseType extends MyProfileType {
+export interface ProfileResponseType extends MyProfileType {
   articles: ArticleType[];
   comments: CommentType[];
+  reactions: ReactionType[];
 }

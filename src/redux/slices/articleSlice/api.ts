@@ -323,3 +323,27 @@ export const deleteArticleCommentReaction = createAsyncThunk(
     }
   },
 );
+
+export const deleteComment = createAsyncThunk(
+  'article/deletecomment',
+  async (commentId: number, { dispatch, rejectWithValue }) => {
+    try {
+      const response = await instance.delete(`comments/${commentId}`);
+
+      if (!response.data.success) {
+        const error: ErrorType = {
+          status: response.data.status,
+          message: response.data.message,
+        };
+        throw error;
+      }
+
+      return {
+        commentId,
+      } as any;
+    } catch (error) {
+      errorHandler(error, dispatch);
+      rejectWithValue(error);
+    }
+  },
+);

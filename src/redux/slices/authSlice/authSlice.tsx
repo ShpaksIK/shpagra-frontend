@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { MyProfileResponseType, MyProfileType } from '../../../types/entities/profileType';
+import { ProfileResponseType, MyProfileType } from '../../../types/entities/profileType';
 import { getMyProfile, login, logout, register, updateMyProfile } from './api';
 import { LoadingType } from '../../../types/reduxType';
 
@@ -57,17 +57,14 @@ const authSlice = createSlice({
     builder.addCase(logout.fulfilled, (state) => {
       state.profile = null;
     });
-    builder.addCase(
-      getMyProfile.fulfilled,
-      (state, action: PayloadAction<MyProfileResponseType>) => {
-        state.initialized = true;
-        state.loadings.auth.isDone = true;
-        if (!action.payload) return;
-        const { articles, comments, ...profileData } = action.payload;
-        state.profile = profileData;
-        state.profile.avatar = null;
-      },
-    );
+    builder.addCase(getMyProfile.fulfilled, (state, action: PayloadAction<ProfileResponseType>) => {
+      state.initialized = true;
+      state.loadings.auth.isDone = true;
+      if (!action.payload) return;
+      const { articles, comments, ...profileData } = action.payload;
+      state.profile = profileData;
+      state.profile.avatar = null;
+    });
     builder.addCase(getMyProfile.rejected, (state) => {
       state.initialized = true;
     });

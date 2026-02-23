@@ -5,11 +5,12 @@ import style from './Block.module.scss';
 interface BlockProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   className?: string;
+  ref?: React.Ref<HTMLDivElement>;
 }
 
-const Block: React.FC<BlockProps> = ({ children, className, ...rest }) => {
+const Block: React.FC<BlockProps> = ({ children, className, ref, ...rest }) => {
   return (
-    <div className={classNames(style.block, className)} {...rest}>
+    <div ref={ref} className={classNames(style.block, className)} {...rest}>
       {children}
     </div>
   );

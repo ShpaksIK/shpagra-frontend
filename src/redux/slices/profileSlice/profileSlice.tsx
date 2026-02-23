@@ -1,12 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { MyProfileResponseType, ProfileType } from '../../../types/entities/profileType';
-import {
-  createCommentReaction,
-  deleteCommentReaction,
-  getProfile,
-  getProfileComments,
-  getProfileReactions,
-} from './api';
+import { ProfileResponseType, ProfileType } from '../../../types/entities/profileType';
+import { createCommentReaction, deleteCommentReaction, getProfile } from './api';
 import { CommentType } from '../../../types/entities/commentType';
 import { CreateReactionType, ReactionType } from '../../../types/entities/reactionType';
 import { getMyProfile } from '../authSlice/api';
@@ -17,6 +11,7 @@ import { getMyProfile } from '../authSlice/api';
 interface ProfileState {
   profile: ProfileType | null;
   profileComments: CommentType[];
+  profileReactions: ReactionType[];
   loadings: {
     commentReaction: Record<number, { isLoading: boolean }>;
   };
@@ -25,6 +20,7 @@ interface ProfileState {
 const initialState: ProfileState = {
   profile: null,
   profileComments: [],
+  profileReactions: [],
   loadings: {
     commentReaction: {},
   },
@@ -35,20 +31,14 @@ const profileSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getProfile.fulfilled, (state, action: PayloadAction<ProfileType>) => {
+    builder.addCase(getProfile.fulfilled, (state, action: PayloadAction<ProfileResponseType>) => {
       if (!action.payload) return;
-      state.profile = action.payload;
+      const { comments, reactions, ...profileData } = action.payload;
+      state.profile = profileData;
       state.profile.avatar = null;
-      state.profile.reactions = [];
+      state.profileComments = comments;
+      state.profileReactions = reactions;
     });
-    builder.addCase(
-      getProfileReactions.fulfilled,
-      (state, action: PayloadAction<ReactionType[]>) => {
-        if (state.profile) {
-          state.profile.reactions = action.payload;
-        }
-      },
-    );
     builder.addCase(createCommentReaction.pending, (state, action) => {
       const { commentId } = action.meta.arg;
       state.loadings.commentReaction[commentId] = {
@@ -72,11 +62,7 @@ const profileSlice = createSlice({
           );
 
           if (comment) {
-            comment.reactions.push({
-              id: action.payload.id,
-              content: action.payload.content,
-              author_login: action.payload.author_login,
-            });
+            comment.reactions.push(action.payload);
           }
         }
         state.loadings.commentReaction[commentId].isLoading = false;
@@ -99,13 +85,11 @@ const profileSlice = createSlice({
         state.loadings.commentReaction[commentId].isLoading = false;
       },
     );
-    builder.addCase(
-      getMyProfile.fulfilled,
-      (state, action: PayloadAction<MyProfileResponseType>) => {
-        if (!action.payload || !action.payload.comments) return;
-        state.profileComments = action.payload.comments;
-      },
-    );
+    builder.addCase(getMyProfile.fulfilled, (state, action: PayloadAction<ProfileResponseType>) => {
+      if (!action.payload || !action.payload.comments) return;
+      state.profileComments = action.payload.comments;
+      state.profileReactions = action.payload.reactions;
+    });
   },
 });
 

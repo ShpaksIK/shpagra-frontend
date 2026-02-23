@@ -22,6 +22,7 @@ const MyProfilePage = () => {
   const profile = useAppSelector((state) => state.auth.profile);
   const articles = useAppSelector((state) => state.article.articles);
   const comments = useAppSelector((state) => state.profile.profileComments);
+  const reactions = useAppSelector((state) => state.profile.profileReactions);
   const authLoading = useAppSelector((state) => state.auth.loadings.auth);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -77,13 +78,13 @@ const MyProfilePage = () => {
           </Block>
         )}
 
-        {profile.reactions.length > 0 && (
+        {reactions.length > 0 && (
           <Block className={style.blocks__reactions}>
             <TextLink to={`/profile/${profile.login}/reactions`}>
               <h2>Мои реакции</h2>
             </TextLink>
 
-            <ReactionContainer reactions={profile.reactions} maxReactions={2} />
+            <ReactionContainer reactions={reactions} maxReactions={2} />
           </Block>
         )}
       </div>

@@ -18,6 +18,9 @@ import { useParams } from 'react-router';
 
 const OtherProfilePage = () => {
   const profile = useAppSelector((state) => state.profile.profile);
+  const articles = useAppSelector((state) => state.article.articles);
+  const comments = useAppSelector((state) => state.profile.profileComments);
+  const reactions = useAppSelector((state) => state.profile.profileReactions);
   const params = useParams();
   const dispatch = useAppDispatch();
   const profileLogin = params.profileLogin as string;
@@ -33,7 +36,7 @@ const OtherProfilePage = () => {
 
   return (
     <LayoutBase>
-      <h2>Профиль {profile.login}</h2>
+      <h2>Профиль {profile.username}</h2>
       <Block className={style.header}>
         <div className={style.header__avatar}>
           <img src={profile.avatar ? profile.avatar : userIMG} />
@@ -47,34 +50,34 @@ const OtherProfilePage = () => {
         </div>
       </Block>
 
-      {profile.articles.length > 0 && (
+      {articles.length > 0 && (
         <>
           <TextLink to={`/profile/${profile.login}/articles`}>
             <h2>Статьи</h2>
           </TextLink>
 
-          <ArticleContainer articles={profile.articles} maxArticles={1} />
+          <ArticleContainer articles={articles} maxArticles={1} />
         </>
       )}
 
       <div className={style.blocks}>
-        {profile.comments.length > 0 && (
+        {comments.length > 0 && (
           <Block className={style.blocks__comments}>
             <TextLink to={`/profile/${profile.login}/comments`}>
               <h2>Комментарии</h2>
             </TextLink>
 
-            <CommentContainer comments={profile.comments} maxComments={2} />
+            <CommentContainer comments={comments} maxComments={2} />
           </Block>
         )}
 
-        {profile.reactions.length > 0 && (
+        {reactions.length > 0 && (
           <Block className={style.blocks__reactions}>
             <TextLink to={`/profile/${profile.login}/reactions`}>
               <h2>Реакции</h2>
             </TextLink>
 
-            <ReactionContainer reactions={profile.reactions} maxReactions={2} />
+            <ReactionContainer reactions={reactions} maxReactions={2} />
           </Block>
         )}
       </div>

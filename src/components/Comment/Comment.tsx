@@ -14,8 +14,14 @@ import A from '../../ui/A/A';
 import {
   createArticleCommentReaction,
   deleteArticleCommentReaction,
+  deleteComment,
 } from '../../redux/slices/articleSlice/api';
 import { useAppDispatch, useAppSelector } from '../../hooks/useStore';
+import DotsSVG from '../../ui/svg/DotsSVG';
+import Dropdown from '../../ui/Dropdown/Dropdown';
+import ButtonAction from '../../ui/ButtonAction/ButtonAction';
+import EditSVG from '../../ui/svg/EditSVG';
+import TrashSVG from '../../ui/svg/TrashSVG';
 
 interface CommentProps {
   comment: CommentType;
@@ -80,6 +86,12 @@ const Comment: React.FC<CommentProps> = ({ comment, setReplyCommentId }) => {
     }
   };
 
+  const [isSettingsOpen, setSettingsOpen] = useState(false);
+
+  const handleDeleteComment = () => {
+    dispatch(deleteComment(comment.id));
+  };
+
   return (
     <article className={style.comment} id={`comment-${comment.related_type}-${comment.id}`}>
       <div className={style.comment__content}>
@@ -106,6 +118,30 @@ const Comment: React.FC<CommentProps> = ({ comment, setReplyCommentId }) => {
             onClick={() => setReplyCommentId(comment.id)}
             icon={<ReplySVG />}
           />
+          <div className={style.comment__content__header__reply}>
+            {profile?.login === comment.author_login && (
+              <>
+                <IconButton onClick={() => setSettingsOpen(true)} icon={<DotsSVG />} />
+                {isSettingsOpen && (
+                  <Dropdown
+                    dropdownClose={() => setSettingsOpen(false)}
+                    className={style.comment__content__header__dropdown}
+                  >
+                    <ButtonAction onClick={() => {}} icon={<EditSVG size={20} />}>
+                      Изменить
+                    </ButtonAction>
+                    <ButtonAction
+                      onClick={() => handleDeleteComment()}
+                      icon={<TrashSVG size={20} />}
+                      isDanger
+                    >
+                      Удалить
+                    </ButtonAction>
+                  </Dropdown>
+                )}
+              </>
+            )}
+          </div>
         </div>
         <div className={style.comment__content__reply}>
           {comment.parent && (
