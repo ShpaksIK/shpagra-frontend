@@ -24,6 +24,7 @@ import {
 } from '../../redux/slices/articleSlice/api';
 import { resetCommentLoading } from '../../redux/slices/articleSlice/articleSlice';
 import Select from '../../ui/Select/Select';
+import { CommentsFilter } from '../../types/entities/commentType';
 
 interface ArticleProps {
   article: ArticleType;
@@ -38,7 +39,12 @@ const Article: React.FC<ArticleProps> = React.memo(({ article }) => {
   const toggleOpenComments = () => {
     if (!isOpenComments) {
       setOpenComments(true);
-      dispatch(getArticleComments(article.id));
+      dispatch(
+        getArticleComments({
+          articleId: article.id,
+          commentsFilter: commentsFilter || 'positive',
+        }),
+      );
     } else {
       setOpenComments(false);
     }
@@ -74,6 +80,7 @@ const Article: React.FC<ArticleProps> = React.memo(({ article }) => {
   const [commentValue, setCommentValue] = useState<string>('');
   const [replyCommentId, setReplyCommentId] = useState<number | null>(null);
   const [isTextareaReadOnly, setTextareaReadOnly] = useState<boolean>(false);
+  const [commentsFilter, setCommentsFilter] = useState<CommentsFilter>('positive');
   const commentLoading = useAppSelector((state) => state.article.loadings.comment);
 
   useEffect(() => {
@@ -133,8 +140,14 @@ const Article: React.FC<ArticleProps> = React.memo(({ article }) => {
     },
   ];
 
-  const handleChangeCommentsFilter = (value: string) => {
-    console.log(value);
+  const handleChangeCommentsFilter = (value: CommentsFilter) => {
+    setCommentsFilter(value);
+    dispatch(
+      getArticleComments({
+        articleId: article.id,
+        commentsFilter: value,
+      }),
+    );
   };
 
   return (
@@ -175,13 +188,15 @@ const Article: React.FC<ArticleProps> = React.memo(({ article }) => {
       </div>
       {isOpenComments && (
         <>
-          <div className={style.article__comments__filter}>
-            <Select
-              values={filterValues}
-              onChange={handleChangeCommentsFilter}
-              title="Фильтр комментариев"
-            />
-          </div>
+          {article.comments.length > 0 && (
+            <div className={style.article__comments__filter}>
+              <Select
+                values={filterValues}
+                onChange={handleChangeCommentsFilter}
+                title="Фильтр комментариев"
+              />
+            </div>
+          )}
           {article.comments.length === 0 && (
             <div className={style.article__comments_no}>
               <p>Прокомментируйте статью первым!</p>

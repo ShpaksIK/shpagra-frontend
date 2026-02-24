@@ -11,6 +11,7 @@ const ArticleFilter = () => {
 
   const handleChangeArticlesFilter = (value: ArticleFilterType) => {
     dispatch(setFilter(value));
+    console.log(value);
   };
 
   const filterValues = [
@@ -33,7 +34,7 @@ const ArticleFilter = () => {
       <Select
         title="Фильтрация статей"
         values={filterValues}
-        currentValue={filterValues.find((v) => (v.value = filter))}
+        currentValue={filter}
         onChange={handleChangeArticlesFilter}
       />
     </Block>

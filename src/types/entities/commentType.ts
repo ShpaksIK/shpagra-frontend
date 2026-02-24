@@ -1,5 +1,7 @@
 import { ReactionType } from './reactionType';
 
+export type CommentsFilter = 'negative' | 'positive' | 'new' | 'old';
+
 export type RelatedType = 'article' | 'post';
 
 export interface CommentType {

@@ -11,7 +11,7 @@ import { showTimeoutAlert } from '../../../utils/showAlert';
 import { ReactionsTypes, ReactionType } from '../../../types/entities/reactionType';
 import { decrementReaction } from './articleSlice';
 import { RootState } from '../..';
-import { CommentSendType } from '../../../types/entities/commentType';
+import { CommentSendType, CommentsFilter } from '../../../types/entities/commentType';
 
 export const getArticle = createAsyncThunk(
   'article/getarticle',
@@ -68,11 +68,16 @@ export const getArticles = createAsyncThunk(
   },
 );
 
+interface GetArticleCommentsType {
+  articleId: number;
+  commentsFilter: CommentsFilter;
+}
+
 export const getArticleComments = createAsyncThunk(
   'article/getarticlecomments',
-  async (articleId: number, { dispatch }) => {
+  async ({ articleId, commentsFilter }: GetArticleCommentsType, { dispatch, rejectWithValue }) => {
     try {
-      const response = await instance.get(`articles/${articleId}/comments`);
+      const response = await instance.get(`articles/${articleId}/comments?sort=${commentsFilter}`);
 
       if (!response.data.success) {
         const error: ErrorType = {
@@ -88,6 +93,7 @@ export const getArticleComments = createAsyncThunk(
       } as any;
     } catch (error) {
       errorHandler(error, dispatch);
+      rejectWithValue(error);
     }
   },
 );

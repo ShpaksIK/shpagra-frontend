@@ -12,13 +12,13 @@ type ValueType = {
 
 interface SelectProps {
   values: ValueType[];
-  currentValue?: ValueType;
+  currentValue?: string;
   title?: string;
   onChange: (selectedType: any) => void;
 }
 
 const Select: React.FC<SelectProps> = ({ values, currentValue, title, onChange }) => {
-  const [value, setValue] = useState(currentValue?.value || values[0].value);
+  const [value, setValue] = useState(currentValue || values[0].value);
 
   const menuItemSx = {
     fontFamily: 'inherit',

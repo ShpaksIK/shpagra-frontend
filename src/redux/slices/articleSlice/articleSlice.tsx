@@ -80,9 +80,11 @@ const articleSlice = createSlice({
     builder.addCase(
       getArticleComments.fulfilled,
       (state, action: PayloadAction<{ articleId: number; comments: CommentType[] }>) => {
-        const article = state.articles.find((a) => a.id === action.payload.articleId);
-        if (article) {
-          article.comments = action.payload.comments;
+        if (action.payload) {
+          const article = state.articles.find((a) => a.id === action.payload.articleId);
+          if (article) {
+            article.comments = action.payload.comments;
+          }
         }
       },
     );
