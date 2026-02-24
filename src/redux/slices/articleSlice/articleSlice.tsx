@@ -107,7 +107,7 @@ const articleSlice = createSlice({
         if (action.payload?.comment) {
           const article = state.articles.find((a) => a.id === action.payload.articleId);
           if (article) {
-            article.comments.unshift(action.payload.comment);
+            article.comments.push(action.payload.comment);
             article.comments_length += 1;
             state.loadings.comment.isSuccess = true;
           }

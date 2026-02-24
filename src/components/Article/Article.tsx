@@ -23,6 +23,7 @@ import {
   getArticleComments,
 } from '../../redux/slices/articleSlice/api';
 import { resetCommentLoading } from '../../redux/slices/articleSlice/articleSlice';
+import Select from '../../ui/Select/Select';
 
 interface ArticleProps {
   article: ArticleType;
@@ -113,6 +114,29 @@ const Article: React.FC<ArticleProps> = React.memo(({ article }) => {
     }
   };
 
+  const filterValues = [
+    {
+      value: 'positive',
+      text: 'Положительные',
+    },
+    {
+      value: 'negative',
+      text: 'Негативные',
+    },
+    {
+      value: 'new',
+      text: 'Новые',
+    },
+    {
+      value: 'old',
+      text: 'Старые',
+    },
+  ];
+
+  const handleChangeCommentsFilter = (value: string) => {
+    console.log(value);
+  };
+
   return (
     <article className={style.article}>
       <Link to={`/article/${article.id}`}>
@@ -151,6 +175,13 @@ const Article: React.FC<ArticleProps> = React.memo(({ article }) => {
       </div>
       {isOpenComments && (
         <>
+          <div className={style.article__comments__filter}>
+            <Select
+              values={filterValues}
+              onChange={handleChangeCommentsFilter}
+              title="Фильтр комментариев"
+            />
+          </div>
           {article.comments.length === 0 && (
             <div className={style.article__comments_no}>
               <p>Прокомментируйте статью первым!</p>
@@ -169,27 +200,29 @@ const Article: React.FC<ArticleProps> = React.memo(({ article }) => {
               />
             </div>
           )}
-          <div className={style.article__send}>
-            <TextareaAutosize
-              className={style.article__send__textarea}
-              minRows={1}
-              maxRows={5}
-              value={commentValue}
-              onChange={handleCommentValue}
-              readOnly={isTextareaReadOnly}
-              placeholder="Прокомментируйте..."
-            />
-            <div className={style.article__send__controls}>
-              <Button
-                isCircle={true}
-                title="Отправить"
-                disabled={!isCorrectComment}
-                onClick={handleSubmitComment}
-              >
-                <SendSVG />
-              </Button>
+          {profile && (
+            <div className={style.article__send}>
+              <TextareaAutosize
+                className={style.article__send__textarea}
+                minRows={1}
+                maxRows={5}
+                value={commentValue}
+                onChange={handleCommentValue}
+                readOnly={isTextareaReadOnly}
+                placeholder="Прокомментируйте..."
+              />
+              <div className={style.article__send__controls}>
+                <Button
+                  isCircle={true}
+                  title="Отправить"
+                  disabled={!isCorrectComment}
+                  onClick={handleSubmitComment}
+                >
+                  <SendSVG />
+                </Button>
+              </div>
             </div>
-          </div>
+          )}
         </>
       )}
     </article>
